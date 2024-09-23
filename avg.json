@@ -1,0 +1,150 @@
+{
+    "data": [
+        {
+            "data_description": "Data Analysis Report covering the period from 2024-09-16 to 2024-09-22, Segments: no specific behavior segmentation",
+            "column_headers": [
+                {
+                    "column_type": "DIMENSION",
+                    "field_name": "pt:combinedPage"
+                },
+                {
+                    "column_type": "METRIC",
+                    "field_name": "pt:avgTimeOnPage"
+                },
+                {
+                    "column_type": "METRIC",
+                    "field_name": "pt:avgSessionDuration"
+                },
+                {
+                    "column_type": "METRIC",
+                    "field_name": "pt:sessions"
+                },
+                {
+                    "column_type": "METRIC",
+                    "field_name": "pt:conversions#[growth]view dc report"
+                },
+                {
+                    "column_type": "METRIC",
+                    "field_name": "pt:conversionRate#[growth]view dc report"
+                }
+            ],
+            "rows": [
+                [
+                    "https://ptengine.jp/app/heatmap_track.html",
+                    596.5628282731233,
+                    614.3495300131926,
+                    15160,
+                    38,
+                    0.0025065963060686017
+                ],
+                [
+                    "https://ptengine.jp/app/login",
+                    278.0467337798242,
+                    356.35925268240345,
+                    3728,
+                    742,
+                    0.1990343347639485
+                ],
+                [
+                    "https://ptengine.jp/app/select_project",
+                    82.66859551760939,
+                    103.14310785619175,
+                    2253,
+                    680,
+                    0.3018197958277852
+                ],
+                [
+                    "https://ptengine.jp",
+                    245.24515423514538,
+                    291.4934891059354,
+                    1331,
+                    121,
+                    0.09090909090909091
+                ],
+                [
+                    "https://ptengine.jp/app",
+                    1.1191692607003891,
+                    1.9079701492537313,
+                    603,
+                    287,
+                    0.4759535655058043
+                ],
+                [
+                    "https://ptengine.jp/plan",
+                    604.7713832684825,
+                    788.9657131979695,
+                    394,
+                    43,
+                    0.10913705583756345
+                ],
+                [
+                    "https://ptengine.jp/app/306fpdir/experience/list",
+                    289.67509655172415,
+                    1135.2132162162163,
+                    222,
+                    17,
+                    0.07657657657657657
+                ],
+                [
+                    "https://ptengine.jp/app/6471c9e3/experience/list",
+                    287.6605569230769,
+                    994.5710744680852,
+                    94,
+                    10,
+                    0.10638297872340426
+                ],
+                [
+                    "https://ptengine.jp/app/6a4bbd65/insight/pagescene/pagescenelist",
+                    839.477993006993,
+                    2824.5965411764705,
+                    85,
+                    5,
+                    0.058823529411764705
+                ],
+                [
+                    "https://ptengine.jp/app/51m7btm0/experience/list",
+                    102.59906113537117,
+                    427.18518181818183,
+                    55,
+                    4,
+                    0.07272727272727272
+                ]
+            ],
+            "metric_total": {
+                "pt:conversionRate#[growth]view dc report": 0.0864498945732993,
+                "pt:conversions#[growth]view dc report": 2337.0,
+                "pt:sessions": 27033.0,
+                "pt:avgSessionDuration": 1002.5567466429919,
+                "pt:avgTimeOnPage": 323.54168744254895
+            }
+        }
+    ],
+    "prompt_user": null,
+    "comparisons": null,
+    "data_url": "https://npstaticprod.ptengine.com/566d12f9/1e608556.json",
+    "request_params": {
+        "start_date": "2024-09-16",
+        "end_date": "2024-09-22",
+        "profile_id": "566d12f9",
+        "aid": "7b71d2aa-dc0d-4179-96c0-27330587fb50",
+        "dimensions": [
+            "pt:combinedPage"
+        ],
+        "metrics": [
+            "pt:avgTimeOnPage",
+            "pt:avgSessionDuration",
+            "pt:sessions",
+            "pt:conversions#1582079789212597",
+            "pt:conversionRate#1582079789212597"
+        ],
+        "segments": null,
+        "filters": null,
+        "limit": 10,
+        "sort": {
+            "field_name": "pt:sessions",
+            "sort_by": "DESC"
+        },
+        "comparisons": null
+    },
+    "has_query_exception": false
+}
