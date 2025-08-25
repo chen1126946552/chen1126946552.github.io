@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TTPBR7L');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高品质无线耳机 - 商品详情</title>
+    <script type="module" crossorigin src="/assets/index-a575275f.js"></script>
+    <link rel="stylesheet" href="/assets/index-737b46e0.css">
+    <script src="https://js.ptengine.com/48tnsyik.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+      }
+      body {
+        background-color: #f8f9fa;
+      }
+      .header {
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 15px 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        text-decoration: none;
+      }
+      .nav {
+        display: flex;
+        list-style: none;
+      }
+      .nav li {
+        margin-left: 20px;
+      }
+      .nav a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+      }
+      .nav a:hover {
+        color: #ff6b6b;
+      }
+      .breadcrumb {
+        padding: 15px 0;
+        font-size: 14px;
+        color: #666;
+      }
+      .breadcrumb a {
+        color: #666;
+        text-decoration: none;
+      }
+      .breadcrumb a:hover {
+        color: #ff6b6b;
+      }
+      .breadcrumb span {
+        margin: 0 5px;
+      }
+      .product-detail {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        margin-bottom: 40px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+      .product-gallery {
+        position: relative;
+      }
+      .main-image {
+        width: 100%;
+        height: 400px;
+        background-color: #f0f0f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        overflow: hidden;
+        margin-bottom: 20px;
+      }
+      .main-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+      .thumbnails {
+        display: flex;
+        gap: 10px;
+      }
+      .thumbnail {
+        width: 80px;
+        height: 80px;
+        background-color: #f0f0f0;
+        border-radius: 4px;
+        cursor: pointer;
+        overflow: hidden;
+        border: 2px solid transparent;
+      }
+      .thumbnail.active {
+        border-color: #ff6b6b;
+      }
+      .thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .product-info h1 {
+        font-size: 28px;
+        margin-bottom: 15px;
+        color: #333;
+      }
+      .product-price {
+        font-size: 24px;
+        font-weight: bold;
+        color: #ff6b6b;
+        margin-bottom: 20px;
+      }
+      .product-rating {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      .stars {
+        color: #ffc107;
+        margin-right: 10px;
+      }
+      .reviews-count {
+        color: #666;
+        font-size: 14px;
+      }
+      .product-description {
+        margin-bottom: 30px;
+        line-height: 1.6;
+        color: #555;
+      }
+      .product-features {
+        margin-bottom: 30px;
+      }
+      .product-features h3 {
+        margin-bottom: 15px;
+        font-size: 18px;
+      }
+      .product-features ul {
+        list-style: none;
+      }
+      .product-features li {
+        margin-bottom: 10px;
+        padding-left: 20px;
+        position: relative;
+      }
+      .product-features li:before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #ff6b6b;
+      }
+      .product-variants {
+        margin-bottom: 30px;
+      }
+      .product-variants h3 {
+        margin-bottom: 15px;
+        font-size: 18px;
+      }
+      .color-options {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .color-option {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2px solid transparent;
+      }
+      .color-option.active {
+        border-color: #333;
+      }
+      .color-black {
+        background-color: #333;
+      }
+      .color-white {
+        background-color: #fff;
+        border: 1px solid #ddd;
+      }
+      .color-blue {
+        background-color: #3498db;
+      }
+      .quantity-selector {
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+      .quantity-selector button {
+        width: 40px;
+        height: 40px;
+        background-color: #f0f0f0;
+        border: none;
+        font-size: 18px;
+        cursor: pointer;
+      }
+      .quantity-selector input {
+        width: 60px;
+        height: 40px;
+        border: 1px solid #ddd;
+        text-align: center;
+        font-size: 16px;
+        margin: 0 10px;
+      }
+      .add-to-cart {
+        display: flex;
+        gap: 15px;
+      }
+      .btn {
+        display: inline-block;
+        padding: 12px 24px;
+        border-radius: 4px;
+        font-weight: 500;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .btn-primary {
+        background-color: #ff6b6b;
+        color: white;
+        border: none;
+        flex: 1;
+      }
+      .btn-primary:hover {
+        background-color: #ff5252;
+      }
+      .btn-outline {
+        border: 1px solid #ddd;
+        color: #333;
+        background-color: transparent;
+      }
+      .btn-outline:hover {
+        background-color: #f0f0f0;
+      }
+      .product-tabs {
+        margin-bottom: 60px;
+      }
+      .tab-buttons {
+        display: flex;
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 20px;
+      }
+      .tab-button {
+        padding: 15px 30px;
+        cursor: pointer;
+        font-weight: 500;
+        color: #666;
+        border-bottom: 2px solid transparent;
+      }
+      .tab-button.active {
+        color: #ff6b6b;
+        border-bottom-color: #ff6b6b;
+      }
+      .tab-content {
+        display: none;
+        line-height: 1.6;
+      }
+      .tab-content.active {
+        display: block;
+      }
+      .tab-content h3 {
+        margin-bottom: 15px;
+      }
+      .tab-content p {
+        margin-bottom: 15px;
+      }
+      .specifications {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+      .specifications tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+      .specifications th, .specifications td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      .specifications th {
+        width: 30%;
+        font-weight: 500;
+      }
+      .review {
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #eee;
+      }
+      .review-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+      .review-author {
+        font-weight: 500;
+      }
+      .review-date {
+        color: #999;
+        font-size: 14px;
+      }
+      .review-rating {
+        margin-bottom: 10px;
+        color: #ffc107;
+      }
+      .related-products {
+        margin-bottom: 60px;
+      }
+      .related-products h2 {
+        margin-bottom: 30px;
+        text-align: center;
+        font-size: 24px;
+      }
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 30px;
+      }
+      .product-card {
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+      .product-card:hover {
+        transform: translateY(-5px);
+      }
+      .product-image {
+        height: 200px;
+        background-color: #f0f0f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .product-card-info {
+        padding: 15px;
+      }
+      .product-card-title {
+        font-size: 16px;
+        margin-bottom: 10px;
+        color: #333;
+      }
+      .product-card-price {
+        font-size: 18px;
+        font-weight: bold;
+        color: #ff6b6b;
+      }
+      .footer {
+        background-color: #333;
+        color: white;
+        padding: 40px 0;
+      }
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+      }
+      .footer h3 {
+        margin-bottom: 20px;
+        font-size: 18px;
+      }
+      .footer ul {
+        list-style: none;
+      }
+      .footer li {
+        margin-bottom: 10px;
+      }
+      .footer a {
+        color: #ddd;
+        text-decoration: none;
+      }
+      .footer a:hover {
+        color: #ff6b6b;
+      }
+      .copyright {
+        margin-top: 30px;
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid #444;
+        font-size: 14px;
+        color: #aaa;
+      }
+      @media (max-width: 768px) {
+        .product-detail {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TTPBR7L"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <a href="products.html" class="logo">电商示例</a>
+          <ul class="nav">
+            <li><a href="products.html">首页</a></li>
+            <li><a href="products.html">商品</a></li>
+            <li><a href="cart.html">购物车</a></li>
+            <li><a href="#">我的账户</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="products.html">首页</a>
+        <span>></span>
+        <a href="products.html">电子产品</a>
+        <span>></span>
+        <a href="products.html">耳机</a>
+        <span>></span>
+        高品质无线耳机
+      </div>
+
+      <div class="product-detail">
+        <div class="product-gallery">
+          <div class="main-image">
+            <img src="https://via.placeholder.com/600x400?text=无线耳机" alt="高品质无线耳机">
+          </div>
+          <div class="thumbnails">
+            <div class="thumbnail active">
+              <img src="https://via.placeholder.com/80x80?text=1" alt="缩略图1">
+            </div>
+            <div class="thumbnail">
+              <img src="https://via.placeholder.com/80x80?text=2" alt="缩略图2">
+            </div>
+            <div class="thumbnail">
+              <img src="https://via.placeholder.com/80x80?text=3" alt="缩略图3">
+            </div>
+            <div class="thumbnail">
+              <img src="https://via.placeholder.com/80x80?text=4" alt="缩略图4">
+            </div>
+          </div>
+        </div>
+        
+        <div class="product-info">
+          <h1>高品质无线耳机</h1>
+          <div class="product-price">¥299.00</div>
+          <div class="product-rating">
+            <div class="stars">★★★★★</div>
+            <div class="reviews-count">128 条评价</div>
+          </div>
+          <div class="product-description">
+            <p>这款高品质无线耳机采用先进的蓝牙5.2技术，提供稳定连接和卓越的音质体验。内置主动降噪功能，有效隔绝外部噪音，让您沉浸在音乐世界中。人体工学设计，佩戴舒适，适合长时间使用。</p>
+          </div>
+          <div class="product-features">
+            <h3>产品特点</h3>
+            <ul>
+              <li>蓝牙5.2技术，稳定连接</li>
+              <li>主动降噪，沉浸式体验</li>
+              <li>长达8小时续航，充电盒可额外提供24小时</li>
+              <li>IPX5防水，适合运动使用</li>
+              <li>触控操作，简单便捷</li>
+            </ul>
+          </div>
+          <div class="product-variants">
+            <h3>颜色选择</h3>
+            <div class="color-options">
+              <div class="color-option color-black active"></div>
+              <div class="color-option color-white"></div>
+              <div class="color-option color-blue"></div>
+            </div>
+          </div>
+          <div class="quantity-selector">
+            <button>-</button>
+            <input type="text" value="1">
+            <button>+</button>
+          </div>
+          <div class="add-to-cart">
+            <button class="btn btn-primary">加入购物车</button>
+            <button class="btn btn-outline">❤ 收藏</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-tabs">
+        <div class="tab-buttons">
+          <div class="tab-button active">详细介绍</div>
+          <div class="tab-button">规格参数</div>
+          <div class="tab-button">用户评价</div>
+        </div>
+        <div class="tab-content active">
+          <h3>产品详情</h3>
+          <p>这款高品质无线耳机采用先进的蓝牙5.2技术，提供稳定连接和卓越的音质体验。内置主动降噪功能，有效隔绝外部噪音，让您沉浸在音乐世界中。人体工学设计，佩戴舒适，适合长时间使用。</p>
+          <p>耳机配备10mm大尺寸动圈单元，音质清晰饱满，低音浑厚有力。支持AAC和SBC高品质音频解码，让您享受更加细腻的音乐细节。</p>
+          <p>内置四麦克风系统，通话清晰，有效过滤环境噪音。支持智能语音助手，轻触即可唤醒手机上的语音助手功能。</p>
+          <p>充电盒采用Type-C接口，支持快充功能，10分钟充电可使用2小时。耳机单次充满可使用8小时，配合充电盒可延长至32小时，满足您的长时间使用需求。</p>
+          <img src="https://via.placeholder.com/800x400?text=产品详情图" alt="产品详情图" style="width: 100%; margin: 20px 0;">
+        </div>
+        <div class="tab-content">
+          <h3>规格参数</h3>
+          <table class="specifications">
+            <tr>
+              <th>品牌</th>
+              <td>电商示例</td>
+            </tr>
+            <tr>
+              <th>型号</th>
+              <td>EB-WH100</td>
+            </tr>
+            <tr>
+              <th>颜色</th>
+              <td>黑色/白色/蓝色</td>
+            </tr>
+            <tr>
+              <th>蓝牙版本</th>
+              <td>5.2</td>
+            </tr>
+            <tr>
+              <th>传输距离</th>
+              <td>10米（无障碍环境）</td>
+            </tr>
+            <tr>
+              <th>电池容量</th>
+              <td>耳机：50mAh x 2 / 充电盒：500mAh</td>
+            </tr>
+            <tr>
+              <th>续航时间</th>
+              <td>单次充电8小时，配合充电盒32小时</td>
+            </tr>
+            <tr>
+              <th>充电时间</th>
+              <td>耳机：1小时 / 充电盒：2小时</td>
+            </tr>
+            <tr>
+              <th>防水等级</th>
+              <td>IPX5</td>
+            </tr>
+            <tr>
+              <th>重量</th>
+              <td>耳机：5g x 2 / 充电盒：45g</td>
+            </tr>
+          </table>
+        </div>
+        <div class="tab-content">
+          <h3>用户评价</h3>
+          <div class="review">
+            <div class="review-header">
+              <div class="review-author">王先生</div>
+              <div class="review-date">2024-05-15</div>
+            </div>
+            <div class="review-rating">★★★★★</div>
+            <p>音质非常好，降噪效果也很棒，戴着很舒服，续航也不错，总体来说非常满意这次购买。</p>
+          </div>
+          <div class="review">
+            <div class="review-header">
+              <div class="review-author">李女士</div>
+              <div class="review-date">2024-05-10</div>
+            </div>
+            <div class="review-rating">★★★★☆</div>
+            <p>耳机整体表现不错，音质清晰，但是低音感觉稍微弱了一点。续航时间符合描述，充电也很快。</p>
+          </div>
+          <div class="review">
+            <div class="review-header">
+              <div class="review-author">张先生</div>
+              <div class="review-date">2024-05-05</div>
+            </div>
+            <div class="review-rating">★★★★★</div>
+            <p>这是我用过的最好的无线耳机之一，降噪效果特别好，坐地铁的时候几乎听不到外界噪音。触控操作也很灵敏，推荐购买！</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="related-products">
+        <h2>相关推荐</h2>
+        <div class="product-grid">
+          <!-- 相关商品1 -->
+          <div class="product-card">
+            <div class="product-image">
+              <img src="https://via.placeholder.com/300x200?text=相关商品1" alt="相关商品1">
+            </div>
+            <div class="product-card-info">
+              <h3 class="product-card-title">头戴式蓝牙耳机</h3>
+              <div class="product-card-price">¥399.00</div>
+            </div>
+          </div>
+
+          <!-- 相关商品2 -->
+          <div class="product-card">
+            <div class="product-image">
+              <img src="https://via.placeholder.com/300x200?text=相关商品2" alt="相关商品2">
+            </div>
+            <div class="product-card-info">
+              <h3 class="product-card-title">运动型无线耳机</h3>
+              <div class="product-card-price">¥249.00</div>
+            </div>
+          </div>
+
+          <!-- 相关商品3 -->
+          <div class="product-card">
+            <div class="product-image">
+              <img src="https://via.placeholder.com/300x200?text=相关商品3" alt="相关商品3">
+            </div>
+            <div class="product-card-info">
+              <h3 class="product-card-title">高端HiFi耳机</h3>
+              <div class="product-card-price">¥599.00</div>
+            </div>
+          </div>
+
+          <!-- 相关商品4 -->
+          <div class="product-card">
+            <div class="product-image">
+              <img src="https://via.placeholder.com/300x200?text=相关商品4" alt="相关商品4">
+            </div>
+            <div class="product-card-info">
+              <h3 class="product-card-title">智能语音助手耳机</h3>
+              <div class="product-card-price">¥349.00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div>
+            <h3>关于我们</h3>
+            <ul>
+              <li><a href="#">公司简介</a></li>
+              <li><a href="#">联系方式</a></li>
+              <li><a href="#">招聘信息</a></li>
+              <li><a href="#">新闻中心</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>客户服务</h3>
+            <ul>
+              <li><a href="#">帮助中心</a></li>
+              <li><a href="#">配送方式</a></li>
+              <li><a href="#">退换货政策</a></li>
+              <li><a href="#">投诉建议</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>商家合作</h3>
+            <ul>
+              <li><a href="#">入驻条件</a></li>
+              <li><a href="#">商家中心</a></li>
+              <li><a href="#">营销中心</a></li>
+              <li><a href="#">物流服务</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>关注我们</h3>
+            <ul>
+              <li><a href="#">微信公众号</a></li>
+              <li><a href="#">微博</a></li>
+              <li><a href="#">抖音</a></li>
+              <li><a href="#">小红书</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright">
+          © 2024 电商示例 版权所有
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // 选项卡切换
+      const tabButtons = document.querySelectorAll('.tab-button');
+      const tabContents = document.querySelectorAll('.tab-content');
+      
+      tabButtons.forEach((button, index) => {
+        button.addEventListener('click', () => {
+          tabButtons.forEach(btn => btn.classList.remove('active'));
+          tabContents.forEach(content => content.classList.remove('active'));
+          
+          button.classList.add('active');
+          tabContents[index].classList.add('active');
+        });
+      });
+
+      // 颜色选择
+      const colorOptions = document.querySelectorAll('.color-option');
+      colorOptions.forEach(option => {
+        option.addEventListener('click', () => {
+          colorOptions.forEach(opt => opt.classList.remove('active'));
+          option.classList.add('active');
+        });
+      });
+
+      // 缩略图切换
+      const thumbnails = document.querySelectorAll('.thumbnail');
+      const mainImage = document.querySelector('.main-image img');
+      
+      thumbnails.forEach((thumbnail, index) => {
+        thumbnail.addEventListener('click', () => {
+          thumbnails.forEach(thumb => thumb.classList.remove('active'));
+          thumbnail.classList.add('active');
+          
+          // 在实际应用中，这里应该切换主图的src
+          mainImage.src = `https://via.placeholder.com/600x400?text=无线耳机${index + 1}`;
+        });
+      });
+
+      // 数量选择器
+      const quantityInput = document.querySelector('.quantity-selector input');
+      const quantityButtons = document.querySelectorAll('.quantity-selector button');
+      
+      quantityButtons[0].addEventListener('click', () => {
+        let value = parseInt(quantityInput.value);
+        if (value > 1) {
+          quantityInput.value = value - 1;
+        }
+      });
+      
+      quantityButtons[1].addEventListener('click', () => {
+        let value = parseInt(quantityInput.value);
+        quantityInput.value = value + 1;
+      });
+    </script>
+  </body>
+</html>
