@@ -16,16 +16,17 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             overflow-x: hidden;
-            background: #000;
-            color: #fff;
+            background: #f5f5f5;
+            color: #333;
         }
 
         /* 轮播容器样式 */
         .carousel-container {
             width: 100%;
-            height: 100vh;
+            height: 500px;
             position: relative;
             overflow: hidden;
+            margin-bottom: 40px;
         }
 
         /* 轮播内容容器 */
@@ -363,6 +364,192 @@
         }
 
         /* 横屏模式优化 */
+        /* 新增内容样式 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #333;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: #fedb1e;
+        }
+
+        /* 特点部分样式 */
+        .features-section {
+            padding: 60px 0;
+            background: #fff;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* 规格部分样式 */
+        .specs-section {
+            padding: 60px 0;
+            background: #f9f9f9;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .spec-item {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .spec-item strong {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .spec-item span {
+            font-size: 1.5rem;
+            color: #fedb1e;
+            font-weight: 600;
+        }
+
+        /* 联系我们部分样式 */
+        .contact-section {
+            padding: 60px 0;
+            background: #fff;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .contact-info {
+            padding: 30px;
+            background: #f9f9f9;
+            border-radius: 10px;
+        }
+
+        .contact-info p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: #fedb1e;
+            color: #000;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .feature-card {
+                padding: 20px;
+            }
+
+            .feature-icon {
+                font-size: 2.5rem;
+            }
+        }
+
         @media (max-height: 600px) and (orientation: landscape) {
             .slide-content h3 {
                 font-size: 2rem;
@@ -478,6 +665,81 @@
             <span class="indicator"></span>
         </div>
     </div>
+
+    <!-- 产品特点部分 -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">产品特点</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>智能导航</h3>
+                    <p>采用先进的AI算法，精确规划路线，自动避障</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔋</div>
+                    <h3>持久续航</h3>
+                    <p>大容量电池，单次充电可持续工作6小时</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>APP控制</h3>
+                    <p>手机远程操控，实时监控工作状态</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌧️</div>
+                    <h3>全天候作业</h3>
+                    <p>IP67防水设计，雨天也能正常工作</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 产品规格部分 -->
+    <section class="specs-section">
+        <div class="container">
+            <h2 class="section-title">技术规格</h2>
+            <div class="specs-grid">
+                <div class="spec-item">
+                    <strong>工作效率</strong>
+                    <span>1000㎡/h</span>
+                </div>
+                <div class="spec-item">
+                    <strong>最大坡度</strong>
+                    <span>35°</span>
+                </div>
+                <div class="spec-item">
+                    <strong>噪音水平</strong>
+                    <span>≤65dB</span>
+                </div>
+                <div class="spec-item">
+                    <strong>续航时间</strong>
+                    <span>6小时</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们部分 -->
+    <section class="contact-section">
+        <div class="container">
+            <h2 class="section-title">联系我们</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <p>📞 客服热线：400-123-4567</p>
+                    <p>📧 邮箱：support@yarbo.com</p>
+                    <p>🏢 地址：深圳市南山区科技园</p>
+                </div>
+                <div class="contact-form">
+                    <input type="text" placeholder="您的姓名">
+                    <input type="email" placeholder="电子邮箱">
+                    <textarea placeholder="留言内容"></textarea>
+                    <button class="submit-btn">提交</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const wrapper = document.querySelector('.carousel-wrapper');
