@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yarbo Lawn Mower Pro</title>
+    <style>
+        /* 基础样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            overflow-x: hidden;
+            background: #000;
+            color: #fff;
+        }
+
+        /* 轮播容器样式 */
+        .carousel-container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 轮播内容容器 */
+        .carousel-wrapper {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* 单个轮播项样式 */
+        .carousel-slide {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        /* 轮播切换动画 */
+        .carousel-wrapper.sliding {
+            transition: none;
+        }
+
+        /* 视频容器样式 */
+        .mobile-video-container,
+        .desktop-video-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .mobile-video-container {
+            display: none;
+        }
+
+        /* 视频样式 */
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 内容层样式 */
+        .slide-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.1));
+            padding: 20px;
+        }
+
+        .content-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* 文字样式 */
+        .slide-content h3 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #fedb1e;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .slide-content .subtitle {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards 0.2s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-buttons {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards 0.4s;
+        }
+
+        /* 按钮样式 */
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+            padding: 16px 42px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .primary-btn {
+            background: #fedb1e;
+            color: #000;
+            box-shadow: 0 4px 15px rgba(254, 219, 30, 0.3);
+        }
+
+        .secondary-btn {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .primary-btn::before,
+        .secondary-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: -1;
+        }
+
+        .primary-btn:hover {
+            background: #fff;
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
+        }
+
+        .secondary-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .primary-btn:hover::before,
+        .secondary-btn:hover::before {
+            transform: translateX(0);
+        }
+
+        .primary-btn:active,
+        .secondary-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* 导航按钮 */
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+        }
+
+        .carousel-nav:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .carousel-nav.prev {
+            left: 30px;
+        }
+
+        .carousel-nav.next {
+            right: 30px;
+        }
+
+        /* 指示器样式 */
+        .carousel-indicators {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: #fff;
+            transform: scale(1.2);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .slide-content h3 {
+                font-size: 3rem;
+            }
+
+            .slide-content .subtitle {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-video-container {
+                display: block;
+            }
+
+            .desktop-video-container {
+                display: none;
+            }
+
+            .slide-content {
+                background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.2));
+            }
+
+            .slide-content h3 {
+                font-size: 2.5rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .slide-content .subtitle {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .content-wrapper {
+                padding: 0 20px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 15px;
+                width: 100%;
+                max-width: 300px;
+                margin: 20px auto 0;
+            }
+
+            .primary-btn,
+            .secondary-btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+                width: 100%;
+                text-align: center;
+            }
+
+            .carousel-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+                opacity: 0.8;
+            }
+
+            .carousel-nav.prev {
+                left: 15px;
+            }
+
+            .carousel-nav.next {
+                right: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide-content h3 {
+                font-size: 2rem;
+            }
+
+            .slide-content .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .carousel-nav {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+
+            .carousel-indicators {
+                bottom: 20px;
+            }
+
+            .indicator {
+                width: 8px;
+                height: 8px;
+            }
+        }
+
+        /* 横屏模式优化 */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .slide-content h3 {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .slide-content .subtitle {
+                font-size: 1.2rem;
+                margin-bottom: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: row;
+                gap: 15px;
+                margin-top: 15px;
+            }
+
+            .primary-btn,
+            .secondary-btn {
+                padding: 10px 25px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="carousel-container">
+        <div class="carousel-wrapper">
+            <!-- 第一个轮播项 -->
+            <div class="carousel-slide active">
+                <!-- 移动端视频 -->
+                <div class="mobile-video-container">
+                    <video playsinline loop muted autoplay
+                        poster="https://img-va.myshopline.com/image/store/1737714205978/7e5c65a8951241f589163a25b4808d75.png">
+                        <source src="https://cdn-files.myshopline.com/video/store/1737714205978/Banner-Full-M.mp4">
+                    </video>
+                </div>
+                
+                <!-- PC端视频 -->
+                <div class="desktop-video-container">
+                    <video class="desktop-video" playsinline loop muted autoplay
+                        src="https://cdn-files.myshopline.com/video/store/1737714205978/Banner-Full.mp4">
+                    </video>
+                </div>
+
+                <!-- 内容层 -->
+                <div class="slide-content">
+                    <div class="content-wrapper">
+                        <h3>Yarbo Lawn Mower Pro</h3>
+                        <p class="subtitle">Made for the Wild Lawn</p>
+                        <div class="cta-buttons">
+                            <a href="#" class="primary-btn">立即购买</a>
+                            <a href="#" class="secondary-btn">了解更多</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第二个轮播项 -->
+            <div class="carousel-slide">
+                <div class="mobile-video-container">
+                    <img src="https://img-va.myshopline.com/image/store/1737714205978/20250623-111054.png" alt="Yarbo Features">
+                </div>
+                
+                <div class="desktop-video-container">
+                    <img src="https://img-va.myshopline.com/image/store/1737714205978/Frame-2036456461-(2).png" alt="Yarbo Features">
+                </div>
+
+                <div class="slide-content">
+                    <div class="content-wrapper">
+                        <h3>智能割草新体验</h3>
+                        <p class="subtitle">全自动导航，精准避障</p>
+                        <div class="cta-buttons">
+                            <a href="#" class="primary-btn">产品特点</a>
+                            <a href="#" class="secondary-btn">技术规格</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第三个轮播项 -->
+            <div class="carousel-slide">
+                <div class="mobile-video-container">
+                    <img src="https://img-va.myshopline.com/image/store/1737714205978/20250623-111054.png" alt="Yarbo App">
+                </div>
+                
+                <div class="desktop-video-container">
+                    <img src="https://img-va.myshopline.com/image/store/1737714205978/Frame-2036456461-(2).png" alt="Yarbo App">
+                </div>
+
+                <div class="slide-content">
+                    <div class="content-wrapper">
+                        <h3>智能APP控制</h3>
+                        <p class="subtitle">随时随地掌控草坪状态</p>
+                        <div class="cta-buttons">
+                            <a href="#" class="primary-btn">下载APP</a>
+                            <a href="#" class="secondary-btn">使用教程</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 导航按钮 -->
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+
+        <!-- 指示器 -->
+        <div class="carousel-indicators">
+            <span class="indicator active"></span>
+            <span class="indicator"></span>
+            <span class="indicator"></span>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const wrapper = document.querySelector('.carousel-wrapper');
+            const slides = document.querySelectorAll('.carousel-slide');
+            const indicators = document.querySelectorAll('.indicator');
+            const prevBtn = document.querySelector('.carousel-nav.prev');
+            const nextBtn = document.querySelector('.carousel-nav.next');
+            
+            let currentIndex = 0;
+            let isTransitioning = false;
+            let autoplayInterval;
+            const autoplayDelay = 5000; // 自动播放间隔，单位毫秒
+
+            // 初始化
+            updateSlides();
+            startAutoplay();
+
+            // 更新轮播位置和状态
+            function updateSlides() {
+                wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                // 更新活动状态
+                slides.forEach((slide, index) => {
+                    slide.classList.toggle('active', index === currentIndex);
+                });
+                
+                // 更新指示器
+                indicators.forEach((indicator, index) => {
+                    indicator.classList.toggle('active', index === currentIndex);
+                });
+            }
+
+            // 切换到下一张
+            function nextSlide() {
+                if (isTransitioning) return;
+                isTransitioning = true;
+                currentIndex = (currentIndex + 1) % slides.length;
+                updateSlides();
+                setTimeout(() => isTransitioning = false, 600);
+            }
+
+            // 切换到上一张
+            function prevSlide() {
+                if (isTransitioning) return;
+                isTransitioning = true;
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                updateSlides();
+                setTimeout(() => isTransitioning = false, 600);
+            }
+
+            // 开始自动播放
+            function startAutoplay() {
+                stopAutoplay();
+                autoplayInterval = setInterval(nextSlide, autoplayDelay);
+            }
+
+            // 停止自动播放
+            function stopAutoplay() {
+                if (autoplayInterval) {
+                    clearInterval(autoplayInterval);
+                    autoplayInterval = null;
+                }
+            }
+
+            // 事件监听
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                startAutoplay(); // 重置自动播放计时器
+            });
+
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                startAutoplay(); // 重置自动播放计时器
+            });
+
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    if (isTransitioning || currentIndex === index) return;
+                    isTransitioning = true;
+                    currentIndex = index;
+                    updateSlides();
+                    setTimeout(() => isTransitioning = false, 600);
+                    startAutoplay(); // 重置自动播放计时器
+                });
+            });
+
+            // 鼠标悬停时暂停自动播放
+            wrapper.addEventListener('mouseenter', stopAutoplay);
+            wrapper.addEventListener('mouseleave', startAutoplay);
+
+            // 触摸事件处理
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            wrapper.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+                stopAutoplay();
+            });
+
+            wrapper.addEventListener('touchmove', (e) => {
+                if (isTransitioning) return;
+                touchEndX = e.touches[0].clientX;
+                const diff = touchStartX - touchEndX;
+                
+                // 添加拖动效果
+                if (Math.abs(diff) > 5) { // 防止微小移动触发
+                    wrapper.style.transform = `translateX(${-currentIndex * 100 - (diff / wrapper.offsetWidth) * 100}%)`;
+                }
+            });
+
+            wrapper.addEventListener('touchend', () => {
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > 50) { // 滑动距离超过50px时触发切换
+                    if (diff > 0) {
+                        nextSlide();
+                    } else {
+                        prevSlide();
+                    }
+                } else {
+                    // 回到原位
+                    updateSlides();
+                }
+                
+                startAutoplay();
+            });
+
+            // 处理视频播放
+            slides.forEach(slide => {
+                const videos = slide.querySelectorAll('video');
+                videos.forEach(video => {
+                    video.addEventListener('loadeddata', () => {
+                        if (slide.classList.contains('active')) {
+                            video.play();
+                        }
+                    });
+                });
+            });
+
+            // 监听轮播切换，控制视频播放
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        const slide = mutation.target;
+                        const videos = slide.querySelectorAll('video');
+                        
+                        videos.forEach(video => {
+                            if (slide.classList.contains('active')) {
+                                video.play();
+                            } else {
+                                video.pause();
+                            }
+                        });
+                    }
+                });
+            });
+
+            slides.forEach(slide => {
+                observer.observe(slide, {
+                    attributes: true
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
