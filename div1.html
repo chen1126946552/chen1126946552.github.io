@@ -238,8 +238,61 @@
 <div>
 </div>
 <div>
+    <h2>第一个有内容div</h2>
+</div>
+<div>
     <iframe height="0" width="0" aria-hidden="true" alt="" style="pointer-events: none; height: 0px; width: 0px; position: absolute; padding: 0px; margin: 0px; border: 0px; visibility: hidden;"></iframe>
 </div>
+    <div>
+    <h2>iframe下有内容div</h2>
+</div>
+ <div class="script-wrapper"><noscript>您的浏览器不支持JavaScript，请启用JavaScript以获得更好的体验。</noscript></div>
+<div class="script-wrapper"><script type="module">
+                import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+                console.log('ES模块脚本执行 - ' + new Date().toLocaleTimeString());
+</script></div>
+<div class="script-wrapper"><script>
+                    console.log('动态脚本执行 - ' + new Date().toLocaleTimeString());
+</script></div>
+    <div>
+    <h2>脚本div下的div</h2>
+</div>
+<div class="comment-wrapper"><!-- @vue/component 
+                <template>
+                    <!-- Vue模板注释 -->
+                </template>
+            --></div>
+<div class="comment-wrapper"><!--[if IE]>
+                这是IE条件注释
+                <![endif]--></div>
+<div class="comment-wrapper"><!--
+                这是一个多行注释
+                第二行
+                第三行
+            --></div>
+<div class="comment-wrapper"><!-- 这是一个单行注释 --></div>
+    <div>
+    <h2>注释下的div</h2>
+</div>
+<aside></aside>
+    <div>
+    <h2>aside标签下的div</h2>
+</div>
+<main></main>
+    <div>
+    <h2>main标签下的div</h2>
+</div>
+<div id="test-div" data-test="true" aria-hidden="true"></div>
+<article></article>
+<div>
+    <h2>article标签下的div</h2>
+</div>
+
+<section></section>
+<div>
+    <h2>section标签下的div</h2>
+</div>
+
  <div id="shadow-host">
         <!-- 这个div将作为Shadow DOM的宿主元素 -->
     </div>
