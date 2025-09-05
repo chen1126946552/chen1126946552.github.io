@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIVAIA JP | サステナブルなシューズ＆アパレル - Sandbox Test</title>
+
+    <!-- Shopify Web Pixels Manager -->
+    <script>
+        window.ShopifyAnalytics = {
+            meta: {
+                page: {
+                    pageType: "home",
+                    resourceType: "homepage",
+                    shopId: 12345
+                }
+            }
+        };
+    </script>
+    <!-- Ptengine Tag -->
+    <script src="https://devjs.ptengine.com/19ky1yoe.js"></script>
+    <script src="https://devjs.ptengine.com/67h6jzm5.js"></script>
+    <script src="https://devjs.ptengine.com/5f3yl5tl.js"></script>
+    <script src="https://devjs.ptengine.com/12w2zmfm.js"></script>
+    <!-- End Ptengine Tag -->
+    <link rel="stylesheet" href="sandbox-styles.css">
+    <style>
+        .control-section {
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+        
+        .action-button {
+            padding: 12px 15px;
+            font-size: 14px;
+            color: white;
+            background-color: #d4001a;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(212, 0, 26, 0.2);
+        }
+        
+        .action-button::before {
+            content: "+";
+            margin-right: 8px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .action-button:hover {
+            background-color: #b30016;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(212, 0, 26, 0.3);
+        }
+        
+        .action-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(212, 0, 26, 0.2);
+        }
+
+        .control-section {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #f8f8f8;
+            border-radius: 6px;
+            border: 1px solid #eee;
+            position: relative;
+        }
+
+        .button-group h4 {
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #fff;
+            padding: 0 10px;
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+            border-radius: 4px;
+            border: 1px solid #eee;
+        }
+
+        .control-section h3 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #d4001a;
+        }
+
+        /* 添加的元素样式 */
+        .empty-element {
+            margin: 10px;
+            padding: 10px;
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            min-height: 50px;
+            position: relative;
+        }
+
+        .empty-element::before {
+            content: attr(data-type);
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background: #fff;
+            padding: 0 5px;
+            color: #666;
+            font-size: 12px;
+        }
+
+        .space-content {
+            border: 1px solid #ddd;
+            padding: 5px;
+            margin: 5px;
+            background: #fff;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+
+        /* 骨架屏占位符样式 */
+        .skeleton-placeholder {
+            padding: 20px;
+            background: #fff;
+        }
+        .skeleton-line {
+            height: 20px;
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .skeleton-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* 加载动画占位符样式 */
+        .loading-placeholder {
+            text-align: center;
+            padding: 20px;
+        }
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #d4001a;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        .loading-text {
+            color: #666;
+            font-size: 14px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* 错误状态占位符样式 */
+        .error-placeholder {
+            text-align: center;
+            padding: 20px;
+            background: #fff5f5;
+        }
+        .error-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .error-message {
+            color: #d4001a;
+            margin-bottom: 10px;
+        }
+        .retry-button {
+            padding: 8px 16px;
+            background: #d4001a;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .retry-button:hover {
+            background: #b30016;
+        }
+
+        /* 空状态占位符样式 */
+        .empty-state-placeholder {
+            text-align: center;
+            padding: 30px;
+            background: #f8f8f8;
+        }
+        .empty-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+        .empty-message {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="测试页面标题">
+    <meta property="og:description" content="测试页面描述">
+    <meta property="og:image" content="https://example.com/image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="description" content="页面描述内容">
+    <meta name="keywords" content="关键词1,关键词2,关键词3">
+    <meta name="author" content="作者名称">
+    <meta name="robots" content="index,follow">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap">
+    <link rel="preload" as="image" href="https://cdn.shopify.com/s/files/1/0532/3063/3157/files/logo.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&amp;display=swap">
+    <link rel="icon" type="image/png" href="https://www.google.com/favicon.ico">
+    <link rel="stylesheet" href="https://cdn.shopify.com/s/assets/storefront.css">
+<div>
+</div>
+        <!-- 2. 动态注入测试 -->
+        <div class="control-section">
+            <h3>动态注入测试</h3>
+            <div class="button-group">
+                <h4>非空元素测试</h4>
+                <button id="add-sandbox-btn" class="action-button">添加sandbox</button>
+                
+            </div>
+            <div class="button-group">
+                <h4>加载状态占位符测试</h4>
+                <button id="add-component-placeholder-btn" class="action-button">添加组件占位符</button>
+                <button id="add-skeleton-btn" class="action-button">添加骨架屏占位符</button>
+                <button id="add-loading-btn" class="action-button">添加加载动画占位符</button>
+            </div>
+            <div class="button-group">
+                <h4>空元素注释测试</h4>
+                <button id="add-empty-div-btn" class="action-button">添加空div</button>
+                <button id="add-attr-div-btn" class="action-button">添加带属性空div</button>
+                <button id="add-empty-section-btn" class="action-button">添加空section</button>
+                <button id="add-empty-article-btn" class="action-button">添加空article</button>
+                <button id="add-empty-main-btn" class="action-button">添加空main</button>
+                <button id="add-empty-aside-btn" class="action-button">添加空aside</button>
+                <button id="add-single-comment-btn" class="action-button">添加单行注释</button>
+                <button id="add-multi-comment-btn" class="action-button">添加多行注释</button>
+                <button id="add-nested-comment-btn" class="action-button">添加嵌套注释</button>
+                <button id="add-conditional-comment-btn" class="action-button">添加条件注释</button>
+                <button id="add-vue-comment-btn" class="action-button">添加Vue注释标记</button>
+                <button id="add-angular-comment-btn" class="action-button">添加Angular注释标记</button>
+            </div>
+            
+            <div class="button-group">
+                <h4>SCRIPT标签测试</h4>
+                <button id="add-inline-script-btn" class="action-button">添加内联脚本</button>
+                <button id="add-external-script-btn" class="action-button">添加外部脚本</button>
+                <button id="add-dynamic-script-btn" class="action-button">添加动态脚本</button>
+                <button id="add-module-script-btn" class="action-button">添加模块脚本</button>
+                <button id="add-basic-noscript-btn" class="action-button">添加基础noscript</button>
+            </div>
+        </div>
+    <!-- 1. 基础sandbox容器 -->
+    <div class="web-pixels-manager-sandbox" data-sandbox-id="basic">
+        <div class="product-card">
+            <img src="https://cdn.shopify.com/s/files/1/0532/3063/3157/files/1755486857-ebf86442-f045-4df7-b882-fe907fa489ae_360x.jpg?v=1756887886" 
+                 alt="[Yancy] ジョガー ナイロン スニーカーリーナ">
+            <h3>[Yancy] ジョガー ナイロン スニーカーリーナ</h3>
+            <p class="price">¥21,900</p>
+            <div class="color-options">
+                <span class="color-dot black" title="ブラック"></span>
+                <span class="color-dot beige" title="ベージュ"></span>
+            </div>
+            <button class="add-to-cart">カートに入れる</button>
+        </div>
+    </div>
+
+
+
+    <!-- 3. 多个sandbox实例 -->
+    <div class="web-pixels-manager-sandbox" data-sandbox-id="collection">
+        <div class="collection-grid">
+            <div class="product-card">
+                <img src="https://cdn.shopify.com/s/files/1/0532/3063/3157/files/1755486857-ebf86442-f045-4df7-b882-fe907fa489ae_360x.jpg?v=1756887886" 
+                     alt="[Tiana] アーモンドトゥ フラットシューズ">
+                <h3>[Tiana] アーモンドトゥ フラットシューズ</h3>
+                <p class="price">¥17,900</p>
+                <div class="color-options">
+                    <span class="color-dot black" title="ブラック"></span>
+                    <span class="color-dot gray" title="グレー"></span>
+                </div>
+                <button class="add-to-cart">カートに入れる</button>
+            </div>
+            <div class="product-card">
+                <img src="https://cdn.shopify.com/s/files/1/0532/3063/3157/files/1754289560-0b0c5a6f-9832-4348-b0f0-673677ffc0e7_2_360x.jpg?v=1756455410" 
+                     alt="[Margot Walker] スクエアトゥ 超軽量 厚底 フラットシューズ">
+                <h3>[Margot Walker] スクエアトゥ 超軽量 厚底 フラットシューズ</h3>
+                <p class="price">¥17,900</p>
+                <div class="color-options">
+                    <span class="color-dot black" title="ブラック"></span>
+                    <span class="color-dot beige" title="ベージュ"></span>
+                </div>
+                <button class="add-to-cart">カートに入れる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. sandbox状态变化 -->
+    <div class="web-pixels-manager-sandbox" data-sandbox-id="dynamic-state">
+        <div class="cart-section">
+            <h2>ショッピングカート</h2>
+            <div class="cart-items">
+                <!-- 购物车内容将动态更新 -->
+            </div>
+            <div class="cart-summary">
+                <p>小計: <span class="subtotal">¥0</span></p>
+                <button class="checkout-button">レジに進む</button>
+            </div>
+        </div>
+    </div>
+    <script src="sandbox-test.js"></script>
+</body>
+</html>
