@@ -46,42 +46,57 @@ document.addEventListener('DOMContentLoaded', function() {
         },
 
         injectSingleComment() {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'comment-wrapper';
             const comment = document.createComment(' 这是一个单行注释 ');
-            document.body.insertBefore(comment, document.body.firstChild);
+            wrapper.appendChild(comment);
+            document.body.insertBefore(wrapper, document.body.firstChild);
         },
 
         injectMultiComment() {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'comment-wrapper';
             const comment = document.createComment(`
                 这是一个多行注释
                 第二行
                 第三行
             `);
-            document.body.insertBefore(comment, document.body.firstChild);
+            wrapper.appendChild(comment);
+            document.body.insertBefore(wrapper, document.body.firstChild);
         },
 
         injectNestedComment() {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'comment-wrapper';
             const comment = document.createComment(`
                 外层注释
                 <!-- 内层注释 -->
                 继续外层
             `);
-            document.body.insertBefore(comment, document.body.firstChild);
+            wrapper.appendChild(comment);
+            document.body.insertBefore(wrapper, document.body.firstChild);
         },
 
         injectConditionalComment() {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'comment-wrapper';
             const comment = document.createComment(`[if IE]>
                 这是IE条件注释
                 <![endif]`);
-            document.body.insertBefore(comment, document.body.firstChild);
+            wrapper.appendChild(comment);
+            document.body.insertBefore(wrapper, document.body.firstChild);
         },
 
         injectVueComment() {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'comment-wrapper';
             const comment = document.createComment(` @vue/component 
                 <template>
                     <!-- Vue模板注释 -->
                 </template>
             `);
-            document.body.insertBefore(comment, document.body.firstChild);
+            wrapper.appendChild(comment);
+            document.body.insertBefore(wrapper, document.body.firstChild);
         },
 
         injectReactComment() {
@@ -95,12 +110,15 @@ document.addEventListener('DOMContentLoaded', function() {
         },
 
         injectAngularComment() {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'comment-wrapper';
             const comment = document.createComment(` Angular template comment 
                 @Component({
                     // TypeScript注释
                 })
             `);
-            document.body.insertBefore(comment, document.body.firstChild);
+            wrapper.appendChild(comment);
+            document.body.insertBefore(wrapper, document.body.firstChild);
         },
 
         injectOtherFrameworkComment() {
@@ -112,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
 
         injectBasicNoscript() {
-            const content = '<noscript>您的浏览器不支持JavaScript，请启用JavaScript以获得更好的体验。</noscript>';
+            const content = '<div class="script-wrapper"><noscript>您的浏览器不支持JavaScript，请启用JavaScript以获得更好的体验。</noscript></div>';
             document.body.insertAdjacentHTML('afterbegin', content);
         },
 
@@ -191,31 +209,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // SCRIPT标签相关函数
         injectInlineScript() {
-            const content = `<script>
+            const content = `<div class="script-wrapper"><script>
                 console.log('内联脚本执行 - ' + new Date().toLocaleTimeString());
-            </script>`;
+            </script></div>`;
             document.body.insertAdjacentHTML('afterbegin', content);
         },
 
         injectExternalScript() {
-            const content = `<script src="https://cdn.shopify.com/s/assets/storefront.js" async></script>`;
+            const content = `<div class="script-wrapper"><script src="https://cdn.shopify.com/s/assets/storefront.js" async></script></div>`;
             document.body.insertAdjacentHTML('afterbegin', content);
         },
 
         injectDynamicScript() {
             setTimeout(() => {
-                const content = `<script>
+                const content = `<div class="script-wrapper"><script>
                     console.log('动态脚本执行 - ' + new Date().toLocaleTimeString());
-                </script>`;
+                </script></div>`;
                 document.body.insertAdjacentHTML('afterbegin', content);
             }, 1000);
         },
 
         injectModuleScript() {
-            const content = `<script type="module">
+            const content = `<div class="script-wrapper"><script type="module">
                 import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
                 console.log('ES模块脚本执行 - ' + new Date().toLocaleTimeString());
-            </script>`;
+            </script></div>`;
             document.body.insertAdjacentHTML('afterbegin', content);
         }
     };
