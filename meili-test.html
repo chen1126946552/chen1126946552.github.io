@@ -235,6 +235,12 @@
     </style>
 </head>
 <body>
+    <script>
+        // 检查URL参数中是否包含kong
+        if (window.location.search.toLowerCase().includes('kong')) {
+            document.body.insertAdjacentHTML('afterbegin', '<div></div>');
+        }
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="测试页面标题">
     <meta property="og:description" content="测试页面描述">
