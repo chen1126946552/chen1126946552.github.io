@@ -328,8 +328,7 @@
              
             </div>
             <div class="shadow-content">
-                <h2>Shadow DOM Content</h2>
-                <p>这是Shadow DOM中的内容</p>
+               
             </div>
         `;
         
@@ -338,12 +337,12 @@
     </script>
     <script>
         // 创建并附加Shadow DOM
-        const shadowHost = document.getElementById('shadow-host2');
-        const shadowRoot = shadowHost.attachShadow({mode: 'open'});
+        const shadowHost2 = document.getElementById('shadow-host2');
+        const shadowRoot2 = shadowHost.attachShadow({mode: 'open'});
         
         // 创建Shadow DOM的内容
-        const shadowContent = document.createElement('div');
-        shadowContent.innerHTML = `
+        const shadowContent2 = document.createElement('div');
+        shadowContent2.innerHTML = `
             <style>
                 .shadow-content {
                     padding: 20px;
@@ -358,7 +357,7 @@
         `;
         
         // 将内容添加到Shadow Root
-        shadowRoot.appendChild(shadowContent);
+        shadowRoot2.appendChild(shadowContent);
     </script>
     <section>
     <section class="testcase">
