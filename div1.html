@@ -303,6 +303,7 @@
  <div id="shadow-host">
         <!-- 这个div将作为Shadow DOM的宿主元素 -->
     </div>
+<div><p class="test-click clickable">点击我（div > p）</p></div>
     <div id="shadow-host2">
         <!-- 这个div将作为Shadow DOM的宿主元素 -->
     </div>
@@ -358,6 +359,110 @@
         // 将内容添加到Shadow Root
         shadowRoot.appendChild(shadowContent);
     </script>
+    <section>
+    <section class="testcase">
+        <section>
+          <script>/* dummy script */</script>
+        <style>.note { color: #888; font-size: 13px; }</style>
+            <link rel="stylesheet" href="#"/>
+            <meta name="viewport" content="width=device-width,initial-scale=1" />
+            <noscript><!-- noscript content --></noscript>
+          <!-- we can't click <script>, so provide a button to simulate clicking the script element -->
+        </section>
+      </section>
+    </section>
+    <section><section>有内容div</section></section>
+    <aside>
+    <aside class="testcase">
+        <aside>
+          <script>/* dummy script */</script>
+        <style>.note { color: #888; font-size: 13px; }</style>
+            <link rel="stylesheet" href="#"/>
+            <meta name="viewport" content="width=device-width,initial-scale=1" />
+            <noscript><!-- noscript content --></noscript>
+          <!-- we can't click <script>, so provide a button to simulate clicking the script element -->
+        </aside>
+      </aside>
+    </aside>
+    <aside><aside>有内容div</aside></aside>
+    <main>
+    <main class="testcase">
+        <main>
+          <script>/* dummy script */</script>
+        <style>.note { color: #888; font-size: 13px; }</style>
+            <link rel="stylesheet" href="#"/>
+            <meta name="viewport" content="width=device-width,initial-scale=1" />
+            <noscript><!-- noscript content --></noscript>
+          <!-- we can't click <script>, so provide a button to simulate clicking the script element -->
+        </main>
+      </main>
+    </main>
+    <main><main>有内容div</main></main>
+    <article>
+    <article class="testcase">
+        <article>
+          <script>/* dummy script */</script>
+        <style>.note { color: #888; font-size: 13px; }</style>
+            <link rel="stylesheet" href="#"/>
+            <meta name="viewport" content="width=device-width,initial-scale=1" />
+            <noscript><!-- noscript content --></noscript>
+          <!-- we can't click <script>, so provide a button to simulate clicking the script element -->
+        </article>
+      </article>
+    </article>
+    <article><article>有内容div</article></article>
+     <nav>
+    <nav class="testcase">
+        <nav>
+          <script>/* dummy script */</script>
+        <style>.note { color: #888; font-size: 13px; }</style>
+            <link rel="stylesheet" href="#"/>
+            <meta name="viewport" content="width=device-width,initial-scale=1" />
+            <noscript><!-- noscript content --></noscript>
+          <!-- we can't click <script>, so provide a button to simulate clicking the script element -->
+        </nav>
+      </nav>
+    </nav>
+    <nav><nav>有内容div</nav></nav>
+    <nav>
+    <header class="testcase">
+        <header>
+          <script>/* dummy script */</script>
+        <style>.note { color: #888; font-size: 13px; }</style>
+            <link rel="stylesheet" href="#"/>
+            <meta name="viewport" content="width=device-width,initial-scale=1" />
+            <noscript><!-- noscript content --></noscript>
+          <!-- we can't click <script>, so provide a button to simulate clicking the script element -->
+        </header>
+      </header>
+    </header>
+    <header><header>有内容div</header></header>
+    <footer class="testcase">
+        <footer>
+          <script>/* dummy script */</script>
+        <style>.note { color: #888; font-size: 13px; }</style>
+            <link rel="stylesheet" href="#"/>
+            <meta name="viewport" content="width=device-width,initial-scale=1" />
+            <noscript><!-- noscript content --></noscript>
+          <!-- we can't click <script>, so provide a button to simulate clicking the script element -->
+        </footer>
+      </footer>
+    </footer>
+    <footer><footer>有内容div</footer></footer>
+    <div>
+    <nav class="testcase">
+        <nav>
+          <script>/* dummy script */</script>
+        <style>.note { color: #888; font-size: 13px; }</style>
+            <link rel="stylesheet" href="#"/>
+            <meta name="viewport" content="width=device-width,initial-scale=1" />
+            <noscript><!-- noscript content --></noscript>
+          <!-- we can't click <script>, so provide a button to simulate clicking the script element -->
+        </nav>
+      </nav>
+    </div>
+    <div><nav>有内容div</nav></div>
+    <div><nav><h1></h1></nav></div>
         <!-- 2. 动态注入测试 -->
         <div >
             <h3>动态注入测试</h3>
