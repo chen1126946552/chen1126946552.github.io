@@ -8,6 +8,9 @@
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-TTPBR7L');</script>
   <!-- End Google Tag Manager -->
+  <script src="https://cdn.amplitude.com/script/92be23a58f32a14b496d02c34c2cc0f5.js"></script>
+  <script>window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));window.amplitude.init('92be23a58f32a14b496d02c34c2cc0f5', {"fetchRemoteConfig":true,"autocapture":{"attribution":true,"fileDownloads":true,"formInteractions":true,"pageViews":true,"sessions":true,"elementInteractions":true,"networkTracking":true,"webVitals":true,"frustrationInteractions":true}});</script>
+  <script src="https://devjs.ptengine.com/7a80pnx3.js"></script>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -249,6 +252,9 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TTPBR7L"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
+  <script>
+    ptengine.track('商品列表',{'时间发生时间戳':Date.now(),'事件发生时间':new Date().toLocaleString(),'事件发生的url':document.location.href});
+  </script>
 
   <!-- 头部导航 -->
   <header class="header">
@@ -484,6 +490,14 @@
 
     // 设置分类
     function setCategory(category) {
+      // Ptengine 事件追踪
+      ptengine.track('筛选分类', {
+        '时间发生时间戳': Date.now(),
+        '事件发生时间': new Date().toLocaleString(),
+        '事件发生的url': document.location.href,
+        '分类名称': category
+      });
+      
       // 更新UI
       document.querySelectorAll('#categoryFilters .filter-option').forEach(option => {
         option.classList.toggle('active', option.dataset.category === category);
@@ -689,6 +703,18 @@
 
     // 跳转到商品详情
     function goToProduct(productId) {
+      const product = filteredProducts.find(p => p.id === productId);
+      
+      // Ptengine 事件追踪
+      ptengine.track('点击商品', {
+        '时间发生时间戳': Date.now(),
+        '事件发生时间': new Date().toLocaleString(),
+        '事件发生的url': document.location.href,
+        '商品ID': productId,
+        '商品名称': product ? product.name : '',
+        '商品价格': product ? product.price : 0
+      });
+      
       window.location.href = `product-detail.html?id=${productId}`;
     }
 
