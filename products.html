@@ -1,404 +1,707 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TTPBR7L');</script>
-    <!-- End Google Tag Manager -->
-    <script src="https://cdn.amplitude.com/script/92be23a58f32a14b496d02c34c2cc0f5.js"></script><script&… 1}));window.amplitude.init('92be23a58f32a14b496d02c34c2cc0f5', {"fetchRemoteConfig":true,"autocapture":{"attribution":true,"fileDownloads":true,"formInteractions":true,"pageViews":true,"sessions":true,"elementInteractions":true,"networkTracking":true,"webVitals":true,"frustrationInteractions":true}});</script>
-    <meta charset="UTF-8">
-    <link rel="icon" href="/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>商品列表 - 电商示例</title>
-    <script type="module" crossorigin src="/assets/index-a575275f.js"></script>
-    <link rel="stylesheet" href="/assets/index-737b46e0.css">
-    <script src="https://devjs.ptengine.com/7a80pnx3.js"></script>
-    <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: 'Arial', sans-serif;
+<html lang="zh-CN">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TTPBR7L');</script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="浏览我们精选的高品质商品">
+  <title>全部商品 - 电商示例</title>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/common.css">
+  <style>
+    .products-page {
+      padding: 40px 0;
+    }
+
+    .products-layout {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: 30px;
+    }
+
+    /* 侧边栏筛选 */
+    .sidebar {
+      background-color: var(--bg-white);
+      border-radius: var(--radius);
+      padding: 25px;
+      box-shadow: var(--shadow);
+      height: fit-content;
+      position: sticky;
+      top: 90px;
+    }
+
+    .filter-section {
+      margin-bottom: 25px;
+    }
+
+    .filter-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .filter-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: var(--text-color);
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .filter-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .filter-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+    }
+
+    .filter-option:hover {
+      background-color: var(--bg-color);
+    }
+
+    .filter-option.active {
+      background-color: rgba(255, 107, 107, 0.1);
+      color: var(--primary-color);
+    }
+
+    .filter-option input {
+      accent-color: var(--primary-color);
+    }
+
+    .price-range {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .price-input {
+      width: 80px;
+      padding: 8px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      text-align: center;
+    }
+
+    /* 主内容区 */
+    .products-main {
+      min-height: 500px;
+    }
+
+    .products-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      padding: 15px 20px;
+      background-color: var(--bg-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .products-count {
+      color: var(--text-light);
+    }
+
+    .products-count strong {
+      color: var(--primary-color);
+    }
+
+    .sort-options {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sort-options label {
+      color: var(--text-light);
+    }
+
+    .sort-select {
+      padding: 8px 15px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      background-color: white;
+      cursor: pointer;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    /* 移动端筛选按钮 */
+    .mobile-filter-btn {
+      display: none;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+
+    /* 分页 */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 40px;
+    }
+
+    .pagination-btn {
+      padding: 10px 15px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      background-color: var(--bg-white);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .pagination-btn:hover:not(:disabled) {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .pagination-btn.active {
+      background-color: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+
+    .pagination-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    @media (max-width: 992px) {
+      .products-layout {
+        grid-template-columns: 1fr;
       }
-      body {
-        background-color: #f8f9fa;
-      }
-      .header {
-        background-color: #fff;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        padding: 15px 0;
-        position: sticky;
+
+      .sidebar {
+        position: fixed;
         top: 0;
-        z-index: 100;
+        left: -300px;
+        width: 280px;
+        height: 100vh;
+        z-index: 1000;
+        border-radius: 0;
+        transition: left 0.3s ease;
+        overflow-y: auto;
       }
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 15px;
+
+      .sidebar.active {
+        left: 0;
       }
-      .header-content {
+
+      .sidebar-overlay.active {
+        display: block;
+      }
+
+      .mobile-filter-btn {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
       }
-      .logo {
-        font-size: 24px;
-        font-weight: bold;
-        color: #333;
-        text-decoration: none;
-      }
-      .nav {
-        display: flex;
-        list-style: none;
-      }
-      .nav li {
-        margin-left: 20px;
-      }
-      .nav a {
-        text-decoration: none;
-        color: #333;
-        font-weight: 500;
-      }
-      .nav a:hover {
-        color: #ff6b6b;
-      }
-      .hero {
-        background-color: #ff6b6b;
-        color: white;
-        padding: 60px 0;
-        text-align: center;
-        margin-bottom: 40px;
-      }
-      .hero h1 {
-        font-size: 36px;
-        margin-bottom: 20px;
-      }
-      .hero p {
-        font-size: 18px;
-        max-width: 600px;
-        margin: 0 auto;
-      }
+
       .product-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 30px;
-        margin-bottom: 60px;
+        grid-template-columns: repeat(2, 1fr);
       }
-      .product-card {
-        background-color: #fff;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
+    }
+
+    @media (max-width: 576px) {
+      .product-grid {
+        grid-template-columns: 1fr;
       }
-      .product-card:hover {
-        transform: translateY(-5px);
-      }
-      .product-image {
-        height: 200px;
-        background-color: #f0f0f0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-      }
-      .product-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-      .product-info {
-        padding: 15px;
-      }
-      .product-title {
-        font-size: 18px;
-        margin-bottom: 10px;
-        color: #333;
-      }
-      .product-price {
-        font-size: 20px;
-        font-weight: bold;
-        color: #ff6b6b;
-        margin-bottom: 15px;
-      }
-      .product-description {
-        font-size: 14px;
-        color: #666;
-        margin-bottom: 15px;
-        line-height: 1.4;
-      }
-      .btn {
-        display: inline-block;
-        background-color: #ff6b6b;
-        color: white;
-        padding: 8px 16px;
-        border-radius: 4px;
-        text-decoration: none;
-        font-weight: 500;
-        transition: background-color 0.3s ease;
-      }
-      .btn:hover {
-        background-color: #ff5252;
-      }
-      .filters {
-        background-color: #fff;
-        padding: 20px;
-        margin-bottom: 30px;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      }
-      .filters h2 {
-        margin-bottom: 15px;
-        font-size: 20px;
-      }
-      .filter-options {
-        display: flex;
+
+      .products-header {
+        flex-direction: column;
         gap: 15px;
-        flex-wrap: wrap;
+        align-items: flex-start;
       }
-      .filter-option {
-        padding: 8px 16px;
-        background-color: #f0f0f0;
-        border-radius: 20px;
-        font-size: 14px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-      .filter-option:hover, .filter-option.active {
-        background-color: #ff6b6b;
-        color: white;
-      }
-      .footer {
-        background-color: #333;
-        color: white;
-        padding: 40px 0;
-      }
-      .footer-content {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 30px;
-      }
-      .footer h3 {
-        margin-bottom: 20px;
-        font-size: 18px;
-      }
-      .footer ul {
-        list-style: none;
-      }
-      .footer li {
-        margin-bottom: 10px;
-      }
-      .footer a {
-        color: #ddd;
-        text-decoration: none;
-      }
-      .footer a:hover {
-        color: #ff6b6b;
-      }
-      .copyright {
-        margin-top: 30px;
-        text-align: center;
-        padding-top: 20px;
-        border-top: 1px solid #444;
-        font-size: 14px;
-        color: #aaa;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TTPBR7L"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    <script>ptengine.track('Products',{'时间发生时间戳':Date.now(),'事件发生时间':new Date().toLocaleString(),'事件发生的url':document.location.href})</script>
-    
-    <header class="header">
-      <div class="container">
-        <div class="header-content">
-          <a href="products.html" class="logo">电商示例</a>
-          <ul class="nav">
-            <li><a href="products.html">首页</a></li>
-            <li><a href="products.html">商品</a></li>
-            <li><a href="cart.html">购物车</a></li>
-            <li><a href="#">我的账户</a></li>
-          </ul>
-        </div>
-      </div>
-    </header>
+    }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TTPBR7L"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
-    <section class="hero">
-      <div class="container">
-        <h1>发现最新商品</h1>
-        <p>探索我们精选的高品质产品，满足您的各种需求</p>
-      </div>
-    </section>
-
+  <!-- 头部导航 -->
+  <header class="header">
     <div class="container">
-      <div class="filters">
-        <h2>筛选商品</h2>
-        <div class="filter-options">
-          <div class="filter-option active">全部</div>
-          <div class="filter-option">电子产品</div>
-          <div class="filter-option">服装</div>
-          <div class="filter-option">家居</div>
-          <div class="filter-option">配饰</div>
-        </div>
+      <div class="header-content">
+        <a href="index.html" class="logo">电商示例</a>
+        <button class="menu-toggle" aria-label="菜单">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav class="nav">
+          <a href="index.html">首页</a>
+          <a href="products.html" class="active">全部商品</a>
+          <a href="cart.html" class="cart-icon">
+            购物车
+            <span class="cart-count" style="display: none;">0</span>
+          </a>
+          <a href="account.html">我的账户</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="products-page">
+    <div class="container">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <a href="index.html">首页</a>
+        <span>›</span>
+        <span id="currentCategory">全部商品</span>
       </div>
 
-      <div class="product-grid">
-        <!-- 商品1 -->
-        <div class="product-card">
-          <div class="product-image">
-            <img src="https://via.placeholder.com/300x200?text=商品1" alt="商品1">
-          </div>
-          <div class="product-info">
-            <h3 class="product-title">高品质无线耳机</h3>
-            <div class="product-price">¥299.00</div>
-            <p class="product-description">享受卓越音质和舒适佩戴体验，内置降噪功能，长达8小时续航。</p>
-            <a href="product-detail.html" class="btn">查看详情</a>
-          </div>
-        </div>
+      <!-- 移动端筛选按钮 -->
+      <button class="btn btn-outline mobile-filter-btn" onclick="toggleSidebar()">
+        筛选商品
+      </button>
 
-        <!-- 商品2 -->
-        <div class="product-card">
-          <div class="product-image">
-            <img src="https://via.placeholder.com/300x200?text=商品2" alt="商品2">
+      <div class="products-layout">
+        <!-- 侧边栏筛选 -->
+        <aside class="sidebar" id="sidebar">
+          <div class="filter-section">
+            <h3 class="filter-title">商品分类</h3>
+            <div class="filter-options" id="categoryFilters">
+              <label class="filter-option active" data-category="全部">
+                <input type="radio" name="category" value="全部" checked>
+                全部商品
+              </label>
+              <label class="filter-option" data-category="电子产品">
+                <input type="radio" name="category" value="电子产品">
+                电子产品
+              </label>
+              <label class="filter-option" data-category="服装">
+                <input type="radio" name="category" value="服装">
+                服装
+              </label>
+              <label class="filter-option" data-category="家居">
+                <input type="radio" name="category" value="家居">
+                家居
+              </label>
+              <label class="filter-option" data-category="配饰">
+                <input type="radio" name="category" value="配饰">
+                配饰
+              </label>
+            </div>
           </div>
-          <div class="product-info">
-            <h3 class="product-title">时尚休闲夹克</h3>
-            <div class="product-price">¥399.00</div>
-            <p class="product-description">采用优质面料，舒适透气，多种颜色可选，适合日常穿着。</p>
-            <a href="product-detail-jacket.html" class="btn">查看详情</a>
-          </div>
-        </div>
 
-        <!-- 商品3 -->
-        <div class="product-card">
-          <div class="product-image">
-            <img src="https://via.placeholder.com/300x200?text=商品3" alt="商品3">
+          <div class="filter-section">
+            <h3 class="filter-title">价格区间</h3>
+            <div class="price-range">
+              <input type="number" class="price-input" id="priceMin" placeholder="最低">
+              <span>-</span>
+              <input type="number" class="price-input" id="priceMax" placeholder="最高">
+            </div>
+            <button class="btn btn-sm btn-outline mt-20" onclick="applyPriceFilter()" style="width: 100%;">
+              应用
+            </button>
           </div>
-          <div class="product-info">
-            <h3 class="product-title">智能手表</h3>
-            <div class="product-price">¥599.00</div>
-            <p class="product-description">全面健康监测，支持多种运动模式，防水设计，长达14天续航。</p>
-            <a href="product-detail-smartwatch.html" class="btn">查看详情</a>
-          </div>
-        </div>
 
-        <!-- 商品4 -->
-        <div class="product-card">
-          <div class="product-image">
-            <img src="https://via.placeholder.com/300x200?text=商品4" alt="商品4">
+          <div class="filter-section">
+            <h3 class="filter-title">筛选条件</h3>
+            <div class="filter-options">
+              <label class="filter-option">
+                <input type="checkbox" id="filterHot">
+                热卖商品
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" id="filterNew">
+                新品上市
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" id="filterSale">
+                促销优惠
+              </label>
+            </div>
           </div>
-          <div class="product-info">
-            <h3 class="product-title">北欧风格台灯</h3>
-            <div class="product-price">¥159.00</div>
-            <p class="product-description">简约现代设计，护眼LED光源，三档亮度调节，适合卧室和书房。</p>
-            <a href="product-detail.html" class="btn">查看详情</a>
-          </div>
-        </div>
 
-        <!-- 商品5 -->
-        <div class="product-card">
-          <div class="product-image">
-            <img src="https://via.placeholder.com/300x200?text=商品5" alt="商品5">
-          </div>
-          <div class="product-info">
-            <h3 class="product-title">真皮钱包</h3>
-            <div class="product-price">¥199.00</div>
-            <p class="product-description">头层牛皮制作，手工缝制，多卡位设计，经典时尚款式。</p>
-            <a href="product-detail.html" class="btn">查看详情</a>
-          </div>
-        </div>
+          <button class="btn btn-primary btn-block mt-20" onclick="resetFilters()">
+            重置筛选
+          </button>
+        </aside>
 
-        <!-- 商品6 -->
-        <div class="product-card">
-          <div class="product-image">
-            <img src="https://via.placeholder.com/300x200?text=商品6" alt="商品6">
-          </div>
-          <div class="product-info">
-            <h3 class="product-title">便携式蓝牙音箱</h3>
-            <div class="product-price">¥249.00</div>
-            <p class="product-description">360°环绕立体声，防水设计，支持TWS连接，续航时间长达12小时。</p>
-            <a href="product-detail-speaker.html" class="btn">查看详情</a>
-          </div>
-        </div>
+        <!-- 遮罩层 -->
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
-        <!-- 商品7 -->
-        <div class="product-card">
-          <div class="product-image">
-            <img src="https://via.placeholder.com/300x200?text=商品7" alt="商品7">
+        <!-- 商品列表 -->
+        <div class="products-main">
+          <div class="products-header">
+            <div class="products-count">
+              共 <strong id="totalCount">0</strong> 件商品
+            </div>
+            <div class="sort-options">
+              <label>排序：</label>
+              <select class="sort-select" id="sortSelect" onchange="sortProducts()">
+                <option value="default">默认排序</option>
+                <option value="price-asc">价格从低到高</option>
+                <option value="price-desc">价格从高到低</option>
+                <option value="rating">评分最高</option>
+                <option value="sales">销量最高</option>
+              </select>
+            </div>
           </div>
-          <div class="product-info">
-            <h3 class="product-title">纯棉T恤</h3>
-            <div class="product-price">¥99.00</div>
-            <p class="product-description">100%有机棉制作，舒适透气，多色可选，适合日常穿着。</p>
-            <a href="product-detail.html" class="btn">查看详情</a>
-          </div>
-        </div>
 
-        <!-- 商品8 -->
-        <div class="product-card">
-          <div class="product-image">
-            <img src="https://via.placeholder.com/300x200?text=商品8" alt="商品8">
+          <div class="product-grid" id="productGrid">
+            <!-- 动态加载 -->
           </div>
-          <div class="product-info">
-            <h3 class="product-title">多功能厨房刀具套装</h3>
-            <div class="product-price">¥329.00</div>
-            <p class="product-description">德国进口不锈钢，锋利耐用，人体工学手柄，包含6件套刀具。</p>
-            <a href="product-detail.html" class="btn">查看详情</a>
+
+          <!-- 分页 -->
+          <div class="pagination" id="pagination">
+            <!-- 动态生成 -->
           </div>
         </div>
       </div>
     </div>
+  </main>
 
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-content">
-          <div>
-            <h3>关于我们</h3>
-            <ul>
-              <li><a href="#">公司简介</a></li>
-              <li><a href="#">联系方式</a></li>
-              <li><a href="#">招聘信息</a></li>
-              <li><a href="#">新闻中心</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3>客户服务</h3>
-            <ul>
-              <li><a href="#">帮助中心</a></li>
-              <li><a href="#">配送方式</a></li>
-              <li><a href="#">退换货政策</a></li>
-              <li><a href="#">投诉建议</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3>商家合作</h3>
-            <ul>
-              <li><a href="#">入驻条件</a></li>
-              <li><a href="#">商家中心</a></li>
-              <li><a href="#">营销中心</a></li>
-              <li><a href="#">物流服务</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3>关注我们</h3>
-            <ul>
-              <li><a href="#">微信公众号</a></li>
-              <li><a href="#">微博</a></li>
-              <li><a href="#">抖音</a></li>
-              <li><a href="#">小红书</a></li>
-            </ul>
-          </div>
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <h3>关于我们</h3>
+          <ul>
+            <li><a href="#">公司简介</a></li>
+            <li><a href="#">联系方式</a></li>
+            <li><a href="#">招聘信息</a></li>
+            <li><a href="#">新闻中心</a></li>
+          </ul>
         </div>
-        <div class="copyright">
-          © 2024 电商示例 版权所有
+        <div>
+          <h3>客户服务</h3>
+          <ul>
+            <li><a href="#">帮助中心</a></li>
+            <li><a href="#">配送方式</a></li>
+            <li><a href="#">退换货政策</a></li>
+            <li><a href="#">投诉建议</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>商家合作</h3>
+          <ul>
+            <li><a href="#">入驻条件</a></li>
+            <li><a href="#">商家中心</a></li>
+            <li><a href="#">营销中心</a></li>
+            <li><a href="#">物流服务</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>关注我们</h3>
+          <ul>
+            <li><a href="#">微信公众号</a></li>
+            <li><a href="#">微博</a></li>
+            <li><a href="#">抖音</a></li>
+            <li><a href="#">小红书</a></li>
+          </ul>
         </div>
       </div>
-    </footer>
-  </body>
+      <div class="footer-bottom">
+        © 2024 电商示例 版权所有
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/common.js"></script>
+  <script>
+    // 状态管理
+    let allProducts = [];
+    let filteredProducts = [];
+    let currentPage = 1;
+    const pageSize = 9;
+
+    // 获取URL参数
+    function getUrlParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        category: params.get('category') || '全部'
+      };
+    }
+
+    // 初始化
+    async function init() {
+      const params = getUrlParams();
+      
+      // 加载商品数据
+      allProducts = await Products.load();
+      
+      // 设置初始分类
+      if (params.category && params.category !== '全部') {
+        setCategory(params.category);
+      } else {
+        filterProducts();
+      }
+
+      // 绑定筛选事件
+      bindFilterEvents();
+    }
+
+    // 绑定筛选事件
+    function bindFilterEvents() {
+      // 分类筛选
+      document.querySelectorAll('#categoryFilters .filter-option').forEach(option => {
+        option.addEventListener('click', () => {
+          const category = option.dataset.category;
+          setCategory(category);
+        });
+      });
+
+      // 其他筛选条件
+      ['filterHot', 'filterNew', 'filterSale'].forEach(id => {
+        document.getElementById(id).addEventListener('change', filterProducts);
+      });
+    }
+
+    // 设置分类
+    function setCategory(category) {
+      // 更新UI
+      document.querySelectorAll('#categoryFilters .filter-option').forEach(option => {
+        option.classList.toggle('active', option.dataset.category === category);
+        option.querySelector('input').checked = option.dataset.category === category;
+      });
+
+      // 更新面包屑
+      document.getElementById('currentCategory').textContent = 
+        category === '全部' ? '全部商品' : category;
+
+      currentPage = 1;
+      filterProducts();
+    }
+
+    // 筛选商品
+    function filterProducts() {
+      const category = document.querySelector('#categoryFilters .filter-option.active')?.dataset.category || '全部';
+      const priceMin = parseFloat(document.getElementById('priceMin').value) || 0;
+      const priceMax = parseFloat(document.getElementById('priceMax').value) || Infinity;
+      const filterHot = document.getElementById('filterHot').checked;
+      const filterNew = document.getElementById('filterNew').checked;
+      const filterSale = document.getElementById('filterSale').checked;
+
+      filteredProducts = allProducts.filter(product => {
+        // 分类筛选
+        if (category !== '全部' && product.category !== category) return false;
+        
+        // 价格筛选
+        if (product.price < priceMin || product.price > priceMax) return false;
+        
+        // 热卖筛选
+        if (filterHot && !product.isHot) return false;
+        
+        // 新品筛选
+        if (filterNew && !product.isNew) return false;
+        
+        // 促销筛选
+        if (filterSale && !product.originalPrice) return false;
+
+        return true;
+      });
+
+      // 排序
+      sortProducts(false);
+    }
+
+    // 排序商品
+    function sortProducts(rerender = true) {
+      const sortBy = document.getElementById('sortSelect').value;
+
+      switch (sortBy) {
+        case 'price-asc':
+          filteredProducts.sort((a, b) => a.price - b.price);
+          break;
+        case 'price-desc':
+          filteredProducts.sort((a, b) => b.price - a.price);
+          break;
+        case 'rating':
+          filteredProducts.sort((a, b) => b.rating - a.rating);
+          break;
+        case 'sales':
+          filteredProducts.sort((a, b) => b.reviewCount - a.reviewCount);
+          break;
+        default:
+          // 默认排序：热卖 > 新品 > 其他
+          filteredProducts.sort((a, b) => {
+            if (a.isHot !== b.isHot) return b.isHot - a.isHot;
+            if (a.isNew !== b.isNew) return b.isNew - a.isNew;
+            return 0;
+          });
+      }
+
+      if (rerender) {
+        currentPage = 1;
+        renderProducts();
+      } else {
+        renderProducts();
+      }
+    }
+
+    // 应用价格筛选
+    function applyPriceFilter() {
+      currentPage = 1;
+      filterProducts();
+      toggleSidebar();
+    }
+
+    // 重置筛选
+    function resetFilters() {
+      document.getElementById('priceMin').value = '';
+      document.getElementById('priceMax').value = '';
+      document.getElementById('filterHot').checked = false;
+      document.getElementById('filterNew').checked = false;
+      document.getElementById('filterSale').checked = false;
+      document.getElementById('sortSelect').value = 'default';
+      setCategory('全部');
+    }
+
+    // 渲染商品
+    function renderProducts() {
+      const container = document.getElementById('productGrid');
+      const totalCount = document.getElementById('totalCount');
+      
+      // 分页
+      const startIndex = (currentPage - 1) * pageSize;
+      const endIndex = startIndex + pageSize;
+      const pageProducts = filteredProducts.slice(startIndex, endIndex);
+
+      totalCount.textContent = filteredProducts.length;
+
+      if (pageProducts.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state" style="grid-column: 1 / -1;">
+            <div class="icon">🔍</div>
+            <h2>没有找到商品</h2>
+            <p>尝试调整筛选条件或浏览其他分类</p>
+            <button class="btn btn-primary" onclick="resetFilters()">重置筛选</button>
+          </div>
+        `;
+        document.getElementById('pagination').innerHTML = '';
+        return;
+      }
+
+      container.innerHTML = pageProducts.map((product, index) => `
+        <div class="product-card" onclick="goToProduct('${product.id}')">
+          <div class="product-image">
+            ${product.isNew ? '<span class="product-badge">新品</span>' : ''}
+            ${product.isHot && !product.isNew ? '<span class="product-badge" style="background-color: #ff9800;">热卖</span>' : ''}
+            ${product.originalPrice && !product.isNew && !product.isHot ? '<span class="product-badge" style="background-color: #4caf50;">促销</span>' : ''}
+            <img src="${product.image}" alt="${product.name}" loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">${product.name}</h3>
+            <div class="product-price">
+              ${formatPrice(product.price)}
+              ${product.originalPrice ? `<span class="product-price-original">${formatPrice(product.originalPrice)}</span>` : ''}
+            </div>
+            <div class="product-rating">
+              <span class="stars">${generateStars(product.rating)}</span>
+              <span class="count">(${product.reviewCount})</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // 渲染分页
+      renderPagination();
+
+      // 推送 view_item_list 事件
+      const category = document.querySelector('#categoryFilters .filter-option.active')?.dataset.category || '全部';
+      pushEcommerceEvent('view_item_list', {
+        item_list_id: 'product_list',
+        item_list_name: category === '全部' ? '全部商品' : category,
+        items: pageProducts.map((p, i) => formatProductItem(p, 1, startIndex + i))
+      });
+    }
+
+    // 渲染分页
+    function renderPagination() {
+      const totalPages = Math.ceil(filteredProducts.length / pageSize);
+      const pagination = document.getElementById('pagination');
+
+      if (totalPages <= 1) {
+        pagination.innerHTML = '';
+        return;
+      }
+
+      let html = `
+        <button class="pagination-btn" onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+          上一页
+        </button>
+      `;
+
+      for (let i = 1; i <= totalPages; i++) {
+        if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
+          html += `
+            <button class="pagination-btn ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">
+              ${i}
+            </button>
+          `;
+        } else if (i === currentPage - 3 || i === currentPage + 3) {
+          html += '<span>...</span>';
+        }
+      }
+
+      html += `
+        <button class="pagination-btn" onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
+          下一页
+        </button>
+      `;
+
+      pagination.innerHTML = html;
+    }
+
+    // 跳转页面
+    function goToPage(page) {
+      const totalPages = Math.ceil(filteredProducts.length / pageSize);
+      if (page < 1 || page > totalPages) return;
+      currentPage = page;
+      renderProducts();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // 跳转到商品详情
+    function goToProduct(productId) {
+      window.location.href = `product-detail.html?id=${productId}`;
+    }
+
+    // 切换侧边栏（移动端）
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      sidebar.classList.toggle('active');
+      overlay.classList.toggle('active');
+    }
+
+    // 初始化
+    init();
+  </script>
+</body>
 </html>

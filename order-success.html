@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TTPBR7L');</script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="订单提交成功">
+  <title>订单成功 - 电商示例</title>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/common.css">
+  <style>
+    .success-page {
+      padding: 60px 0;
+      min-height: calc(100vh - 200px);
+    }
+
+    .success-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* 成功提示 */
+    .success-header {
+      text-align: center;
+      padding: 50px 30px;
+      background-color: var(--bg-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 30px;
+    }
+
+    .success-icon {
+      width: 100px;
+      height: 100px;
+      background-color: var(--success-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 25px;
+      animation: scaleIn 0.5s ease;
+    }
+
+    @keyframes scaleIn {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .success-icon svg {
+      width: 50px;
+      height: 50px;
+      fill: white;
+    }
+
+    .success-title {
+      font-size: 28px;
+      color: var(--text-color);
+      margin-bottom: 10px;
+    }
+
+    .success-subtitle {
+      color: var(--text-light);
+      font-size: 16px;
+      margin-bottom: 25px;
+    }
+
+    .order-number {
+      display: inline-block;
+      background-color: var(--bg-color);
+      padding: 12px 25px;
+      border-radius: var(--radius);
+      font-size: 18px;
+    }
+
+    .order-number span {
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+
+    /* 订单详情 */
+    .order-details {
+      background-color: var(--bg-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 30px;
+      overflow: hidden;
+    }
+
+    .details-header {
+      padding: 20px 25px;
+      background-color: var(--bg-color);
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .details-content {
+      padding: 25px;
+    }
+
+    .details-section {
+      margin-bottom: 25px;
+    }
+
+    .details-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .details-title {
+      font-weight: 500;
+      color: var(--text-light);
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    .details-info {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .info-item {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .info-label {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .info-value {
+      font-weight: 500;
+    }
+
+    /* 订单商品 */
+    .order-items {
+      border-top: 1px solid var(--border-light);
+      padding-top: 25px;
+    }
+
+    .order-item {
+      display: flex;
+      gap: 15px;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .order-item:last-child {
+      border-bottom: none;
+    }
+
+    .order-item-image {
+      width: 70px;
+      height: 70px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .order-item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .order-item-info {
+      flex: 1;
+    }
+
+    .order-item-name {
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .order-item-variant {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .order-item-price {
+      text-align: right;
+    }
+
+    .order-item-price .price {
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+
+    .order-item-price .quantity {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* 订单总计 */
+    .order-totals {
+      border-top: 1px solid var(--border-light);
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .total-row .label {
+      color: var(--text-light);
+    }
+
+    .total-row.final {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .total-row.final .value {
+      color: var(--primary-color);
+      font-size: 24px;
+    }
+
+    /* 操作按钮 */
+    .action-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .action-buttons .btn {
+      min-width: 180px;
+    }
+
+    /* 提示信息 */
+    .tips {
+      background-color: #fff8e6;
+      border: 1px solid #ffe58f;
+      border-radius: var(--radius);
+      padding: 20px 25px;
+      margin-bottom: 30px;
+    }
+
+    .tips-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #d48806;
+    }
+
+    .tips-list {
+      font-size: 14px;
+      color: #8c6d1f;
+      line-height: 1.8;
+    }
+
+    .tips-list li {
+      margin-bottom: 5px;
+    }
+
+    @media (max-width: 576px) {
+      .success-header {
+        padding: 40px 20px;
+      }
+
+      .success-title {
+        font-size: 22px;
+      }
+
+      .details-info {
+        grid-template-columns: 1fr;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+
+      .action-buttons .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TTPBR7L"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- 头部导航 -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo">电商示例</a>
+        <button class="menu-toggle" aria-label="菜单">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav class="nav">
+          <a href="index.html">首页</a>
+          <a href="products.html">全部商品</a>
+          <a href="cart.html" class="cart-icon">
+            购物车
+            <span class="cart-count" style="display: none;">0</span>
+          </a>
+          <a href="account.html">我的账户</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="success-page">
+    <div class="container">
+      <!-- 步骤指示器 -->
+      <div class="steps">
+        <div class="step completed">
+          <div class="step-number">✓</div>
+          <div class="step-label">购物车</div>
+        </div>
+        <div class="step completed">
+          <div class="step-number">✓</div>
+          <div class="step-label">结算</div>
+        </div>
+        <div class="step active">
+          <div class="step-number">✓</div>
+          <div class="step-label">完成</div>
+        </div>
+      </div>
+
+      <div class="success-container">
+        <!-- 成功提示 -->
+        <div class="success-header">
+          <div class="success-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+            </svg>
+          </div>
+          <h1 class="success-title">订单提交成功！</h1>
+          <p class="success-subtitle">感谢您的购买，我们将尽快为您发货</p>
+          <div class="order-number">
+            订单号：<span id="orderNumber">-</span>
+          </div>
+        </div>
+
+        <!-- 温馨提示 -->
+        <div class="tips">
+          <div class="tips-title">温馨提示</div>
+          <ul class="tips-list">
+            <li>• 订单确认短信已发送至您的手机，请注意查收</li>
+            <li>• 您可以在"我的账户"中查看订单详情和物流信息</li>
+            <li>• 如有问题，请联系客服：400-123-4567</li>
+          </ul>
+        </div>
+
+        <!-- 订单详情 -->
+        <div class="order-details">
+          <div class="details-header">订单详情</div>
+          <div class="details-content">
+            <!-- 收货信息 -->
+            <div class="details-section">
+              <div class="details-title">收货信息</div>
+              <div class="details-info">
+                <div class="info-item">
+                  <span class="info-label">收货人</span>
+                  <span class="info-value" id="shippingName">-</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">联系电话</span>
+                  <span class="info-value" id="shippingPhone">-</span>
+                </div>
+                <div class="info-item" style="grid-column: 1 / -1;">
+                  <span class="info-label">收货地址</span>
+                  <span class="info-value" id="shippingAddress">-</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 配送与支付 -->
+            <div class="details-section">
+              <div class="details-title">配送与支付</div>
+              <div class="details-info">
+                <div class="info-item">
+                  <span class="info-label">配送方式</span>
+                  <span class="info-value" id="shippingMethod">-</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">支付方式</span>
+                  <span class="info-value" id="paymentMethod">-</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">下单时间</span>
+                  <span class="info-value" id="orderTime">-</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 订单商品 -->
+            <div class="details-section order-items">
+              <div class="details-title">订单商品</div>
+              <div id="orderItems">
+                <!-- 动态生成 -->
+              </div>
+
+              <!-- 订单总计 -->
+              <div class="order-totals">
+                <div class="total-row">
+                  <span class="label">商品总价</span>
+                  <span class="value" id="subtotal">¥0.00</span>
+                </div>
+                <div class="total-row">
+                  <span class="label">运费</span>
+                  <span class="value" id="shippingCost">¥0.00</span>
+                </div>
+                <div class="total-row final">
+                  <span class="label">实付金额</span>
+                  <span class="value" id="totalAmount">¥0.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 操作按钮 -->
+        <div class="action-buttons">
+          <a href="account.html" class="btn btn-outline">查看订单</a>
+          <a href="products.html" class="btn btn-primary">继续购物</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <h3>关于我们</h3>
+          <ul>
+            <li><a href="#">公司简介</a></li>
+            <li><a href="#">联系方式</a></li>
+            <li><a href="#">招聘信息</a></li>
+            <li><a href="#">新闻中心</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>客户服务</h3>
+          <ul>
+            <li><a href="#">帮助中心</a></li>
+            <li><a href="#">配送方式</a></li>
+            <li><a href="#">退换货政策</a></li>
+            <li><a href="#">投诉建议</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>商家合作</h3>
+          <ul>
+            <li><a href="#">入驻条件</a></li>
+            <li><a href="#">商家中心</a></li>
+            <li><a href="#">营销中心</a></li>
+            <li><a href="#">物流服务</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>关注我们</h3>
+          <ul>
+            <li><a href="#">微信公众号</a></li>
+            <li><a href="#">微博</a></li>
+            <li><a href="#">抖音</a></li>
+            <li><a href="#">小红书</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © 2024 电商示例 版权所有
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/common.js"></script>
+  <script>
+    // 配送方式映射
+    const shippingMethodMap = {
+      'standard': '标准配送（3-5个工作日）',
+      'express': '快速配送（1-2个工作日）',
+      'sameday': '当日达'
+    };
+
+    // 支付方式映射
+    const paymentMethodMap = {
+      'alipay': '支付宝',
+      'wechat': '微信支付',
+      'unionpay': '银联支付',
+      'credit': '信用卡'
+    };
+
+    // 初始化
+    function init() {
+      const orderData = sessionStorage.getItem('lastOrder');
+      
+      if (!orderData) {
+        // 如果没有订单数据，显示示例数据
+        showDemoOrder();
+        return;
+      }
+
+      const order = JSON.parse(orderData);
+      renderOrderDetails(order);
+    }
+
+    // 渲染订单详情
+    function renderOrderDetails(order) {
+      // 订单号
+      document.getElementById('orderNumber').textContent = order.orderId;
+
+      // 收货信息
+      document.getElementById('shippingName').textContent = order.shipping.name;
+      document.getElementById('shippingPhone').textContent = maskPhone(order.shipping.phone);
+      document.getElementById('shippingAddress').textContent = 
+        `${order.shipping.province} ${order.shipping.city} ${order.shipping.address}`;
+
+      // 配送与支付
+      document.getElementById('shippingMethod').textContent = 
+        shippingMethodMap[order.shipping.method] || order.shipping.method;
+      document.getElementById('paymentMethod').textContent = 
+        paymentMethodMap[order.payment] || order.payment;
+      document.getElementById('orderTime').textContent = 
+        new Date(order.createdAt).toLocaleString('zh-CN');
+
+      // 订单商品
+      document.getElementById('orderItems').innerHTML = order.items.map(item => {
+        const variantText = item.variant ? 
+          Object.entries(item.variant).map(([k, v]) => v).join(' / ') : '';
+        
+        return `
+          <div class="order-item">
+            <div class="order-item-image">
+              <img src="${item.image}" alt="${item.name}">
+            </div>
+            <div class="order-item-info">
+              <div class="order-item-name">${item.name}</div>
+              ${variantText ? `<div class="order-item-variant">${variantText}</div>` : ''}
+            </div>
+            <div class="order-item-price">
+              <div class="price">${formatPrice(item.price * item.quantity)}</div>
+              <div class="quantity">x${item.quantity}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // 订单总计
+      document.getElementById('subtotal').textContent = formatPrice(order.subtotal);
+      document.getElementById('shippingCost').textContent = 
+        order.shippingCost === 0 ? '免费' : formatPrice(order.shippingCost);
+      document.getElementById('totalAmount').textContent = formatPrice(order.total);
+    }
+
+    // 显示示例订单
+    function showDemoOrder() {
+      const demoOrder = {
+        orderId: generateOrderId(),
+        items: [
+          {
+            id: 'SKU001',
+            name: '高品质无线耳机',
+            price: 299,
+            quantity: 1,
+            image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop',
+            variant: { color: '黑色' }
+          }
+        ],
+        shipping: {
+          name: '张三',
+          phone: '13800138000',
+          province: '广东省',
+          city: '深圳市',
+          address: '南山区科技园路123号',
+          method: 'standard'
+        },
+        payment: 'alipay',
+        subtotal: 299,
+        shippingCost: 0,
+        total: 299,
+        createdAt: new Date().toISOString()
+      };
+
+      renderOrderDetails(demoOrder);
+    }
+
+    // 手机号脱敏
+    function maskPhone(phone) {
+      if (!phone || phone.length < 7) return phone;
+      return phone.substring(0, 3) + '****' + phone.substring(7);
+    }
+
+    // 初始化
+    init();
+  </script>
+</body>
+</html>

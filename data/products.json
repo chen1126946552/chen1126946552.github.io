@@ -1,0 +1,420 @@
+[
+  {
+    "id": "SKU001",
+    "name": "高品质无线耳机",
+    "price": 299.00,
+    "originalPrice": 399.00,
+    "category": "电子产品",
+    "brand": "SoundMax",
+    "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=600&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?w=600&h=600&fit=crop"
+    ],
+    "description": "这款高品质无线耳机采用先进的蓝牙5.2技术，提供稳定连接和卓越的音质体验。内置主动降噪功能，有效隔绝外部噪音，让您沉浸在音乐世界中。",
+    "features": [
+      "蓝牙5.2技术，稳定连接",
+      "主动降噪，沉浸式体验",
+      "长达8小时续航，充电盒可额外提供24小时",
+      "IPX5防水，适合运动使用",
+      "触控操作，简单便捷"
+    ],
+    "specs": {
+      "品牌": "SoundMax",
+      "型号": "SM-WH100",
+      "蓝牙版本": "5.2",
+      "续航时间": "8小时（单次）/ 32小时（含充电盒）",
+      "防水等级": "IPX5",
+      "重量": "5g x 2（耳机）/ 45g（充电盒）"
+    },
+    "colors": ["黑色", "白色", "蓝色"],
+    "rating": 4.8,
+    "reviewCount": 128,
+    "stock": 50,
+    "isHot": true,
+    "isNew": false
+  },
+  {
+    "id": "SKU002",
+    "name": "时尚休闲夹克",
+    "price": 399.00,
+    "originalPrice": 599.00,
+    "category": "服装",
+    "brand": "UrbanStyle",
+    "image": "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=400&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=600&h=600&fit=crop"
+    ],
+    "description": "采用优质面料制作的时尚休闲夹克，舒适透气，版型修身。适合日常穿着，可搭配多种风格。",
+    "features": [
+      "优质面料，舒适透气",
+      "修身版型，时尚有型",
+      "多口袋设计，实用便捷",
+      "YKK拉链，品质保证",
+      "机洗不变形"
+    ],
+    "specs": {
+      "品牌": "UrbanStyle",
+      "材质": "100%聚酯纤维",
+      "款式": "休闲夹克",
+      "适用季节": "春秋",
+      "洗涤方式": "机洗"
+    },
+    "colors": ["黑色", "藏青色", "军绿色"],
+    "sizes": ["S", "M", "L", "XL", "XXL"],
+    "rating": 4.6,
+    "reviewCount": 89,
+    "stock": 100,
+    "isHot": true,
+    "isNew": false
+  },
+  {
+    "id": "SKU003",
+    "name": "智能运动手表",
+    "price": 599.00,
+    "originalPrice": 799.00,
+    "category": "电子产品",
+    "brand": "FitTech",
+    "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=600&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=600&h=600&fit=crop"
+    ],
+    "description": "全面健康监测智能手表，支持心率、血氧、睡眠监测。内置GPS，支持多种运动模式，防水设计，续航长达14天。",
+    "features": [
+      "全面健康监测（心率/血氧/睡眠）",
+      "内置GPS，精准定位",
+      "100+运动模式",
+      "5ATM防水",
+      "14天超长续航"
+    ],
+    "specs": {
+      "品牌": "FitTech",
+      "型号": "FT-Watch Pro",
+      "屏幕": "1.4英寸 AMOLED",
+      "防水等级": "5ATM",
+      "续航时间": "14天",
+      "兼容系统": "iOS 10+ / Android 6+"
+    },
+    "colors": ["曜石黑", "星空银", "玫瑰金"],
+    "rating": 4.7,
+    "reviewCount": 256,
+    "stock": 30,
+    "isHot": true,
+    "isNew": true
+  },
+  {
+    "id": "SKU004",
+    "name": "北欧风格台灯",
+    "price": 159.00,
+    "originalPrice": 199.00,
+    "category": "家居",
+    "brand": "NordicLight",
+    "image": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=400&h=400&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=600&h=600&fit=crop"
+    ],
+    "description": "简约现代的北欧风格台灯，护眼LED光源，三档亮度调节。适合卧室、书房使用，为您的空间增添温馨氛围。",
+    "features": [
+      "护眼LED光源",
+      "三档亮度调节",
+      "简约北欧设计",
+      "金属灯身，质感出众",
+      "节能环保"
+    ],
+    "specs": {
+      "品牌": "NordicLight",
+      "光源类型": "LED",
+      "功率": "12W",
+      "色温": "3000K-6000K可调",
+      "材质": "金属+布艺",
+      "尺寸": "高45cm"
+    },
+    "colors": ["白色", "黑色", "原木色"],
+    "rating": 4.5,
+    "reviewCount": 67,
+    "stock": 80,
+    "isHot": false,
+    "isNew": false
+  },
+  {
+    "id": "SKU005",
+    "name": "真皮商务钱包",
+    "price": 199.00,
+    "originalPrice": 299.00,
+    "category": "配饰",
+    "brand": "LeatherCraft",
+    "image": "https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&h=400&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1627123424574-724758594e93?w=600&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1606503825008-909a67e63c3d?w=600&h=600&fit=crop"
+    ],
+    "description": "头层牛皮制作的商务钱包，手工缝制，多卡位设计。经典时尚款式，彰显品味与格调。",
+    "features": [
+      "头层牛皮，品质保证",
+      "手工缝制，精细做工",
+      "多卡位设计，容量充足",
+      "RFID防盗刷",
+      "经典款式，送礼佳选"
+    ],
+    "specs": {
+      "品牌": "LeatherCraft",
+      "材质": "头层牛皮",
+      "尺寸": "12cm x 9.5cm x 2cm",
+      "卡位": "8个",
+      "功能": "RFID防盗刷"
+    },
+    "colors": ["黑色", "棕色", "深蓝色"],
+    "rating": 4.9,
+    "reviewCount": 203,
+    "stock": 60,
+    "isHot": false,
+    "isNew": false
+  },
+  {
+    "id": "SKU006",
+    "name": "便携式蓝牙音箱",
+    "price": 249.00,
+    "originalPrice": 349.00,
+    "category": "电子产品",
+    "brand": "SoundMax",
+    "image": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=400&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=600&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1545454675-3531b543be5d?w=600&h=600&fit=crop"
+    ],
+    "description": "360°环绕立体声蓝牙音箱，IPX7防水设计，支持TWS连接。续航时间长达12小时，户外聚会必备。",
+    "features": [
+      "360°环绕立体声",
+      "IPX7防水，户外无忧",
+      "支持TWS双音箱连接",
+      "12小时超长续航",
+      "便携设计，随身携带"
+    ],
+    "specs": {
+      "品牌": "SoundMax",
+      "型号": "SM-SP200",
+      "蓝牙版本": "5.0",
+      "功率": "20W",
+      "防水等级": "IPX7",
+      "续航时间": "12小时"
+    },
+    "colors": ["黑色", "蓝色", "红色"],
+    "rating": 4.6,
+    "reviewCount": 145,
+    "stock": 45,
+    "isHot": false,
+    "isNew": true
+  },
+  {
+    "id": "SKU007",
+    "name": "纯棉休闲T恤",
+    "price": 99.00,
+    "originalPrice": 149.00,
+    "category": "服装",
+    "brand": "BasicWear",
+    "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=600&h=600&fit=crop"
+    ],
+    "description": "100%有机棉制作的休闲T恤，舒适透气，亲肤柔软。简约设计，百搭款式，日常穿着首选。",
+    "features": [
+      "100%有机棉",
+      "舒适透气，亲肤柔软",
+      "简约设计，百搭款式",
+      "不易变形，耐穿耐洗",
+      "环保印染"
+    ],
+    "specs": {
+      "品牌": "BasicWear",
+      "材质": "100%有机棉",
+      "款式": "圆领短袖",
+      "适用季节": "春夏",
+      "洗涤方式": "机洗"
+    },
+    "colors": ["白色", "黑色", "灰色", "藏青色"],
+    "sizes": ["S", "M", "L", "XL", "XXL"],
+    "rating": 4.4,
+    "reviewCount": 312,
+    "stock": 200,
+    "isHot": false,
+    "isNew": false
+  },
+  {
+    "id": "SKU008",
+    "name": "多功能厨房刀具套装",
+    "price": 329.00,
+    "originalPrice": 499.00,
+    "category": "家居",
+    "brand": "ChefPro",
+    "image": "https://images.unsplash.com/photo-1593618998160-e34014e67546?w=400&h=400&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1593618998160-e34014e67546?w=600&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1566454419290-57a0589c9b17?w=600&h=600&fit=crop"
+    ],
+    "description": "德国进口不锈钢刀具套装，锋利耐用，人体工学手柄设计。包含6件套刀具，满足各种烹饪需求。",
+    "features": [
+      "德国进口不锈钢",
+      "锋利耐用，切割顺畅",
+      "人体工学手柄",
+      "6件套，满足各种需求",
+      "配套刀架，收纳方便"
+    ],
+    "specs": {
+      "品牌": "ChefPro",
+      "材质": "德国进口不锈钢",
+      "套装内容": "主厨刀/切片刀/水果刀/剪刀/磨刀棒/刀架",
+      "刀柄材质": "ABS树脂",
+      "产地": "德国"
+    },
+    "colors": ["银色"],
+    "rating": 4.8,
+    "reviewCount": 178,
+    "stock": 35,
+    "isHot": false,
+    "isNew": false
+  },
+  {
+    "id": "SKU009",
+    "name": "复古太阳镜",
+    "price": 179.00,
+    "originalPrice": 259.00,
+    "category": "配饰",
+    "brand": "VintageEye",
+    "image": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=400&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&h=600&fit=crop"
+    ],
+    "description": "复古风格太阳镜，偏光镜片有效阻挡紫外线。轻量设计，佩戴舒适，时尚与功能兼具。",
+    "features": [
+      "偏光镜片，有效阻挡UV",
+      "复古设计，时尚百搭",
+      "轻量材质，佩戴舒适",
+      "金属铰链，耐用可靠",
+      "配套眼镜盒"
+    ],
+    "specs": {
+      "品牌": "VintageEye",
+      "镜片材质": "TAC偏光镜片",
+      "镜框材质": "TR90",
+      "UV防护": "UV400",
+      "适用人群": "男女通用"
+    },
+    "colors": ["黑框黑片", "金框茶片", "银框蓝片"],
+    "rating": 4.5,
+    "reviewCount": 92,
+    "stock": 70,
+    "isHot": false,
+    "isNew": true
+  },
+  {
+    "id": "SKU010",
+    "name": "简约双肩背包",
+    "price": 259.00,
+    "originalPrice": 359.00,
+    "category": "配饰",
+    "brand": "TravelMate",
+    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1581605405669-fcdf81165afa?w=600&h=600&fit=crop"
+    ],
+    "description": "简约设计双肩背包，大容量多隔层设计。防泼水面料，USB充电接口，通勤旅行两相宜。",
+    "features": [
+      "大容量，多隔层设计",
+      "防泼水面料",
+      "USB充电接口",
+      "减压背带，舒适背负",
+      "15.6寸笔记本隔层"
+    ],
+    "specs": {
+      "品牌": "TravelMate",
+      "材质": "防泼水牛津布",
+      "容量": "25L",
+      "尺寸": "45cm x 30cm x 15cm",
+      "适用场景": "通勤/旅行/学生"
+    },
+    "colors": ["黑色", "灰色", "藏青色"],
+    "rating": 4.7,
+    "reviewCount": 234,
+    "stock": 55,
+    "isHot": true,
+    "isNew": false
+  },
+  {
+    "id": "SKU011",
+    "name": "智能空气净化器",
+    "price": 899.00,
+    "originalPrice": 1299.00,
+    "category": "家居",
+    "brand": "PureAir",
+    "image": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=400&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&h=600&fit=crop"
+    ],
+    "description": "智能空气净化器，H13级HEPA滤网，有效去除99.97%的PM2.5、甲醛等有害物质。支持APP远程控制。",
+    "features": [
+      "H13级HEPA滤网",
+      "去除99.97%有害物质",
+      "智能空气质量检测",
+      "APP远程控制",
+      "静音设计，低至28dB"
+    ],
+    "specs": {
+      "品牌": "PureAir",
+      "型号": "PA-500",
+      "适用面积": "40-60㎡",
+      "CADR": "500m³/h",
+      "滤网等级": "H13 HEPA",
+      "噪音": "28-52dB"
+    },
+    "colors": ["白色"],
+    "rating": 4.8,
+    "reviewCount": 156,
+    "stock": 20,
+    "isHot": false,
+    "isNew": true
+  },
+  {
+    "id": "SKU012",
+    "name": "运动休闲鞋",
+    "price": 459.00,
+    "originalPrice": 599.00,
+    "category": "服装",
+    "brand": "SportStep",
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&h=600&fit=crop"
+    ],
+    "description": "轻量透气运动休闲鞋，缓震科技中底，舒适耐穿。适合跑步、健身、日常穿着。",
+    "features": [
+      "轻量透气网面",
+      "缓震科技中底",
+      "防滑橡胶大底",
+      "舒适包裹感",
+      "反光设计，夜跑安全"
+    ],
+    "specs": {
+      "品牌": "SportStep",
+      "鞋面材质": "飞织网面",
+      "中底": "EVA缓震",
+      "大底": "橡胶防滑",
+      "适用场景": "跑步/健身/日常"
+    },
+    "colors": ["黑白", "全黑", "灰蓝"],
+    "sizes": ["39", "40", "41", "42", "43", "44"],
+    "rating": 4.6,
+    "reviewCount": 287,
+    "stock": 85,
+    "isHot": true,
+    "isNew": false
+  }
+]

@@ -1,370 +1,371 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TTPBR7L');</script>
-    <!-- End Google Tag Manager -->
-    <script src="https://cdn.amplitude.com/script/92be23a58f32a14b496d02c34c2cc0f5.js"></script><script&… 1}));window.amplitude.init('92be23a58f32a14b496d02c34c2cc0f5', {"fetchRemoteConfig":true,"autocapture":{"attribution":true,"fileDownloads":true,"formInteractions":true,"pageViews":true,"sessions":true,"elementInteractions":true,"networkTracking":true,"webVitals":true,"frustrationInteractions":true}});</script>
-    <meta charset="UTF-8">
-    <link rel="icon" href="/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>结算 - 电商示例</title>
-    <script type="module" crossorigin src="/assets/index-a575275f.js"></script>
-    <link rel="stylesheet" href="/assets/index-737b46e0.css">
-    <script src="https://devjs.ptengine.com/7a80pnx3.js"></script>
-    <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: 'Arial', sans-serif;
+<html lang="zh-CN">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TTPBR7L');</script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="完成您的订单">
+  <title>结算 - 电商示例</title>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/common.css">
+  <style>
+    .checkout-page {
+      padding: 40px 0 60px;
+    }
+
+    .checkout-layout {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 30px;
+      align-items: start;
+    }
+
+    /* 结算表单 */
+    .checkout-form {
+      background-color: var(--bg-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .form-section {
+      padding: 30px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .form-section:last-child {
+      border-bottom: none;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title .icon {
+      width: 30px;
+      height: 30px;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    /* 配送方式 */
+    .shipping-options {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .shipping-option {
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .shipping-option:hover {
+      border-color: var(--primary-color);
+    }
+
+    .shipping-option.active {
+      border-color: var(--primary-color);
+      background-color: rgba(255, 107, 107, 0.05);
+    }
+
+    .shipping-option input {
+      margin-right: 15px;
+      accent-color: var(--primary-color);
+    }
+
+    .shipping-info {
+      flex: 1;
+    }
+
+    .shipping-name {
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .shipping-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .shipping-price {
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+
+    /* 支付方式 */
+    .payment-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .payment-option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .payment-option:hover {
+      border-color: var(--primary-color);
+    }
+
+    .payment-option.active {
+      border-color: var(--primary-color);
+      background-color: rgba(255, 107, 107, 0.05);
+    }
+
+    .payment-option input {
+      display: none;
+    }
+
+    .payment-icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .payment-name {
+      font-weight: 500;
+    }
+
+    /* 订单摘要 */
+    .order-summary {
+      background-color: var(--bg-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 90px;
+    }
+
+    .summary-header {
+      padding: 20px 25px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .summary-header h2 {
+      font-size: 18px;
+    }
+
+    .summary-items {
+      padding: 20px 25px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .summary-item {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .summary-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .summary-item-image {
+      width: 60px;
+      height: 60px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .summary-item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .summary-item-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .summary-item-name {
+      font-size: 14px;
+      margin-bottom: 5px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .summary-item-variant {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .summary-item-price {
+      text-align: right;
+    }
+
+    .summary-item-price .price {
+      font-weight: 500;
+      color: var(--primary-color);
+    }
+
+    .summary-item-price .quantity {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .summary-totals {
+      padding: 20px 25px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    .summary-row .label {
+      color: var(--text-light);
+    }
+
+    .summary-row.total {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid var(--border-light);
+      font-size: 16px;
+      margin-bottom: 0;
+    }
+
+    .summary-row.total .value {
+      font-size: 24px;
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+
+    .summary-actions {
+      padding: 20px 25px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .place-order-btn {
+      width: 100%;
+      padding: 15px;
+      font-size: 16px;
+    }
+
+    .terms-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 15px;
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    .terms-check input {
+      margin-top: 3px;
+      accent-color: var(--primary-color);
+    }
+
+    .terms-check a {
+      color: var(--primary-color);
+    }
+
+    /* 安全提示 */
+    .security-notice {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 15px;
+      background-color: var(--bg-color);
+      border-radius: 0 0 var(--radius) var(--radius);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .security-notice .icon {
+      color: var(--success-color);
+    }
+
+    @media (max-width: 992px) {
+      .checkout-layout {
+        grid-template-columns: 1fr;
       }
-      body {
-        background-color: #f8f9fa;
-      }
-      .header {
-        background-color: #fff;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        padding: 15px 0;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-      }
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 15px;
-      }
-      .header-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .logo {
-        font-size: 24px;
-        font-weight: bold;
-        color: #333;
-        text-decoration: none;
-      }
-      .nav {
-        display: flex;
-        list-style: none;
-      }
-      .nav li {
-        margin-left: 20px;
-      }
-      .nav a {
-        text-decoration: none;
-        color: #333;
-        font-weight: 500;
-      }
-      .nav a:hover {
-        color: #ff6b6b;
-      }
-      .page-title {
-        text-align: center;
-        margin: 40px 0;
-      }
-      .page-title h1 {
-        font-size: 32px;
-        color: #333;
-      }
-      .checkout-container {
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        gap: 30px;
-        margin-bottom: 60px;
-      }
-      .checkout-form {
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        padding: 30px;
-      }
-      .form-section {
-        margin-bottom: 30px;
-      }
-      .form-section h2 {
-        font-size: 20px;
-        margin-bottom: 20px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid #eee;
-      }
-      .form-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 15px;
-        margin-bottom: 15px;
-      }
-      .form-group {
-        margin-bottom: 15px;
-      }
-      .form-group label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: 500;
-      }
-      .form-group input,
-      .form-group select {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-size: 16px;
-      }
-      .form-group input:focus,
-      .form-group select:focus {
-        border-color: #ff6b6b;
-        outline: none;
-      }
-      .form-check {
-        display: flex;
-        align-items: center;
-        margin-bottom: 15px;
-      }
-      .form-check input {
-        margin-right: 10px;
-      }
-      .payment-methods {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 15px;
-        margin-bottom: 20px;
-      }
-      .payment-method {
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        padding: 15px;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-      .payment-method:hover {
-        border-color: #ff6b6b;
-      }
-      .payment-method.active {
-        border-color: #ff6b6b;
-        background-color: #fff0f0;
-      }
-      .payment-method img {
-        height: 30px;
-        margin-bottom: 10px;
-      }
+
       .order-summary {
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        padding: 30px;
-        position: sticky;
-        top: 100px;
-        height: fit-content;
+        position: static;
+        order: -1;
       }
-      .order-summary h2 {
-        margin-bottom: 20px;
-        font-size: 20px;
-      }
-      .order-items {
-        margin-bottom: 20px;
-      }
-      .order-item {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 15px;
-        padding-bottom: 15px;
-        border-bottom: 1px solid #eee;
-      }
-      .order-item:last-child {
-        border-bottom: none;
-      }
-      .order-item-info {
-        display: flex;
-      }
-      .order-item-image {
-        width: 60px;
-        height: 60px;
-        background-color: #f0f0f0;
-        border-radius: 4px;
-        margin-right: 15px;
-        overflow: hidden;
-      }
-      .order-item-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-      .order-item-details h3 {
-        font-size: 16px;
-        margin-bottom: 5px;
-      }
-      .order-item-details .item-variant {
-        font-size: 14px;
-        color: #666;
-      }
-      .order-item-details .item-quantity {
-        font-size: 14px;
-        color: #666;
-      }
-      .order-item-price {
-        font-weight: 500;
-      }
-      .summary-item {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 15px;
-      }
-      .summary-item.total {
-        font-size: 18px;
-        font-weight: 500;
-        padding-top: 15px;
-        margin-top: 15px;
-        border-top: 1px solid #eee;
-      }
-      .summary-item.total .summary-value {
-        color: #ff6b6b;
-      }
-      .btn {
-        display: inline-block;
-        width: 100%;
-        padding: 15px;
-        text-align: center;
-        border-radius: 4px;
-        font-weight: 500;
-        text-decoration: none;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-      .btn-primary {
-        background-color: #ff6b6b;
-        color: white;
-        border: none;
-      }
-      .btn-primary:hover {
-        background-color: #ff5252;
-      }
-      .footer {
-        background-color: #333;
-        color: white;
-        padding: 40px 0;
-      }
-      .footer-content {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 30px;
-      }
-      .footer h3 {
-        margin-bottom: 20px;
-        font-size: 18px;
-      }
-      .footer ul {
-        list-style: none;
-      }
-      .footer li {
-        margin-bottom: 10px;
-      }
-      .footer a {
-        color: #ddd;
-        text-decoration: none;
-      }
-      .footer a:hover {
-        color: #ff6b6b;
-      }
-      .copyright {
-        margin-top: 30px;
-        text-align: center;
-        padding-top: 20px;
-        border-top: 1px solid #444;
-        font-size: 14px;
-        color: #aaa;
-      }
-      .steps {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 40px;
-      }
-      .step {
-        flex: 1;
-        text-align: center;
-        position: relative;
-      }
-      .step:not(:last-child):after {
-        content: "";
-        position: absolute;
-        top: 20px;
-        right: -50%;
-        width: 100%;
-        height: 2px;
-        background-color: #ddd;
-        z-index: -1;
-      }
-      .step.active:not(:last-child):after {
-        background-color: #ff6b6b;
-      }
-      .step-number {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background-color: #ddd;
-        color: white;
-        font-weight: 500;
-        margin-bottom: 10px;
-      }
-      .step.active .step-number {
-        background-color: #ff6b6b;
-      }
-      .step-label {
-        font-size: 14px;
-        color: #666;
-      }
-      .step.active .step-label {
-        color: #ff6b6b;
-        font-weight: 500;
-      }
-      @media (max-width: 768px) {
-        .checkout-container {
-          grid-template-columns: 1fr;
-        }
-        .form-row {
-          grid-template-columns: 1fr;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TTPBR7L"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    
-     <script>ptengine.track('checkout',{'时间发生时间戳':Date.now(),'事件发生时间':new Date().toLocaleString(),'事件发生的url':document.location.href})</script>
-    <header class="header">
-      <div class="container">
-        <div class="header-content">
-          <a href="products.html" class="logo">电商示例</a>
-          <ul class="nav">
-            <li><a href="products.html">首页</a></li>
-            <li><a href="products.html">商品</a></li>
-            <li><a href="cart.html">购物车</a></li>
-            <li><a href="#">我的账户</a></li>
-          </ul>
-        </div>
-      </div>
-    </header>
 
+      .payment-options {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TTPBR7L"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- 头部导航 -->
+  <header class="header">
     <div class="container">
-      <div class="page-title">
-        <h1>结算</h1>
+      <div class="header-content">
+        <a href="index.html" class="logo">电商示例</a>
+        <button class="menu-toggle" aria-label="菜单">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav class="nav">
+          <a href="index.html">首页</a>
+          <a href="products.html">全部商品</a>
+          <a href="cart.html" class="cart-icon">
+            购物车
+            <span class="cart-count" style="display: none;">0</span>
+          </a>
+          <a href="account.html">我的账户</a>
+        </nav>
       </div>
+    </div>
+  </header>
 
+  <main class="checkout-page">
+    <div class="container">
+      <!-- 步骤指示器 -->
       <div class="steps">
-        <div class="step">
-          <div class="step-number">1</div>
+        <div class="step completed">
+          <div class="step-number">✓</div>
           <div class="step-label">购物车</div>
         </div>
         <div class="step active">
@@ -377,273 +378,413 @@
         </div>
       </div>
 
-      <div class="checkout-container">
+      <div class="checkout-layout">
+        <!-- 结算表单 -->
         <div class="checkout-form">
+          <!-- 收货信息 -->
           <div class="form-section">
-            <h2>收货信息</h2>
+            <h2 class="section-title">
+              <span class="icon">1</span>
+              收货信息
+            </h2>
             <div class="form-row">
               <div class="form-group">
-                <label for="firstName">姓氏</label>
-                <input type="text" id="firstName" placeholder="请输入姓氏">
+                <label>收货人 <span class="required">*</span></label>
+                <input type="text" class="form-control" id="name" placeholder="请输入收货人姓名" required>
               </div>
               <div class="form-group">
-                <label for="lastName">名字</label>
-                <input type="text" id="lastName" placeholder="请输入名字">
+                <label>手机号码 <span class="required">*</span></label>
+                <input type="tel" class="form-control" id="phone" placeholder="请输入手机号码" required>
               </div>
-            </div>
-            <div class="form-group">
-              <label for="email">电子邮箱</label>
-              <input type="email" id="email" placeholder="请输入电子邮箱">
-            </div>
-            <div class="form-group">
-              <label for="phone">手机号码</label>
-              <input type="tel" id="phone" placeholder="请输入手机号码">
-            </div>
-          </div>
-
-          <div class="form-section">
-            <h2>收货地址</h2>
-            <div class="form-group">
-              <label for="address">详细地址</label>
-              <input type="text" id="address" placeholder="请输入详细地址">
             </div>
             <div class="form-row">
               <div class="form-group">
-                <label for="city">城市</label>
-                <input type="text" id="city" placeholder="请输入城市">
-              </div>
-              <div class="form-group">
-                <label for="province">省份</label>
-                <select id="province">
+                <label>省份 <span class="required">*</span></label>
+                <select class="form-control" id="province" required>
                   <option value="">请选择省份</option>
-                  <option value="beijing">北京市</option>
-                  <option value="shanghai">上海市</option>
-                  <option value="guangdong">广东省</option>
-                  <option value="jiangsu">江苏省</option>
-                  <option value="zhejiang">浙江省</option>
-                  <!-- 其他省份... -->
+                  <option value="北京市">北京市</option>
+                  <option value="上海市">上海市</option>
+                  <option value="广东省">广东省</option>
+                  <option value="江苏省">江苏省</option>
+                  <option value="浙江省">浙江省</option>
+                  <option value="四川省">四川省</option>
                 </select>
               </div>
+              <div class="form-group">
+                <label>城市 <span class="required">*</span></label>
+                <input type="text" class="form-control" id="city" placeholder="请输入城市" required>
+              </div>
             </div>
             <div class="form-group">
-              <label for="zipcode">邮政编码</label>
-              <input type="text" id="zipcode" placeholder="请输入邮政编码">
+              <label>详细地址 <span class="required">*</span></label>
+              <input type="text" class="form-control" id="address" placeholder="请输入详细地址（街道、门牌号等）" required>
             </div>
-            <div class="form-check">
-              <input type="checkbox" id="saveAddress">
-              <label for="saveAddress">保存此地址以便下次使用</label>
-            </div>
-          </div>
-
-          <div class="form-section">
-            <h2>配送方式</h2>
-            <div class="form-check">
-              <input type="radio" name="shipping" id="shipping1" checked>
-              <label for="shipping1">标准配送（3-5个工作日）- 免费</label>
-            </div>
-            <div class="form-check">
-              <input type="radio" name="shipping" id="shipping2">
-              <label for="shipping2">快速配送（1-2个工作日）- ¥20.00</label>
-            </div>
-            <div class="form-check">
-              <input type="radio" name="shipping" id="shipping3">
-              <label for="shipping3">次日达 - ¥50.00</label>
+            <div class="form-group">
+              <label>邮政编码</label>
+              <input type="text" class="form-control" id="zipcode" placeholder="请输入邮政编码">
             </div>
           </div>
 
+          <!-- 配送方式 -->
           <div class="form-section">
-            <h2>支付方式</h2>
-            <div class="payment-methods">
-              <div class="payment-method active">
-                <img src="https://via.placeholder.com/100x30?text=支付宝" alt="支付宝">
-                <div>支付宝</div>
-              </div>
-              <div class="payment-method">
-                <img src="https://via.placeholder.com/100x30?text=微信支付" alt="微信支付">
-                <div>微信支付</div>
-              </div>
-              <div class="payment-method">
-                <img src="https://via.placeholder.com/100x30?text=银联" alt="银联">
-                <div>银联</div>
-              </div>
-              <div class="payment-method">
-                <img src="https://via.placeholder.com/100x30?text=信用卡" alt="信用卡">
-                <div>信用卡</div>
-              </div>
+            <h2 class="section-title">
+              <span class="icon">2</span>
+              配送方式
+            </h2>
+            <div class="shipping-options">
+              <label class="shipping-option active" data-shipping="standard" data-price="0">
+                <input type="radio" name="shipping" value="standard" checked>
+                <div class="shipping-info">
+                  <div class="shipping-name">标准配送</div>
+                  <div class="shipping-desc">预计 3-5 个工作日送达</div>
+                </div>
+                <div class="shipping-price">免费</div>
+              </label>
+              <label class="shipping-option" data-shipping="express" data-price="15">
+                <input type="radio" name="shipping" value="express">
+                <div class="shipping-info">
+                  <div class="shipping-name">快速配送</div>
+                  <div class="shipping-desc">预计 1-2 个工作日送达</div>
+                </div>
+                <div class="shipping-price">¥15.00</div>
+              </label>
+              <label class="shipping-option" data-shipping="sameday" data-price="30">
+                <input type="radio" name="shipping" value="sameday">
+                <div class="shipping-info">
+                  <div class="shipping-name">当日达</div>
+                  <div class="shipping-desc">限部分城市，当日 18:00 前下单</div>
+                </div>
+                <div class="shipping-price">¥30.00</div>
+              </label>
             </div>
-            <div class="form-check">
-              <input type="checkbox" id="terms" checked>
-              <label for="terms">我已阅读并同意<a href="#" style="color: #ff6b6b;">服务条款</a>和<a href="#" style="color: #ff6b6b;">隐私政策</a></label>
+          </div>
+
+          <!-- 支付方式 -->
+          <div class="form-section">
+            <h2 class="section-title">
+              <span class="icon">3</span>
+              支付方式
+            </h2>
+            <div class="payment-options">
+              <label class="payment-option active" data-payment="alipay">
+                <input type="radio" name="payment" value="alipay" checked>
+                <div class="payment-icon">💳</div>
+                <div class="payment-name">支付宝</div>
+              </label>
+              <label class="payment-option" data-payment="wechat">
+                <input type="radio" name="payment" value="wechat">
+                <div class="payment-icon">💚</div>
+                <div class="payment-name">微信支付</div>
+              </label>
+              <label class="payment-option" data-payment="unionpay">
+                <input type="radio" name="payment" value="unionpay">
+                <div class="payment-icon">🏦</div>
+                <div class="payment-name">银联支付</div>
+              </label>
+              <label class="payment-option" data-payment="credit">
+                <input type="radio" name="payment" value="credit">
+                <div class="payment-icon">💳</div>
+                <div class="payment-name">信用卡</div>
+              </label>
+            </div>
+          </div>
+
+          <!-- 备注 -->
+          <div class="form-section">
+            <h2 class="section-title">
+              <span class="icon">4</span>
+              订单备注
+            </h2>
+            <div class="form-group">
+              <textarea class="form-control" id="notes" rows="3" placeholder="如有特殊要求请在此备注（选填）"></textarea>
             </div>
           </div>
         </div>
 
+        <!-- 订单摘要 -->
         <div class="order-summary">
-          <h2>订单摘要</h2>
-          <div class="order-items">
-            <!-- 订单商品1 -->
-            <div class="order-item">
-              <div class="order-item-info">
-                <div class="order-item-image">
-                  <img src="https://via.placeholder.com/60x60?text=耳机" alt="高品质无线耳机">
-                </div>
-                <div class="order-item-details">
-                  <h3>高品质无线耳机</h3>
-                  <div class="item-variant">颜色: 黑色</div>
-                  <div class="item-quantity">数量: 1</div>
-                </div>
-              </div>
-              <div class="order-item-price">¥299.00</div>
-            </div>
+          <div class="summary-header">
+            <h2>订单摘要</h2>
+          </div>
+          
+          <div class="summary-items" id="summaryItems">
+            <!-- 动态生成 -->
+          </div>
 
-            <!-- 订单商品2 -->
-            <div class="order-item">
-              <div class="order-item-info">
-                <div class="order-item-image">
-                  <img src="https://via.placeholder.com/60x60?text=夹克" alt="时尚休闲夹克">
-                </div>
-                <div class="order-item-details">
-                  <h3>时尚休闲夹克</h3>
-                  <div class="item-variant">尺码: L, 颜色: 蓝色</div>
-                  <div class="item-quantity">数量: 1</div>
-                </div>
-              </div>
-              <div class="order-item-price">¥399.00</div>
+          <div class="summary-totals">
+            <div class="summary-row">
+              <span class="label">商品总价</span>
+              <span class="value" id="subtotal">¥0.00</span>
+            </div>
+            <div class="summary-row">
+              <span class="label">运费</span>
+              <span class="value" id="shippingCost">¥0.00</span>
+            </div>
+            <div class="summary-row total">
+              <span class="label">应付总额</span>
+              <span class="value" id="totalAmount">¥0.00</span>
             </div>
           </div>
 
-          <div class="summary-item">
-            <div class="summary-label">商品总价</div>
-            <div class="summary-value">¥698.00</div>
-          </div>
-          <div class="summary-item">
-            <div class="summary-label">运费</div>
-            <div class="summary-value">¥0.00</div>
-          </div>
-          <div class="summary-item">
-            <div class="summary-label">优惠</div>
-            <div class="summary-value">-¥0.00</div>
-          </div>
-          <div class="summary-item total">
-            <div class="summary-label">总计</div>
-            <div class="summary-value">¥698.00</div>
+          <div class="summary-actions">
+            <button class="btn btn-primary place-order-btn" onclick="placeOrder()">
+              提交订单
+            </button>
+            <label class="terms-check">
+              <input type="checkbox" id="agreeTerms" checked>
+              <span>我已阅读并同意 <a href="#">服务条款</a> 和 <a href="#">隐私政策</a></span>
+            </label>
           </div>
 
-          <button id="placeOrder" class="btn btn-primary">提交订单</button>
+          <div class="security-notice">
+            <span class="icon">🔒</span>
+            <span>您的支付信息将被安全加密</span>
+          </div>
         </div>
       </div>
     </div>
+  </main>
 
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-content">
-          <div>
-            <h3>关于我们</h3>
-            <ul>
-              <li><a href="#">公司简介</a></li>
-              <li><a href="#">联系方式</a></li>
-              <li><a href="#">招聘信息</a></li>
-              <li><a href="#">新闻中心</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3>客户服务</h3>
-            <ul>
-              <li><a href="#">帮助中心</a></li>
-              <li><a href="#">配送方式</a></li>
-              <li><a href="#">退换货政策</a></li>
-              <li><a href="#">投诉建议</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3>商家合作</h3>
-            <ul>
-              <li><a href="#">入驻条件</a></li>
-              <li><a href="#">商家中心</a></li>
-              <li><a href="#">营销中心</a></li>
-              <li><a href="#">物流服务</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3>关注我们</h3>
-            <ul>
-              <li><a href="#">微信公众号</a></li>
-              <li><a href="#">微博</a></li>
-              <li><a href="#">抖音</a></li>
-              <li><a href="#">小红书</a></li>
-            </ul>
-          </div>
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <h3>关于我们</h3>
+          <ul>
+            <li><a href="#">公司简介</a></li>
+            <li><a href="#">联系方式</a></li>
+            <li><a href="#">招聘信息</a></li>
+            <li><a href="#">新闻中心</a></li>
+          </ul>
         </div>
-        <div class="copyright">
-          © 2024 电商示例 版权所有
+        <div>
+          <h3>客户服务</h3>
+          <ul>
+            <li><a href="#">帮助中心</a></li>
+            <li><a href="#">配送方式</a></li>
+            <li><a href="#">退换货政策</a></li>
+            <li><a href="#">投诉建议</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>商家合作</h3>
+          <ul>
+            <li><a href="#">入驻条件</a></li>
+            <li><a href="#">商家中心</a></li>
+            <li><a href="#">营销中心</a></li>
+            <li><a href="#">物流服务</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>关注我们</h3>
+          <ul>
+            <li><a href="#">微信公众号</a></li>
+            <li><a href="#">微博</a></li>
+            <li><a href="#">抖音</a></li>
+            <li><a href="#">小红书</a></li>
+          </ul>
         </div>
       </div>
-    </footer>
+      <div class="footer-bottom">
+        © 2024 电商示例 版权所有
+      </div>
+    </div>
+  </footer>
 
-    <script>
-      // 支付方式选择
-      const paymentMethods = document.querySelectorAll('.payment-method');
-      
-      paymentMethods.forEach(method => {
-        method.addEventListener('click', () => {
-          paymentMethods.forEach(m => m.classList.remove('active'));
-          method.classList.add('active');
-        });
+  <script src="/js/common.js"></script>
+  <script>
+    let checkoutItems = [];
+    let subtotal = 0;
+    let shippingCost = 0;
+
+    // 初始化
+    function init() {
+      // 从 sessionStorage 获取结算商品
+      const stored = sessionStorage.getItem('checkoutItems');
+      if (stored) {
+        checkoutItems = JSON.parse(stored);
+      } else {
+        // 如果没有，使用购物车全部商品
+        checkoutItems = Cart.getItems();
+      }
+
+      if (checkoutItems.length === 0) {
+        showToast('购物车为空', 'error');
+        setTimeout(() => window.location.href = 'cart.html', 1500);
+        return;
+      }
+
+      renderSummaryItems();
+      updateTotals();
+      bindEvents();
+
+      // 推送 begin_checkout 事件
+      pushEcommerceEvent('begin_checkout', {
+        value: subtotal,
+        items: checkoutItems.map((item, i) => ({
+          item_id: item.id,
+          item_name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+          index: i
+        }))
       });
+    }
 
+    // 渲染订单商品
+    function renderSummaryItems() {
+      const container = document.getElementById('summaryItems');
+      
+      container.innerHTML = checkoutItems.map(item => {
+        const variantText = item.variant ? 
+          Object.entries(item.variant).map(([k, v]) => v).join(' / ') : '';
+        
+        return `
+          <div class="summary-item">
+            <div class="summary-item-image">
+              <img src="${item.image}" alt="${item.name}">
+            </div>
+            <div class="summary-item-info">
+              <div class="summary-item-name">${item.name}</div>
+              ${variantText ? `<div class="summary-item-variant">${variantText}</div>` : ''}
+            </div>
+            <div class="summary-item-price">
+              <div class="price">${formatPrice(item.price * item.quantity)}</div>
+              <div class="quantity">x${item.quantity}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 绑定事件
+    function bindEvents() {
       // 配送方式选择
-      const shippingOptions = document.querySelectorAll('input[name="shipping"]');
-      
-      shippingOptions.forEach(option => {
-        option.addEventListener('change', () => {
-          let shippingCost = 0;
-          
-          if (option.id === 'shipping2') {
-            shippingCost = 20;
-          } else if (option.id === 'shipping3') {
-            shippingCost = 50;
-          }
-          
-          document.querySelectorAll('.summary-item')[1].querySelector('.summary-value').textContent = `¥${shippingCost.toFixed(2)}`;
-          
-          // 更新总计
-          const subtotal = 698;
-          const discount = 0;
-          const total = subtotal + shippingCost - discount;
-          
-          document.querySelector('.summary-item.total .summary-value').textContent = `¥${total.toFixed(2)}`;
+      document.querySelectorAll('.shipping-option').forEach(option => {
+        option.addEventListener('click', () => {
+          document.querySelectorAll('.shipping-option').forEach(o => o.classList.remove('active'));
+          option.classList.add('active');
+          option.querySelector('input').checked = true;
+          shippingCost = parseFloat(option.dataset.price) || 0;
+          updateTotals();
         });
       });
 
-      // 提交订单
-      document.getElementById('placeOrder').addEventListener('click', () => {
-        // 表单验证
-        const firstName = document.getElementById('firstName').value;
-        const lastName = document.getElementById('lastName').value;
-        const email = document.getElementById('email').value;
-        const phone = document.getElementById('phone').value;
-        const address = document.getElementById('address').value;
-        const city = document.getElementById('city').value;
-        const province = document.getElementById('province').value;
-        const terms = document.getElementById('terms').checked;
-        
-        if (!firstName || !lastName || !email || !phone || !address || !city || !province) {
-          alert('请填写所有必填字段');
-          return;
-        }
-        
-        if (!terms) {
-          alert('请阅读并同意服务条款和隐私政策');
-          return;
-        }
-        
-        // 模拟订单提交
-        alert('订单提交成功！谢谢您的购买。');
-        
-        // 在实际应用中，这里应该提交表单到服务器
-        // 然后重定向到订单确认页面
-        window.location.href = 'products.html';
+      // 支付方式选择
+      document.querySelectorAll('.payment-option').forEach(option => {
+        option.addEventListener('click', () => {
+          document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('active'));
+          option.classList.add('active');
+          option.querySelector('input').checked = true;
+        });
       });
-    </script>
-  </body>
+    }
+
+    // 更新总计
+    function updateTotals() {
+      subtotal = checkoutItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      const total = subtotal + shippingCost;
+
+      document.getElementById('subtotal').textContent = formatPrice(subtotal);
+      document.getElementById('shippingCost').textContent = shippingCost === 0 ? '免费' : formatPrice(shippingCost);
+      document.getElementById('totalAmount').textContent = formatPrice(total);
+    }
+
+    // 表单验证
+    function validateForm() {
+      const required = ['name', 'phone', 'province', 'city', 'address'];
+      
+      for (const field of required) {
+        const input = document.getElementById(field);
+        if (!input.value.trim()) {
+          showToast(`请填写${input.previousElementSibling.textContent.replace(' *', '')}`, 'error');
+          input.focus();
+          return false;
+        }
+      }
+
+      // 手机号验证
+      const phone = document.getElementById('phone').value;
+      if (!/^1[3-9]\d{9}$/.test(phone)) {
+        showToast('请输入正确的手机号码', 'error');
+        document.getElementById('phone').focus();
+        return false;
+      }
+
+      // 同意条款
+      if (!document.getElementById('agreeTerms').checked) {
+        showToast('请阅读并同意服务条款', 'error');
+        return false;
+      }
+
+      return true;
+    }
+
+    // 提交订单
+    function placeOrder() {
+      if (!validateForm()) return;
+
+      const orderId = generateOrderId();
+      const total = subtotal + shippingCost;
+
+      // 收集订单信息
+      const orderInfo = {
+        orderId: orderId,
+        items: checkoutItems,
+        shipping: {
+          name: document.getElementById('name').value,
+          phone: document.getElementById('phone').value,
+          province: document.getElementById('province').value,
+          city: document.getElementById('city').value,
+          address: document.getElementById('address').value,
+          zipcode: document.getElementById('zipcode').value,
+          method: document.querySelector('input[name="shipping"]:checked').value
+        },
+        payment: document.querySelector('input[name="payment"]:checked').value,
+        notes: document.getElementById('notes').value,
+        subtotal: subtotal,
+        shippingCost: shippingCost,
+        total: total,
+        createdAt: new Date().toISOString()
+      };
+
+      // 保存订单信息
+      sessionStorage.setItem('lastOrder', JSON.stringify(orderInfo));
+
+      // 推送 purchase 事件
+      pushEcommerceEvent('purchase', {
+        transaction_id: orderId,
+        value: total,
+        shipping: shippingCost,
+        items: checkoutItems.map((item, i) => ({
+          item_id: item.id,
+          item_name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+          index: i
+        }))
+      });
+
+      // 清空购物车中已购买的商品
+      const cartItems = Cart.getItems();
+      const remainingItems = cartItems.filter(cartItem => 
+        !checkoutItems.some(checkoutItem => 
+          checkoutItem.id === cartItem.id && 
+          JSON.stringify(checkoutItem.variant) === JSON.stringify(cartItem.variant)
+        )
+      );
+      Cart.saveItems(remainingItems);
+
+      // 清除结算数据
+      sessionStorage.removeItem('checkoutItems');
+
+      // 跳转到订单成功页
+      window.location.href = 'order-success.html';
+    }
+
+    // 初始化
+    init();
+  </script>
+</body>
 </html>
