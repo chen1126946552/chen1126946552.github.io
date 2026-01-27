@@ -501,9 +501,6 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TTPBR7L"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
-  <script>
-    ptengine.track('商品详情',{'时间发生时间戳':Date.now(),'事件发生时间':new Date().toLocaleString(),'事件发生的url':document.location.href});
-  </script>
 
   <!-- 头部导航 -->
   <header class="header">
@@ -750,6 +747,24 @@
       pushEcommerceEvent('view_item', {
         value: currentProduct.price,
         items: [formatProductItem(currentProduct)]
+      });
+      
+      // Ptengine 商品详情页浏览事件（包含商品属性）
+      ptengine.track('商品详情', {
+        '时间发生时间戳': Date.now(),
+        '事件发生时间': new Date().toLocaleString(),
+        '事件发生的url': document.location.href,
+        '商品ID': currentProduct.id,
+        '商品名称': currentProduct.name,
+        '商品价格': currentProduct.price,
+        '商品原价': currentProduct.originalPrice || currentProduct.price,
+        '商品分类': currentProduct.category,
+        '商品品牌': currentProduct.brand || '',
+        '商品评分': currentProduct.rating,
+        '评价数量': currentProduct.reviewCount,
+        '库存数量': currentProduct.stock,
+        '是否热卖': currentProduct.isHot ? '是' : '否',
+        '是否新品': currentProduct.isNew ? '是' : '否'
       });
     }
 
