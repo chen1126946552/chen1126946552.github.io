@@ -253,7 +253,7 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
   <script>
-    ptengine.track('商品列表',{'时间发生时间戳':Date.now(),'事件发生时间':new Date().toLocaleString(),'事件发生的url':document.location.href});
+    ptengine.track('商品列表',{'事件发生时间戳':Date.now(),'事件发生时间':new Date().toLocaleString(),'事件发生的url':document.location.href});
   </script>
 
   <!-- 头部导航 -->
@@ -492,7 +492,7 @@
     function setCategory(category) {
       // Ptengine 事件追踪
       ptengine.track('筛选分类', {
-        '时间发生时间戳': Date.now(),
+        '事件发生时间戳': Date.now(),
         '事件发生时间': new Date().toLocaleString(),
         '事件发生的url': document.location.href,
         '分类名称': category
@@ -707,7 +707,7 @@
       
       // Ptengine 事件追踪
       ptengine.track('点击商品', {
-        '时间发生时间戳': Date.now(),
+        '事件发生时间戳': Date.now(),
         '事件发生时间': new Date().toLocaleString(),
         '事件发生的url': document.location.href,
         '商品ID': productId,

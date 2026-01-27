@@ -414,7 +414,7 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
   <script>
-    ptengine.track('购物车',{'时间发生时间戳':Date.now(),'事件发生时间':new Date().toLocaleString(),'事件发生的url':document.location.href});
+    ptengine.track('购物车',{'事件发生时间戳':Date.now(),'事件发生时间':new Date().toLocaleString(),'事件发生的url':document.location.href});
   </script>
 
   <!-- 头部导航 -->
@@ -711,7 +711,7 @@
       
       // Ptengine 事件追踪
       ptengine.track('移除购物车商品', {
-        '时间发生时间戳': Date.now(),
+        '事件发生时间戳': Date.now(),
         '事件发生时间': new Date().toLocaleString(),
         '事件发生的url': document.location.href,
         '商品ID': removedItem.id,
@@ -854,7 +854,7 @@
       
       // Ptengine 事件追踪
       ptengine.track('去结算', {
-        '时间发生时间戳': Date.now(),
+        '事件发生时间戳': Date.now(),
         '事件发生时间': new Date().toLocaleString(),
         '事件发生的url': document.location.href,
         '商品数量': totalQuantity,

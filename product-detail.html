@@ -751,7 +751,7 @@
       
       // Ptengine 商品详情页浏览事件（包含商品属性）
       ptengine.track('商品详情', {
-        '时间发生时间戳': Date.now(),
+        '事件发生时间戳': Date.now(),
         '事件发生时间': new Date().toLocaleString(),
         '事件发生的url': document.location.href,
         '商品ID': currentProduct.id,
@@ -991,7 +991,7 @@
       
       // Ptengine 事件追踪
       ptengine.track('加入购物车', {
-        '时间发生时间戳': Date.now(),
+        '事件发生时间戳': Date.now(),
         '事件发生时间': new Date().toLocaleString(),
         '事件发生的url': document.location.href,
         '商品ID': currentProduct.id,
@@ -1009,7 +1009,7 @@
       
       // Ptengine 事件追踪
       ptengine.track('立即购买', {
-        '时间发生时间戳': Date.now(),
+        '事件发生时间戳': Date.now(),
         '事件发生时间': new Date().toLocaleString(),
         '事件发生的url': document.location.href,
         '商品ID': currentProduct.id,
@@ -1026,7 +1026,7 @@
     function toggleFavorite() {
       // Ptengine 事件追踪
       ptengine.track('收藏商品', {
-        '时间发生时间戳': Date.now(),
+        '事件发生时间戳': Date.now(),
         '事件发生时间': new Date().toLocaleString(),
         '事件发生的url': document.location.href,
         '商品ID': currentProduct.id,

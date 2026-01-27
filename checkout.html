@@ -340,7 +340,7 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
   <script>
-    ptengine.track('结算',{'时间发生时间戳':Date.now(),'事件发生时间':new Date().toLocaleString(),'事件发生的url':document.location.href});
+    ptengine.track('结算',{'事件发生时间戳':Date.now(),'事件发生时间':new Date().toLocaleString(),'事件发生的url':document.location.href});
   </script>
 
   <!-- 头部导航 -->
@@ -736,7 +736,7 @@
       
       // Ptengine 事件追踪 - 提交订单
       ptengine.track('提交订单', {
-        '时间发生时间戳': Date.now(),
+        '事件发生时间戳': Date.now(),
         '事件发生时间': new Date().toLocaleString(),
         '事件发生的url': document.location.href,
         '订单号': orderId,
@@ -788,7 +788,7 @@
       
       // Ptengine 事件追踪 - 购买完成
       ptengine.track('购买完成', {
-        '时间发生时间戳': Date.now(),
+        '事件发生时间戳': Date.now(),
         '事件发生时间': new Date().toLocaleString(),
         '事件发生的url': document.location.href,
         '订单号': orderId,
