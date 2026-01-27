@@ -415,6 +415,75 @@
       display: block;
     }
 
+    /* 登录框样式 */
+    .login-container {
+      max-width: 450px;
+      margin: 0 auto;
+      padding: 40px 0;
+    }
+
+    .login-box {
+      background-color: var(--bg-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 40px;
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .login-header h2 {
+      font-size: 24px;
+      color: var(--text-color);
+      margin-bottom: 10px;
+    }
+
+    .login-header p {
+      color: var(--text-light);
+      font-size: 14px;
+    }
+
+    .login-form .form-group {
+      margin-bottom: 20px;
+    }
+
+    .login-form .btn-primary {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .logged-in-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 15px;
+      background-color: #d4edda;
+      border-radius: var(--radius-sm);
+      margin-bottom: 20px;
+      color: #155724;
+      font-size: 14px;
+    }
+
+    .logged-in-info .icon {
+      font-size: 18px;
+    }
+
+    .logout-btn {
+      margin-left: auto;
+      color: #155724;
+      font-size: 13px;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .logout-btn:hover {
+      color: var(--primary-color);
+    }
+
     @media (max-width: 992px) {
       .account-layout {
         grid-template-columns: 1fr;
@@ -478,13 +547,35 @@
 
   <main class="account-page">
     <div class="container">
-      <div class="account-layout">
+      <!-- 登录框（未登录时显示） -->
+      <div class="login-container" id="loginContainer">
+        <div class="login-box">
+          <div class="login-header">
+            <h2>登录账户</h2>
+            <p>登录后享受更多会员权益</p>
+          </div>
+          <form class="login-form" id="loginForm" onsubmit="handleLogin(event)">
+            <div class="form-group">
+              <label>电子邮箱 <span class="required">*</span></label>
+              <input type="email" class="form-control" id="loginEmail" placeholder="请输入您的邮箱" required>
+            </div>
+            <div class="form-group">
+              <label>生日 <span class="required">*</span></label>
+              <input type="date" class="form-control" id="loginBirthday" required>
+            </div>
+            <button type="submit" class="btn btn-primary">登录</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- 已登录内容（登录后显示） -->
+      <div class="account-layout" id="accountContent" style="display: none;">
         <!-- 侧边栏 -->
         <aside class="account-sidebar">
           <div class="user-info">
             <div class="user-avatar">👤</div>
-            <div class="user-name">用户123456</div>
-            <div class="user-level">普通会员</div>
+            <div class="user-name" id="sidebarUserName">用户</div>
+            <div class="user-level" id="sidebarUserEmail">未登录</div>
           </div>
           <nav class="sidebar-menu">
             <div class="menu-item active" data-tab="overview">
@@ -522,6 +613,13 @@
               <h2>账户概览</h2>
             </div>
             <div class="content-body">
+              <!-- 已登录提示 -->
+              <div class="logged-in-info" id="loggedInInfo">
+                <span class="icon">✓</span>
+                <span>已登录：<strong id="displayEmail">-</strong></span>
+                <button type="button" class="logout-btn" id="logoutBtn">退出登录</button>
+              </div>
+              
               <div class="overview-stats">
                 <div class="stat-card">
                   <div class="stat-value" id="orderCount">0</div>
@@ -956,7 +1054,118 @@
       });
     }
 
+    // 处理登录
+    function handleLogin(event) {
+      event.preventDefault();
+      
+      const email = document.getElementById('loginEmail').value.trim();
+      const birthday = document.getElementById('loginBirthday').value;
+      
+      if (!email || !birthday) {
+        showToast('请填写完整信息', 'error');
+        return;
+      }
+      
+      // 验证邮箱格式
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        showToast('请输入有效的邮箱地址', 'error');
+        return;
+      }
+      
+      const loginTime = new Date().toLocaleString();
+      const loginTimestamp = Date.now();
+      
+      // 保存登录信息到 localStorage
+      const userInfo = {
+        email: email,
+        birthday: birthday,
+        loginTime: loginTime,
+        loginTimestamp: loginTimestamp
+      };
+      localStorage.setItem('userInfo', JSON.stringify(userInfo));
+      
+      // Ptengine identify 用户识别
+      ptengine.identify(email, {
+        '登录时间': loginTime,
+        '登录时间戳': loginTimestamp,
+        '生日': birthday
+      });
+      
+      // Ptengine 事件追踪
+      ptengine.track('用户登录', {
+        '时间发生时间戳': loginTimestamp,
+        '事件发生时间': loginTime,
+        '事件发生的url': document.location.href,
+        '用户邮箱': email,
+        '用户生日': birthday
+      });
+      
+      showToast('登录成功！');
+      
+      // 显示已登录界面
+      showLoggedInView(userInfo);
+    }
+    
+    // 显示已登录视图
+    function showLoggedInView(userInfo) {
+      document.getElementById('loginContainer').style.display = 'none';
+      document.getElementById('accountContent').style.display = 'grid';
+      
+      // 更新显示的用户信息
+      document.getElementById('displayEmail').textContent = userInfo.email;
+      document.getElementById('sidebarUserName').textContent = userInfo.email.split('@')[0];
+      document.getElementById('sidebarUserEmail').textContent = userInfo.email;
+    }
+    
+    // 处理退出登录
+    function handleLogout() {
+      // Ptengine 事件追踪
+      ptengine.track('用户退出', {
+        '时间发生时间戳': Date.now(),
+        '事件发生时间': new Date().toLocaleString(),
+        '事件发生的url': document.location.href
+      });
+      
+      localStorage.removeItem('userInfo');
+      showToast('已退出登录');
+      
+      // 显示登录界面
+      document.getElementById('loginContainer').style.display = 'block';
+      document.getElementById('accountContent').style.display = 'none';
+      
+      // 清空表单
+      document.getElementById('loginEmail').value = '';
+      document.getElementById('loginBirthday').value = '';
+    }
+    
+    // 检查登录状态
+    function checkLoginStatus() {
+      const userInfoStr = localStorage.getItem('userInfo');
+      if (userInfoStr) {
+        const userInfo = JSON.parse(userInfoStr);
+        showLoggedInView(userInfo);
+        
+        // 重新 identify 用户（页面刷新后）
+        ptengine.identify(userInfo.email, {
+          '登录时间': userInfo.loginTime,
+          '登录时间戳': userInfo.loginTimestamp,
+          '生日': userInfo.birthday
+        });
+      }
+    }
+    
+    // 绑定退出登录按钮事件（使用事件委托）
+    document.addEventListener('click', function(e) {
+      if (e.target && e.target.id === 'logoutBtn') {
+        e.preventDefault();
+        e.stopPropagation();
+        handleLogout();
+      }
+    });
+    
     // 初始化
+    checkLoginStatus();
     init();
   </script>
 </body>
