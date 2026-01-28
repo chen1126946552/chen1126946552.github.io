@@ -710,10 +710,10 @@
         }
       }
 
-      // 手机号验证
+      // 手机号验证（只需要是数字即可）
       const phone = document.getElementById('phone').value;
-      if (!/^1[3-9]\d{9}$/.test(phone)) {
-        showToast('请输入正确的手机号码', 'error');
+      if (!/^\d+$/.test(phone)) {
+        showToast('手机号码只能包含数字', 'error');
         document.getElementById('phone').focus();
         return false;
       }
