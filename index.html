@@ -14,17 +14,23 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="电商示例 - 发现优质商品，享受购物乐趣">
-  <title>电商示例 - 首页</title>
+  <meta name="description" content="PTmeili - 发现优质商品，享受精致生活">
+  <title>PTmeili - 精致生活，从这里开始</title>
   <link rel="icon" href="/favicon.ico">
   <link rel="stylesheet" href="/css/common.css">
   <style>
-    /* 首页特有样式 */
+    /* ========================================
+       首页特有样式 - 奢华精致版
+       ======================================== */
+    
+    /* Hero 区域 */
     .hero {
       position: relative;
-      height: 500px;
+      height: 100vh;
+      min-height: 700px;
+      max-height: 1000px;
       overflow: hidden;
-      margin-bottom: 60px;
+      background: var(--bg-dark);
     }
 
     .hero-slide {
@@ -32,7 +38,7 @@
       width: 100%;
       height: 100%;
       opacity: 0;
-      transition: opacity 0.8s ease-in-out;
+      transition: opacity 1.2s ease-in-out;
     }
 
     .hero-slide.active {
@@ -43,28 +49,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-    }
-
-    .hero-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      color: white;
-      z-index: 10;
-    }
-
-    .hero-content h1 {
-      font-size: 48px;
-      margin-bottom: 20px;
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-    }
-
-    .hero-content p {
-      font-size: 20px;
-      margin-bottom: 30px;
-      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+      filter: brightness(0.7);
     }
 
     .hero-overlay {
@@ -73,16 +58,101 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, rgba(255, 107, 107, 0.7), rgba(51, 51, 51, 0.5));
+      background: linear-gradient(
+        135deg,
+        rgba(13, 13, 13, 0.8) 0%,
+        rgba(13, 13, 13, 0.4) 50%,
+        rgba(201, 169, 98, 0.2) 100%
+      );
     }
 
+    .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      transform: translateY(-50%);
+      text-align: center;
+      color: white;
+      z-index: 10;
+      padding: 0 24px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 10px 24px;
+      background: rgba(201, 169, 98, 0.2);
+      border: 1px solid rgba(201, 169, 98, 0.5);
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--primary-color);
+      margin-bottom: 30px;
+      animation: fadeInUp 0.8s ease-out 0.2s backwards;
+    }
+
+    .hero-content h1 {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 8vw, 90px);
+      font-weight: 600;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      animation: fadeInUp 0.8s ease-out 0.4s backwards;
+    }
+
+    .hero-content h1 span {
+      display: block;
+      background: linear-gradient(135deg, #fff 0%, var(--primary-color) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-content p {
+      font-size: clamp(16px, 2vw, 20px);
+      margin-bottom: 40px;
+      opacity: 0.85;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+      animation: fadeInUp 0.8s ease-out 0.6s backwards;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.8s ease-out 0.8s backwards;
+    }
+
+    .hero-buttons .btn {
+      min-width: 180px;
+    }
+
+    .hero-buttons .btn-outline {
+      border-color: rgba(255, 255, 255, 0.4);
+      color: white;
+    }
+
+    .hero-buttons .btn-outline:hover {
+      background: white;
+      border-color: white;
+      color: var(--secondary-color);
+    }
+
+    /* Hero 导航点 */
     .hero-dots {
       position: absolute;
-      bottom: 30px;
+      bottom: 50px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      gap: 10px;
+      gap: 12px;
       z-index: 10;
     }
 
@@ -90,47 +160,196 @@
       width: 12px;
       height: 12px;
       border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.3);
       cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .hero-dot::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border: 2px solid transparent;
+      border-radius: 50%;
       transition: var(--transition);
     }
 
     .hero-dot.active {
-      background-color: white;
-      transform: scale(1.2);
+      background: var(--primary-color);
+    }
+
+    .hero-dot.active::before {
+      border-color: var(--primary-color);
+    }
+
+    .hero-dot:hover {
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    /* 滚动提示 */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      animation: float 2s ease-in-out infinite;
+      z-index: 10;
+    }
+
+    .scroll-indicator::after {
+      content: '';
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
+    }
+
+    /* 品牌特色区域 */
+    .brand-features {
+      background: var(--bg-white);
+      padding: 0;
+      position: relative;
+      z-index: 5;
+      margin-top: -60px;
+    }
+
+    .brand-features-inner {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      padding: 50px 60px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+    }
+
+    .brand-feature {
+      text-align: center;
+      padding: 20px;
+      position: relative;
+    }
+
+    .brand-feature::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 20%;
+      height: 60%;
+      width: 1px;
+      background: var(--border-light);
+    }
+
+    .brand-feature:last-child::after {
+      display: none;
+    }
+
+    .brand-feature-icon {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 20px;
+      background: var(--primary-light);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      transition: var(--transition);
+    }
+
+    .brand-feature:hover .brand-feature-icon {
+      background: var(--primary-color);
+      transform: scale(1.1);
+    }
+
+    .brand-feature:hover .brand-feature-icon span {
+      filter: brightness(10);
+    }
+
+    .brand-feature h4 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-color);
+    }
+
+    .brand-feature p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
     }
 
     /* 分类区域 */
     .categories {
+      padding: 100px 0;
+      background: var(--bg-cream);
+    }
+
+    .section-header {
+      text-align: center;
       margin-bottom: 60px;
     }
 
+    .section-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      background: var(--primary-light);
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--primary-hover);
+      margin-bottom: 20px;
+    }
+
     .section-title {
-      text-align: center;
-      font-size: 32px;
-      margin-bottom: 40px;
+      font-family: var(--font-display);
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 600;
       color: var(--text-color);
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+
+    .section-subtitle {
+      font-size: 17px;
+      color: var(--text-light);
+      max-width: 500px;
+      margin: 0 auto;
     }
 
     .category-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+      gap: 24px;
     }
 
     .category-card {
       position: relative;
-      height: 180px;
+      height: 320px;
       border-radius: var(--radius);
       overflow: hidden;
       cursor: pointer;
+      group: category;
     }
 
     .category-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.5s ease;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .category-card:hover img {
@@ -143,146 +362,406 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+      background: linear-gradient(
+        to top,
+        rgba(13, 13, 13, 0.9) 0%,
+        rgba(13, 13, 13, 0.3) 50%,
+        transparent 100%
+      );
       display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      padding-bottom: 20px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 30px;
+      transition: var(--transition);
+    }
+
+    .category-card:hover .category-overlay {
+      background: linear-gradient(
+        to top,
+        rgba(201, 169, 98, 0.9) 0%,
+        rgba(201, 169, 98, 0.4) 50%,
+        transparent 100%
+      );
+    }
+
+    .category-name {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 600;
       color: white;
-      font-size: 20px;
-      font-weight: bold;
+      margin-bottom: 8px;
+      transform: translateY(10px);
+      transition: var(--transition);
+    }
+
+    .category-card:hover .category-name {
+      transform: translateY(0);
+    }
+
+    .category-count {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: var(--transition);
+    }
+
+    .category-card:hover .category-count {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* 热门商品 */
     .featured-products {
-      margin-bottom: 60px;
+      padding: 100px 0;
+      background: var(--bg-white);
+    }
+
+    .products-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 50px;
+    }
+
+    .products-header .section-header {
+      text-align: left;
+      margin-bottom: 0;
+    }
+
+    .view-all-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text-color);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      padding: 12px 0;
+      border-bottom: 2px solid var(--primary-color);
+      transition: var(--transition);
+    }
+
+    .view-all-link:hover {
+      color: var(--primary-color);
+      gap: 16px;
+    }
+
+    .view-all-link svg {
+      width: 20px;
+      height: 20px;
+      transition: var(--transition);
+    }
+
+    .view-all-link:hover svg {
+      transform: translateX(4px);
     }
 
     .product-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 25px;
+      gap: 30px;
     }
 
     /* 促销横幅 */
     .promo-banner {
-      background: linear-gradient(135deg, var(--primary-color), #ff8e8e);
-      color: white;
-      padding: 60px 0;
-      margin-bottom: 60px;
+      position: relative;
+      padding: 120px 0;
+      background: var(--secondary-color);
+      overflow: hidden;
+    }
+
+    .promo-banner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a962' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+
+    .promo-content {
+      position: relative;
+      z-index: 1;
       text-align: center;
+      color: white;
+    }
+
+    .promo-badge {
+      display: inline-block;
+      padding: 10px 24px;
+      background: rgba(201, 169, 98, 0.2);
+      border: 1px solid rgba(201, 169, 98, 0.4);
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--primary-color);
+      margin-bottom: 30px;
     }
 
     .promo-banner h2 {
-      font-size: 36px;
-      margin-bottom: 15px;
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 600;
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+
+    .promo-banner h2 span {
+      color: var(--primary-color);
     }
 
     .promo-banner p {
       font-size: 18px;
-      margin-bottom: 25px;
-      opacity: 0.9;
+      margin-bottom: 40px;
+      opacity: 0.8;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .promo-banner .btn {
-      background-color: white;
-      color: var(--primary-color);
+    .promo-banner .btn-primary {
+      background: var(--primary-color);
+      color: var(--secondary-color);
     }
 
-    .promo-banner .btn:hover {
-      background-color: var(--secondary-color);
-      color: white;
+    .promo-banner .btn-primary:hover {
+      background: var(--accent-color);
+    }
+
+    /* 新品推荐 */
+    .new-arrivals {
+      padding: 100px 0;
+      background: var(--bg-cream);
     }
 
     /* 特色服务 */
     .features {
-      background-color: var(--bg-white);
-      padding: 60px 0;
-      margin-bottom: 60px;
+      background: var(--bg-white);
+      padding: 100px 0;
+      border-top: 1px solid var(--border-light);
     }
 
     .feature-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 30px;
+      gap: 40px;
     }
 
     .feature-item {
       text-align: center;
-      padding: 30px 20px;
+      padding: 40px 30px;
+      background: var(--bg-cream);
+      border-radius: var(--radius);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      transform: scaleX(0);
+      transition: var(--transition);
+    }
+
+    .feature-item:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .feature-item:hover::before {
+      transform: scaleX(1);
     }
 
     .feature-icon {
-      font-size: 48px;
-      margin-bottom: 20px;
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+      background: var(--bg-white);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .feature-item:hover .feature-icon {
+      background: var(--primary-color);
+      transform: scale(1.1) rotate(5deg);
     }
 
     .feature-title {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 10px;
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 12px;
       color: var(--text-color);
     }
 
     .feature-desc {
       color: var(--text-light);
-      font-size: 14px;
-      line-height: 1.6;
+      font-size: 15px;
+      line-height: 1.7;
     }
 
-    /* 新品推荐 */
-    .new-arrivals {
-      margin-bottom: 60px;
+    /* 订阅区域 */
+    .newsletter {
+      padding: 80px 0;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+      position: relative;
+      overflow: hidden;
     }
 
-    .section-header {
+    .newsletter::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+    }
+
+    .newsletter::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -5%;
+      width: 300px;
+      height: 300px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 50%;
+    }
+
+    .newsletter-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: white;
+    }
+
+    .newsletter h2 {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .newsletter p {
+      font-size: 17px;
+      margin-bottom: 32px;
+      opacity: 0.9;
+    }
+
+    .newsletter-form {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 30px;
+      gap: 12px;
+      max-width: 500px;
+      margin: 0 auto;
     }
 
-    .section-header h2 {
-      font-size: 28px;
-      color: var(--text-color);
+    .newsletter-form input {
+      flex: 1;
+      padding: 16px 24px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      background: rgba(255, 255, 255, 0.95);
     }
 
-    .section-header a {
-      color: var(--primary-color);
-      font-weight: 500;
+    .newsletter-form input:focus {
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
     }
 
-    .section-header a:hover {
-      text-decoration: underline;
+    .newsletter-form .btn {
+      background: var(--secondary-color);
+      color: white;
+      white-space: nowrap;
     }
 
+    .newsletter-form .btn:hover {
+      background: #2a2a2a;
+    }
+
+    /* 响应式 */
     @media (max-width: 992px) {
+      .hero {
+        min-height: 600px;
+      }
+
+      .brand-features-inner {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 40px;
+      }
+
+      .brand-feature::after {
+        display: none;
+      }
+
       .category-grid,
       .product-grid,
       .feature-grid {
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .hero-content h1 {
-        font-size: 36px;
+      .products-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+      }
+
+      .scroll-indicator {
+        display: none;
       }
     }
 
     @media (max-width: 576px) {
       .hero {
-        height: 400px;
+        min-height: 500px;
       }
 
-      .hero-content h1 {
-        font-size: 28px;
+      .hero-buttons {
+        flex-direction: column;
       }
 
-      .hero-content p {
-        font-size: 16px;
+      .hero-buttons .btn {
+        width: 100%;
+      }
+
+      .brand-features {
+        margin-top: -40px;
+      }
+
+      .brand-features-inner {
+        grid-template-columns: 1fr;
+        padding: 30px 24px;
+        gap: 30px;
       }
 
       .category-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
+      }
+
+      .category-card {
+        height: 240px;
       }
 
       .product-grid {
@@ -291,6 +770,25 @@
 
       .feature-grid {
         grid-template-columns: 1fr;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+      }
+
+      .newsletter-form .btn {
+        width: 100%;
+      }
+
+      .categories,
+      .featured-products,
+      .new-arrivals,
+      .features {
+        padding: 60px 0;
+      }
+
+      .promo-banner {
+        padding: 80px 0;
       }
     }
   </style>
@@ -308,13 +806,13 @@
   <header class="header">
     <div class="container">
       <div class="header-content">
-        <a href="index.html" class="logo">电商示例</a>
-        <button class="menu-toggle" aria-label="菜单">
+        <a href="index.html" class="logo">PTmeili</a>
+        <button class="menu-toggle" aria-label="菜单" onclick="toggleMenu()">
           <span></span>
           <span></span>
           <span></span>
         </button>
-        <nav class="nav">
+        <nav class="nav" id="mainNav">
           <a href="index.html" class="active">首页</a>
           <a href="products.html">全部商品</a>
           <a href="cart.html" class="cart-icon">
@@ -330,32 +828,35 @@
   <!-- 轮播图 -->
   <section class="hero">
     <div class="hero-slide active">
-      <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1920&h=500&fit=crop" alt="新品上市">
+      <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1920&h=1080&fit=crop" alt="新品上市">
       <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <h1>新品上市</h1>
-        <p>发现最新潮流商品，开启品质生活</p>
-        <a href="products.html" class="btn btn-lg">立即查看</a>
-      </div>
     </div>
     <div class="hero-slide">
-      <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1920&h=500&fit=crop" alt="限时特惠">
+      <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1920&h=1080&fit=crop" alt="限时特惠">
       <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <h1>限时特惠</h1>
-        <p>精选商品低至5折，错过再等一年</p>
-        <a href="products.html" class="btn btn-lg">马上抢购</a>
-      </div>
     </div>
     <div class="hero-slide">
-      <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=1920&h=500&fit=crop" alt="品质生活">
+      <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=1920&h=1080&fit=crop" alt="品质生活">
       <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <h1>品质生活</h1>
-        <p>为您精选优质商品，享受美好生活</p>
-        <a href="products.html" class="btn btn-lg">了解更多</a>
+    </div>
+    
+    <div class="hero-content">
+      <div class="hero-badge">2024 新品发布</div>
+      <h1>
+        <span>精致生活</span>
+        从这里开始
+      </h1>
+      <p>探索我们精心甄选的优质商品，为您的生活增添一份优雅与品质</p>
+      <div class="hero-buttons">
+        <a href="products.html" class="btn btn-primary btn-lg">探索商品</a>
+        <a href="#categories" class="btn btn-outline btn-lg">了解更多</a>
       </div>
     </div>
+
+    <div class="scroll-indicator">
+      <span>向下滚动</span>
+    </div>
+
     <div class="hero-dots">
       <span class="hero-dot active" data-index="0"></span>
       <span class="hero-dot" data-index="1"></span>
@@ -363,26 +864,78 @@
     </div>
   </section>
 
-  <!-- 商品分类 -->
-  <section class="categories">
+  <!-- 品牌特色 -->
+  <section class="brand-features">
     <div class="container">
-      <h2 class="section-title">商品分类</h2>
+      <div class="brand-features-inner">
+        <div class="brand-feature">
+          <div class="brand-feature-icon">
+            <span>🚚</span>
+          </div>
+          <h4>全国包邮</h4>
+          <p>满99元免费配送</p>
+        </div>
+        <div class="brand-feature">
+          <div class="brand-feature-icon">
+            <span>🔄</span>
+          </div>
+          <h4>无忧退换</h4>
+          <p>7天无理由退换货</p>
+        </div>
+        <div class="brand-feature">
+          <div class="brand-feature-icon">
+            <span>💎</span>
+          </div>
+          <h4>正品保证</h4>
+          <p>100%品质保障</p>
+        </div>
+        <div class="brand-feature">
+          <div class="brand-feature-icon">
+            <span>🔒</span>
+          </div>
+          <h4>安全支付</h4>
+          <p>多种支付方式</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 商品分类 -->
+  <section class="categories" id="categories">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">精选分类</span>
+        <h2 class="section-title">探索商品世界</h2>
+        <p class="section-subtitle">从电子产品到时尚配饰，发现适合您的完美选择</p>
+      </div>
       <div class="category-grid">
         <a href="products.html?category=电子产品" class="category-card">
-          <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?w=400&h=200&fit=crop" alt="电子产品">
-          <div class="category-overlay">电子产品</div>
+          <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?w=600&h=400&fit=crop" alt="电子产品">
+          <div class="category-overlay">
+            <span class="category-name">电子产品</span>
+            <span class="category-count">探索系列 →</span>
+          </div>
         </a>
         <a href="products.html?category=服装" class="category-card">
-          <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=200&fit=crop" alt="服装">
-          <div class="category-overlay">服装</div>
+          <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=600&h=400&fit=crop" alt="服装">
+          <div class="category-overlay">
+            <span class="category-name">精品服装</span>
+            <span class="category-count">探索系列 →</span>
+          </div>
         </a>
         <a href="products.html?category=家居" class="category-card">
-          <img src="https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=400&h=200&fit=crop" alt="家居">
-          <div class="category-overlay">家居</div>
+          <img src="https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=600&h=400&fit=crop" alt="家居">
+          <div class="category-overlay">
+            <span class="category-name">家居生活</span>
+            <span class="category-count">探索系列 →</span>
+          </div>
         </a>
         <a href="products.html?category=配饰" class="category-card">
-          <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=400&h=200&fit=crop" alt="配饰">
-          <div class="category-overlay">配饰</div>
+          <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=600&h=400&fit=crop" alt="配饰">
+          <div class="category-overlay">
+            <span class="category-name">时尚配饰</span>
+            <span class="category-count">探索系列 →</span>
+          </div>
         </a>
       </div>
     </div>
@@ -391,9 +944,18 @@
   <!-- 热门商品 -->
   <section class="featured-products">
     <div class="container">
-      <div class="section-header">
-        <h2>热门商品</h2>
-        <a href="products.html">查看全部 →</a>
+      <div class="products-header">
+        <div class="section-header">
+          <span class="section-badge">热门推荐</span>
+          <h2 class="section-title">精选热卖商品</h2>
+          <p class="section-subtitle">最受欢迎的优质商品，品质与口碑的双重保证</p>
+        </div>
+        <a href="products.html" class="view-all-link">
+          查看全部
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
       </div>
       <div class="product-grid" id="hotProducts">
         <!-- 动态加载 -->
@@ -404,18 +966,30 @@
   <!-- 促销横幅 -->
   <section class="promo-banner">
     <div class="container">
-      <h2>新用户专享优惠</h2>
-      <p>注册即送50元优惠券，首单满199减50</p>
-      <a href="account.html" class="btn btn-lg">立即注册</a>
+      <div class="promo-content">
+        <span class="promo-badge">限时优惠</span>
+        <h2>新用户专享 <span>50元</span> 优惠券</h2>
+        <p>立即注册，首单满199减50，开启您的品质购物之旅</p>
+        <a href="account.html" class="btn btn-primary btn-lg">立即注册</a>
+      </div>
     </div>
   </section>
 
   <!-- 新品推荐 -->
   <section class="new-arrivals">
     <div class="container">
-      <div class="section-header">
-        <h2>新品推荐</h2>
-        <a href="products.html">查看全部 →</a>
+      <div class="products-header">
+        <div class="section-header">
+          <span class="section-badge">新品上市</span>
+          <h2 class="section-title">最新到货商品</h2>
+          <p class="section-subtitle">抢先体验最新潮流，做时尚的引领者</p>
+        </div>
+        <a href="products.html" class="view-all-link">
+          查看全部
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
       </div>
       <div class="product-grid" id="newProducts">
         <!-- 动态加载 -->
@@ -426,6 +1000,11 @@
   <!-- 特色服务 -->
   <section class="features">
     <div class="container">
+      <div class="section-header">
+        <span class="section-badge">我们的承诺</span>
+        <h2 class="section-title">为什么选择我们</h2>
+        <p class="section-subtitle">我们致力于为您提供最优质的购物体验</p>
+      </div>
       <div class="feature-grid">
         <div class="feature-item">
           <div class="feature-icon">🚚</div>
@@ -447,6 +1026,20 @@
           <h3 class="feature-title">安全支付</h3>
           <p class="feature-desc">多种支付方式<br>安全有保障</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 订阅 -->
+  <section class="newsletter">
+    <div class="container">
+      <div class="newsletter-content">
+        <h2>订阅我们的资讯</h2>
+        <p>第一时间获取新品发布、独家优惠和精彩活动</p>
+        <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+          <input type="email" placeholder="请输入您的邮箱地址" required>
+          <button type="submit" class="btn">立即订阅</button>
+        </form>
       </div>
     </div>
   </section>
@@ -493,13 +1086,21 @@
         </div>
       </div>
       <div class="footer-bottom">
-        © 2024 电商示例 版权所有
+        © 2024 PTmeili 版权所有 · 精致生活，从这里开始
       </div>
     </div>
   </footer>
 
   <script src="/js/common.js"></script>
   <script>
+    // 移动端菜单切换
+    function toggleMenu() {
+      const nav = document.getElementById('mainNav');
+      const toggle = document.querySelector('.menu-toggle');
+      nav.classList.toggle('active');
+      toggle.classList.toggle('active');
+    }
+
     // 轮播图功能
     const slides = document.querySelectorAll('.hero-slide');
     const dots = document.querySelectorAll('.hero-dot');
@@ -521,7 +1122,7 @@
     }
 
     function startSlideshow() {
-      slideInterval = setInterval(nextSlide, 5000);
+      slideInterval = setInterval(nextSlide, 6000);
     }
 
     // 点击圆点切换
@@ -534,6 +1135,16 @@
     });
 
     startSlideshow();
+
+    // 头部滚动效果
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('.header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
 
     // 加载商品
     async function loadProducts() {
@@ -558,10 +1169,10 @@
       if (!container) return;
 
       container.innerHTML = products.map((product, index) => `
-        <div class="product-card" onclick="goToProduct('${product.id}')">
+        <div class="product-card" onclick="goToProduct('${product.id}')" style="animation-delay: ${0.1 + index * 0.1}s">
           <div class="product-image">
-            ${product.isNew ? '<span class="product-badge">新品</span>' : ''}
-            ${product.isHot && !product.isNew ? '<span class="product-badge" style="background-color: #ff9800;">热卖</span>' : ''}
+            ${product.isNew ? '<span class="product-badge new">新品</span>' : ''}
+            ${product.isHot && !product.isNew ? '<span class="product-badge hot">热卖</span>' : ''}
             <img src="${product.image}" alt="${product.name}" loading="lazy">
           </div>
           <div class="product-info">
@@ -597,6 +1208,14 @@
       });
       
       window.location.href = `product-detail.html?id=${productId}`;
+    }
+
+    // 订阅邮件
+    function subscribeNewsletter(e) {
+      e.preventDefault();
+      const email = e.target.querySelector('input').value;
+      showToast('订阅成功！感谢您的关注');
+      e.target.reset();
     }
 
     // 初始化

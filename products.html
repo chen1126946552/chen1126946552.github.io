@@ -15,33 +15,75 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="浏览我们精选的高品质商品">
-  <title>全部商品 - 电商示例</title>
+  <title>全部商品 - PTmeili</title>
   <link rel="icon" href="/favicon.ico">
   <link rel="stylesheet" href="/css/common.css">
   <style>
+    /* ========================================
+       商品列表页样式 - 奢华精致版
+       ======================================== */
+    
     .products-page {
-      padding: 40px 0;
+      padding: 40px 0 80px;
+      min-height: 100vh;
     }
 
     .products-layout {
       display: grid;
-      grid-template-columns: 250px 1fr;
-      gap: 30px;
+      grid-template-columns: 280px 1fr;
+      gap: 40px;
+    }
+
+    /* 页面头部 */
+    .page-hero {
+      background: linear-gradient(135deg, var(--secondary-color) 0%, #2a2a2a 100%);
+      padding: 60px 0;
+      margin-bottom: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(201, 169, 98, 0.15) 0%, transparent 70%);
+    }
+
+    .page-hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-hero h1 {
+      font-family: var(--font-display);
+      font-size: 42px;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 12px;
+    }
+
+    .page-hero p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 17px;
     }
 
     /* 侧边栏筛选 */
     .sidebar {
       background-color: var(--bg-white);
       border-radius: var(--radius);
-      padding: 25px;
-      box-shadow: var(--shadow);
+      padding: 30px;
+      box-shadow: var(--shadow-sm);
       height: fit-content;
       position: sticky;
-      top: 90px;
+      top: 100px;
     }
 
     .filter-section {
-      margin-bottom: 25px;
+      margin-bottom: 32px;
     }
 
     .filter-section:last-child {
@@ -49,110 +91,163 @@
     }
 
     .filter-title {
+      font-family: var(--font-display);
       font-size: 16px;
-      font-weight: bold;
-      margin-bottom: 15px;
+      font-weight: 600;
+      margin-bottom: 18px;
       color: var(--text-color);
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-title::before {
+      content: '';
+      width: 4px;
+      height: 16px;
+      background: var(--primary-color);
+      border-radius: 2px;
     }
 
     .filter-options {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 6px;
     }
 
     .filter-option {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       cursor: pointer;
-      padding: 8px 12px;
+      padding: 12px 16px;
       border-radius: var(--radius-sm);
-      transition: var(--transition);
+      transition: var(--transition-fast);
+      font-size: 15px;
+      color: var(--text-light);
     }
 
     .filter-option:hover {
-      background-color: var(--bg-color);
+      background-color: var(--bg-cream);
+      color: var(--text-color);
     }
 
     .filter-option.active {
-      background-color: rgba(255, 107, 107, 0.1);
-      color: var(--primary-color);
+      background: var(--primary-light);
+      color: var(--primary-hover);
+      font-weight: 500;
     }
 
     .filter-option input {
       accent-color: var(--primary-color);
+      width: 18px;
+      height: 18px;
     }
 
     .price-range {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       align-items: center;
     }
 
     .price-input {
-      width: 80px;
-      padding: 8px;
-      border: 1px solid var(--border-color);
+      width: 100px;
+      padding: 12px 14px;
+      border: 2px solid var(--border-color);
       border-radius: var(--radius-sm);
       text-align: center;
+      font-size: 14px;
+      transition: var(--transition-fast);
+    }
+
+    .price-input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+
+    .price-separator {
+      color: var(--text-muted);
+      font-weight: 500;
     }
 
     /* 主内容区 */
     .products-main {
-      min-height: 500px;
+      min-height: 600px;
     }
 
     .products-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 25px;
-      padding: 15px 20px;
+      margin-bottom: 30px;
+      padding: 20px 24px;
       background-color: var(--bg-white);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow-sm);
     }
 
     .products-count {
       color: var(--text-light);
+      font-size: 15px;
     }
 
     .products-count strong {
       color: var(--primary-color);
+      font-weight: 600;
     }
 
     .sort-options {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
     .sort-options label {
       color: var(--text-light);
+      font-size: 14px;
+      font-weight: 500;
     }
 
     .sort-select {
-      padding: 8px 15px;
-      border: 1px solid var(--border-color);
+      padding: 12px 40px 12px 18px;
+      border: 2px solid var(--border-color);
       border-radius: var(--radius-sm);
       background-color: white;
       cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      transition: var(--transition-fast);
+    }
+
+    .sort-select:focus {
+      outline: none;
+      border-color: var(--primary-color);
     }
 
     .product-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
+      gap: 28px;
     }
 
     /* 移动端筛选按钮 */
     .mobile-filter-btn {
       display: none;
       width: 100%;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .mobile-filter-btn svg {
+      width: 20px;
+      height: 20px;
     }
 
     .sidebar-overlay {
@@ -164,6 +259,28 @@
       height: 100%;
       background-color: rgba(0, 0, 0, 0.5);
       z-index: 999;
+      backdrop-filter: blur(4px);
+    }
+
+    .sidebar-close {
+      display: none;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-full);
+      background: var(--bg-cream);
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: var(--text-color);
+      transition: var(--transition-fast);
+    }
+
+    .sidebar-close:hover {
+      background: var(--primary-color);
+      color: white;
     }
 
     /* 分页 */
@@ -171,17 +288,24 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 10px;
-      margin-top: 40px;
+      gap: 8px;
+      margin-top: 50px;
     }
 
     .pagination-btn {
-      padding: 10px 15px;
-      border: 1px solid var(--border-color);
+      min-width: 44px;
+      height: 44px;
+      padding: 0 16px;
+      border: 2px solid var(--border-color);
       border-radius: var(--radius-sm);
       background-color: var(--bg-white);
       cursor: pointer;
-      transition: var(--transition);
+      transition: var(--transition-fast);
+      font-weight: 500;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .pagination-btn:hover:not(:disabled) {
@@ -190,14 +314,53 @@
     }
 
     .pagination-btn.active {
-      background-color: var(--primary-color);
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
       color: white;
       border-color: var(--primary-color);
     }
 
     .pagination-btn:disabled {
-      opacity: 0.5;
+      opacity: 0.4;
       cursor: not-allowed;
+    }
+
+    .pagination-ellipsis {
+      color: var(--text-muted);
+      padding: 0 8px;
+    }
+
+    /* 空状态 */
+    .empty-products {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 80px 20px;
+      background: var(--bg-white);
+      border-radius: var(--radius);
+    }
+
+    .empty-products .icon {
+      font-size: 72px;
+      margin-bottom: 24px;
+      opacity: 0.4;
+    }
+
+    .empty-products h2 {
+      font-family: var(--font-display);
+      font-size: 26px;
+      margin-bottom: 12px;
+      color: var(--text-color);
+    }
+
+    .empty-products p {
+      color: var(--text-light);
+      margin-bottom: 28px;
+    }
+
+    /* 响应式 */
+    @media (max-width: 1200px) {
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     @media (max-width: 992px) {
@@ -208,17 +371,22 @@
       .sidebar {
         position: fixed;
         top: 0;
-        left: -300px;
-        width: 280px;
+        left: -320px;
+        width: 300px;
         height: 100vh;
         z-index: 1000;
         border-radius: 0;
-        transition: left 0.3s ease;
+        transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         overflow-y: auto;
+        padding-top: 70px;
       }
 
       .sidebar.active {
         left: 0;
+      }
+
+      .sidebar-close {
+        display: flex;
       }
 
       .sidebar-overlay.active {
@@ -231,18 +399,44 @@
 
       .product-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .page-hero {
+        padding: 40px 0;
+      }
+
+      .page-hero h1 {
+        font-size: 32px;
       }
     }
 
     @media (max-width: 576px) {
+      .products-page {
+        padding: 20px 0 60px;
+      }
+
       .product-grid {
         grid-template-columns: 1fr;
       }
 
       .products-header {
         flex-direction: column;
-        gap: 15px;
-        align-items: flex-start;
+        gap: 16px;
+        align-items: stretch;
+        padding: 16px 20px;
+      }
+
+      .sort-options {
+        width: 100%;
+      }
+
+      .sort-select {
+        flex: 1;
+      }
+
+      .page-hero h1 {
+        font-size: 28px;
       }
     }
   </style>
@@ -260,13 +454,13 @@
   <header class="header">
     <div class="container">
       <div class="header-content">
-        <a href="index.html" class="logo">电商示例</a>
-        <button class="menu-toggle" aria-label="菜单">
+        <a href="index.html" class="logo">PTmeili</a>
+        <button class="menu-toggle" aria-label="菜单" onclick="toggleMenu()">
           <span></span>
           <span></span>
           <span></span>
         </button>
-        <nav class="nav">
+        <nav class="nav" id="mainNav">
           <a href="index.html">首页</a>
           <a href="products.html" class="active">全部商品</a>
           <a href="cart.html" class="cart-icon">
@@ -279,6 +473,16 @@
     </div>
   </header>
 
+  <!-- 页面头部 -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-content">
+        <h1 id="pageTitle">全部商品</h1>
+        <p>探索我们精心甄选的优质商品系列</p>
+      </div>
+    </div>
+  </section>
+
   <main class="products-page">
     <div class="container">
       <!-- 面包屑 -->
@@ -290,12 +494,17 @@
 
       <!-- 移动端筛选按钮 -->
       <button class="btn btn-outline mobile-filter-btn" onclick="toggleSidebar()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 21v-7m0-4V3m8 18v-9m0-4V3m8 18v-5m0-4V3M1 14h6m2-6h6m2 8h6"/>
+        </svg>
         筛选商品
       </button>
 
       <div class="products-layout">
         <!-- 侧边栏筛选 -->
         <aside class="sidebar" id="sidebar">
+          <button class="sidebar-close" onclick="toggleSidebar()">×</button>
+          
           <div class="filter-section">
             <h3 class="filter-title">商品分类</h3>
             <div class="filter-options" id="categoryFilters">
@@ -309,15 +518,15 @@
               </label>
               <label class="filter-option" data-category="服装">
                 <input type="radio" name="category" value="服装">
-                服装
+                精品服装
               </label>
               <label class="filter-option" data-category="家居">
                 <input type="radio" name="category" value="家居">
-                家居
+                家居生活
               </label>
               <label class="filter-option" data-category="配饰">
                 <input type="radio" name="category" value="配饰">
-                配饰
+                时尚配饰
               </label>
             </div>
           </div>
@@ -326,16 +535,16 @@
             <h3 class="filter-title">价格区间</h3>
             <div class="price-range">
               <input type="number" class="price-input" id="priceMin" placeholder="最低">
-              <span>-</span>
+              <span class="price-separator">—</span>
               <input type="number" class="price-input" id="priceMax" placeholder="最高">
             </div>
-            <button class="btn btn-sm btn-outline mt-20" onclick="applyPriceFilter()" style="width: 100%;">
-              应用
+            <button class="btn btn-outline btn-sm btn-block mt-20" onclick="applyPriceFilter()">
+              应用筛选
             </button>
           </div>
 
           <div class="filter-section">
-            <h3 class="filter-title">筛选条件</h3>
+            <h3 class="filter-title">商品标签</h3>
             <div class="filter-options">
               <label class="filter-option">
                 <input type="checkbox" id="filterHot">
@@ -364,7 +573,7 @@
         <div class="products-main">
           <div class="products-header">
             <div class="products-count">
-              共 <strong id="totalCount">0</strong> 件商品
+              共找到 <strong id="totalCount">0</strong> 件商品
             </div>
             <div class="sort-options">
               <label>排序：</label>
@@ -433,13 +642,21 @@
         </div>
       </div>
       <div class="footer-bottom">
-        © 2024 电商示例 版权所有
+        © 2024 PTmeili 版权所有 · 精致生活，从这里开始
       </div>
     </div>
   </footer>
 
   <script src="/js/common.js"></script>
   <script>
+    // 移动端菜单切换
+    function toggleMenu() {
+      const nav = document.getElementById('mainNav');
+      const toggle = document.querySelector('.menu-toggle');
+      nav.classList.toggle('active');
+      toggle.classList.toggle('active');
+    }
+
     // 状态管理
     let allProducts = [];
     let filteredProducts = [];
@@ -504,9 +721,10 @@
         option.querySelector('input').checked = option.dataset.category === category;
       });
 
-      // 更新面包屑
-      document.getElementById('currentCategory').textContent = 
-        category === '全部' ? '全部商品' : category;
+      // 更新面包屑和标题
+      const categoryName = category === '全部' ? '全部商品' : category;
+      document.getElementById('currentCategory').textContent = categoryName;
+      document.getElementById('pageTitle').textContent = categoryName;
 
       currentPage = 1;
       filterProducts();
@@ -610,7 +828,7 @@
 
       if (pageProducts.length === 0) {
         container.innerHTML = `
-          <div class="empty-state" style="grid-column: 1 / -1;">
+          <div class="empty-products">
             <div class="icon">🔍</div>
             <h2>没有找到商品</h2>
             <p>尝试调整筛选条件或浏览其他分类</p>
@@ -622,11 +840,11 @@
       }
 
       container.innerHTML = pageProducts.map((product, index) => `
-        <div class="product-card" onclick="goToProduct('${product.id}')">
+        <div class="product-card" onclick="goToProduct('${product.id}')" style="animation-delay: ${0.05 + index * 0.05}s">
           <div class="product-image">
-            ${product.isNew ? '<span class="product-badge">新品</span>' : ''}
-            ${product.isHot && !product.isNew ? '<span class="product-badge" style="background-color: #ff9800;">热卖</span>' : ''}
-            ${product.originalPrice && !product.isNew && !product.isHot ? '<span class="product-badge" style="background-color: #4caf50;">促销</span>' : ''}
+            ${product.isNew ? '<span class="product-badge new">新品</span>' : ''}
+            ${product.isHot && !product.isNew ? '<span class="product-badge hot">热卖</span>' : ''}
+            ${product.originalPrice && !product.isNew && !product.isHot ? '<span class="product-badge sale">促销</span>' : ''}
             <img src="${product.image}" alt="${product.name}" loading="lazy">
           </div>
           <div class="product-info">
@@ -667,7 +885,7 @@
 
       let html = `
         <button class="pagination-btn" onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
-          上一页
+          ‹ 上一页
         </button>
       `;
 
@@ -679,13 +897,13 @@
             </button>
           `;
         } else if (i === currentPage - 3 || i === currentPage + 3) {
-          html += '<span>...</span>';
+          html += '<span class="pagination-ellipsis">...</span>';
         }
       }
 
       html += `
         <button class="pagination-btn" onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
-          下一页
+          下一页 ›
         </button>
       `;
 
@@ -724,6 +942,7 @@
       const overlay = document.getElementById('sidebarOverlay');
       sidebar.classList.toggle('active');
       overlay.classList.toggle('active');
+      document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
     }
 
     // 初始化
