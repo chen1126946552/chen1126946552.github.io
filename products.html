@@ -447,7 +447,13 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
   <script>
-    ptengine.track('商品列表',{'事件发生时间戳':Date.now(),'事件发生时间':new Date().toLocaleString(),'事件发生的url':document.location.href});
+    ptengine.track('商品列表',{
+      '事件发生时间戳': Date.now(),
+      '事件发生时间': new Date().toLocaleString(),
+      '事件发生的url': document.location.href,
+      '页面标题': document.title,
+      '来源': document.referrer || '直接访问'
+    });
   </script>
 
   <!-- 头部导航 -->
@@ -765,6 +771,22 @@
     // 排序商品
     function sortProducts(rerender = true) {
       const sortBy = document.getElementById('sortSelect').value;
+      const sortOptions = {
+        'default': '默认排序',
+        'price-asc': '价格从低到高',
+        'price-desc': '价格从高到低',
+        'rating': '评分最高',
+        'sales': '销量最高'
+      };
+      
+      if (rerender) {
+        ptengine.track('排序商品', {
+          '事件发生时间戳': Date.now(),
+          '事件发生时间': new Date().toLocaleString(),
+          '事件发生的url': document.location.href,
+          '排序方式': sortOptions[sortBy] || sortBy
+        });
+      }
 
       switch (sortBy) {
         case 'price-asc':
@@ -798,6 +820,17 @@
 
     // 应用价格筛选
     function applyPriceFilter() {
+      const minPrice = document.getElementById('priceMin').value;
+      const maxPrice = document.getElementById('priceMax').value;
+      
+      ptengine.track('价格筛选', {
+        '事件发生时间戳': Date.now(),
+        '事件发生时间': new Date().toLocaleString(),
+        '事件发生的url': document.location.href,
+        '最低价格': minPrice || '无限制',
+        '最高价格': maxPrice || '无限制'
+      });
+      
       currentPage = 1;
       filterProducts();
       toggleSidebar();
@@ -930,7 +963,10 @@
         '事件发生的url': document.location.href,
         '商品ID': productId,
         '商品名称': product ? product.name : '',
-        '商品价格': product ? product.price : 0
+        '商品实际价格': product ? product.price : 0,
+        '商品原价': product ? (product.originalPrice || product.price) : 0,
+        '折扣率': product && product.originalPrice ? Math.round((1 - product.price / product.originalPrice) * 100) + '%' : '0%',
+        '商品分类': product ? product.category : ''
       });
       
       window.location.href = `product-detail.html?id=${productId}`;

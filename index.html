@@ -799,7 +799,13 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
   <script>
-    ptengine.track('首页',{'事件发生时间戳':Date.now(),'事件发生时间':new Date().toLocaleString(),'事件发生的url':document.location.href});
+    ptengine.track('首页',{
+      '事件发生时间戳': Date.now(),
+      '事件发生时间': new Date().toLocaleString(),
+      '事件发生的url': document.location.href,
+      '页面标题': document.title,
+      '来源': document.referrer || '直接访问'
+    });
   </script>
 
   <!-- 头部导航 -->
@@ -1197,13 +1203,21 @@
       });
     }
 
-    function goToProduct(productId) {
+    async function goToProduct(productId) {
+      const products = await Products.load();
+      const product = products.find(p => p.id === productId);
+      
       // Ptengine 事件追踪
       ptengine.track('点击商品', {
         '事件发生时间戳': Date.now(),
         '事件发生时间': new Date().toLocaleString(),
         '事件发生的url': document.location.href,
         '商品ID': productId,
+        '商品名称': product ? product.name : '',
+        '商品实际价格': product ? product.price : 0,
+        '商品原价': product ? (product.originalPrice || product.price) : 0,
+        '折扣率': product && product.originalPrice ? Math.round((1 - product.price / product.originalPrice) * 100) + '%' : '0%',
+        '商品分类': product ? product.category : '',
         '来源': '首页推荐'
       });
       
@@ -1214,6 +1228,15 @@
     function subscribeNewsletter(e) {
       e.preventDefault();
       const email = e.target.querySelector('input').value;
+      
+      // Ptengine 事件追踪
+      ptengine.track('订阅邮件', {
+        '事件发生时间戳': Date.now(),
+        '事件发生时间': new Date().toLocaleString(),
+        '事件发生的url': document.location.href,
+        '邮箱': email
+      });
+      
       showToast('订阅成功！感谢您的关注');
       e.target.reset();
     }

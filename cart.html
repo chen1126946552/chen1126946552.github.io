@@ -578,7 +578,13 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
   <script>
-    ptengine.track('购物车',{'事件发生时间戳':Date.now(),'事件发生时间':new Date().toLocaleString(),'事件发生的url':document.location.href});
+    ptengine.track('购物车',{
+      '事件发生时间戳': Date.now(),
+      '事件发生时间': new Date().toLocaleString(),
+      '事件发生的url': document.location.href,
+      '页面标题': document.title,
+      '来源': document.referrer || '直接访问'
+    });
   </script>
 
   <!-- 头部导航 -->
@@ -909,9 +915,11 @@
           '事件发生的url': document.location.href,
           '商品ID': item.id,
           '商品名称': item.name,
-          '商品价格': item.price,
+          '商品实际价格': item.price,
+          '商品原价': item.originalPrice || item.price,
           '增加数量': delta,
-          '当前数量': newQuantity
+          '当前数量': newQuantity,
+          '小计金额': item.price * newQuantity
         });
       } else {
         pushEcommerceEvent('remove_from_cart', {
@@ -930,9 +938,11 @@
           '事件发生的url': document.location.href,
           '商品ID': item.id,
           '商品名称': item.name,
-          '商品价格': item.price,
+          '商品实际价格': item.price,
+          '商品原价': item.originalPrice || item.price,
           '减少数量': Math.abs(delta),
-          '当前数量': newQuantity
+          '当前数量': newQuantity,
+          '小计金额': item.price * newQuantity
         });
       }
       
@@ -988,8 +998,10 @@
         '事件发生的url': document.location.href,
         '商品ID': removedItem.id,
         '商品名称': removedItem.name,
-        '商品价格': removedItem.price,
-        '移除数量': removedItem.quantity
+        '商品实际价格': removedItem.price,
+        '商品原价': removedItem.originalPrice || removedItem.price,
+        '移除数量': removedItem.quantity,
+        '移除金额': removedItem.price * removedItem.quantity
       });
       
       pushEcommerceEvent('remove_from_cart', {
@@ -1037,6 +1049,17 @@
         return;
       }
 
+      const deletedItems = Array.from(selectedItems).map(index => cartItems[index]);
+      
+      ptengine.track('删除选中商品', {
+        '事件发生时间戳': Date.now(),
+        '事件发生时间': new Date().toLocaleString(),
+        '事件发生的url': document.location.href,
+        '删除商品数量': deletedItems.length,
+        '删除商品': deletedItems.map(item => item.name).join(', '),
+        '删除商品总价': deletedItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
+      });
+
       const indices = Array.from(selectedItems).sort((a, b) => b - a);
       indices.forEach(index => {
         cartItems.splice(index, 1);
@@ -1060,6 +1083,14 @@
     // 清空购物车
     function clearCart() {
       if (!confirm('确定要清空购物车吗？')) return;
+      
+      ptengine.track('清空购物车', {
+        '事件发生时间戳': Date.now(),
+        '事件发生时间': new Date().toLocaleString(),
+        '事件发生的url': document.location.href,
+        '清空商品数量': cartItems.length,
+        '清空商品总价': cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
+      });
       
       Cart.clear();
       cartItems = [];

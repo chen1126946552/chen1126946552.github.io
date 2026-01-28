@@ -891,8 +891,9 @@
         '事件发生的url': document.location.href,
         '商品ID': currentProduct.id,
         '商品名称': currentProduct.name,
-        '商品价格': currentProduct.price,
+        '商品实际价格': currentProduct.price,
         '商品原价': currentProduct.originalPrice || currentProduct.price,
+        '折扣率': currentProduct.originalPrice ? Math.round((1 - currentProduct.price / currentProduct.originalPrice) * 100) + '%' : '0%',
         '商品分类': currentProduct.category,
         '商品品牌': currentProduct.brand || '',
         '商品评分': currentProduct.rating,
@@ -1106,8 +1107,11 @@
         '事件发生的url': document.location.href,
         '商品ID': currentProduct.id,
         '商品名称': currentProduct.name,
-        '商品价格': currentProduct.price,
+        '商品实际价格': currentProduct.price,
+        '商品原价': currentProduct.originalPrice || currentProduct.price,
+        '折扣率': currentProduct.originalPrice ? Math.round((1 - currentProduct.price / currentProduct.originalPrice) * 100) + '%' : '0%',
         '购买数量': quantity,
+        '小计金额': currentProduct.price * quantity,
         '颜色': selectedColor || '',
         '尺码': selectedSize || ''
       });
@@ -1131,8 +1135,11 @@
         '事件发生的url': document.location.href,
         '商品ID': currentProduct.id,
         '商品名称': currentProduct.name,
-        '商品价格': currentProduct.price,
+        '商品实际价格': currentProduct.price,
+        '商品原价': currentProduct.originalPrice || currentProduct.price,
+        '折扣率': currentProduct.originalPrice ? Math.round((1 - currentProduct.price / currentProduct.originalPrice) * 100) + '%' : '0%',
         '购买数量': quantity,
+        '小计金额': currentProduct.price * quantity,
         '颜色': selectedColor || '',
         '尺码': selectedSize || ''
       });
@@ -1162,7 +1169,9 @@
         '事件发生的url': document.location.href,
         '商品ID': currentProduct.id,
         '商品名称': currentProduct.name,
-        '商品价格': currentProduct.price,
+        '商品实际价格': currentProduct.price,
+        '商品原价': currentProduct.originalPrice || currentProduct.price,
+        '商品分类': currentProduct.category,
         '操作': isActive ? '收藏' : '取消收藏'
       });
       
