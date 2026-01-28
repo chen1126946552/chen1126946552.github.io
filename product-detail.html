@@ -1006,6 +1006,16 @@
     // 立即购买
     function buyNow() {
       const quantity = parseInt(document.getElementById('quantityInput').value) || 1;
+      const variant = {};
+      
+      if (selectedColor) variant.color = selectedColor;
+      if (selectedSize) variant.size = selectedSize;
+      
+      // 推送 add_to_cart 事件
+      pushEcommerceEvent('add_to_cart', {
+        value: currentProduct.price * quantity,
+        items: [formatProductItem(currentProduct, quantity)]
+      });
       
       // Ptengine 事件追踪
       ptengine.track('立即购买', {
@@ -1015,11 +1025,29 @@
         '商品ID': currentProduct.id,
         '商品名称': currentProduct.name,
         '商品价格': currentProduct.price,
-        '购买数量': quantity
+        '购买数量': quantity,
+        '颜色': selectedColor || '',
+        '尺码': selectedSize || ''
       });
       
-      addToCart();
-      window.location.href = 'cart.html';
+      // 构建结算商品数据
+      const checkoutItem = {
+        id: currentProduct.id,
+        name: currentProduct.name,
+        price: currentProduct.price,
+        image: currentProduct.image,
+        quantity: quantity,
+        variant: variant
+      };
+      
+      // 保存到 sessionStorage 用于结算
+      sessionStorage.setItem('checkoutItems', JSON.stringify([checkoutItem]));
+      
+      // 同时添加到购物车
+      Cart.addItem(currentProduct, quantity, variant);
+      
+      // 直接跳转到结算页面
+      window.location.href = 'checkout.html';
     }
 
     // 收藏

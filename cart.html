@@ -690,8 +690,61 @@
       const newQuantity = cartItems[index].quantity + delta;
       if (newQuantity < 1) return;
       
+      const item = cartItems[index];
+      const oldQuantity = item.quantity;
+      
       cartItems[index].quantity = newQuantity;
       Cart.saveItems(cartItems);
+      
+      // 根据增减发送不同事件
+      if (delta > 0) {
+        // 增加商品 - 发送 add_to_cart 事件
+        pushEcommerceEvent('add_to_cart', {
+          value: item.price * delta,
+          items: [{
+            item_id: item.id,
+            item_name: item.name,
+            price: item.price,
+            quantity: delta
+          }]
+        });
+        
+        // Ptengine 事件追踪
+        ptengine.track('购物车增加商品', {
+          '事件发生时间戳': Date.now(),
+          '事件发生时间': new Date().toLocaleString(),
+          '事件发生的url': document.location.href,
+          '商品ID': item.id,
+          '商品名称': item.name,
+          '商品价格': item.price,
+          '增加数量': delta,
+          '当前数量': newQuantity
+        });
+      } else {
+        // 减少商品 - 发送 remove_from_cart 事件
+        pushEcommerceEvent('remove_from_cart', {
+          value: item.price * Math.abs(delta),
+          items: [{
+            item_id: item.id,
+            item_name: item.name,
+            price: item.price,
+            quantity: Math.abs(delta)
+          }]
+        });
+        
+        // Ptengine 事件追踪
+        ptengine.track('购物车减少商品', {
+          '事件发生时间戳': Date.now(),
+          '事件发生时间': new Date().toLocaleString(),
+          '事件发生的url': document.location.href,
+          '商品ID': item.id,
+          '商品名称': item.name,
+          '商品价格': item.price,
+          '减少数量': Math.abs(delta),
+          '当前数量': newQuantity
+        });
+      }
+      
       renderCartItems();
       updateSummary();
     }
@@ -699,8 +752,64 @@
     // 设置数量
     function setQuantity(index, value) {
       const quantity = Math.max(1, parseInt(value) || 1);
+      const item = cartItems[index];
+      const oldQuantity = item.quantity;
+      const diff = quantity - oldQuantity;
+      
+      if (diff === 0) return;
+      
       cartItems[index].quantity = quantity;
       Cart.saveItems(cartItems);
+      
+      // 根据增减发送不同事件
+      if (diff > 0) {
+        // 增加商品 - 发送 add_to_cart 事件
+        pushEcommerceEvent('add_to_cart', {
+          value: item.price * diff,
+          items: [{
+            item_id: item.id,
+            item_name: item.name,
+            price: item.price,
+            quantity: diff
+          }]
+        });
+        
+        // Ptengine 事件追踪
+        ptengine.track('购物车增加商品', {
+          '事件发生时间戳': Date.now(),
+          '事件发生时间': new Date().toLocaleString(),
+          '事件发生的url': document.location.href,
+          '商品ID': item.id,
+          '商品名称': item.name,
+          '商品价格': item.price,
+          '增加数量': diff,
+          '当前数量': quantity
+        });
+      } else {
+        // 减少商品 - 发送 remove_from_cart 事件
+        pushEcommerceEvent('remove_from_cart', {
+          value: item.price * Math.abs(diff),
+          items: [{
+            item_id: item.id,
+            item_name: item.name,
+            price: item.price,
+            quantity: Math.abs(diff)
+          }]
+        });
+        
+        // Ptengine 事件追踪
+        ptengine.track('购物车减少商品', {
+          '事件发生时间戳': Date.now(),
+          '事件发生时间': new Date().toLocaleString(),
+          '事件发生的url': document.location.href,
+          '商品ID': item.id,
+          '商品名称': item.name,
+          '商品价格': item.price,
+          '减少数量': Math.abs(diff),
+          '当前数量': quantity
+        });
+      }
+      
       renderCartItems();
       updateSummary();
     }
