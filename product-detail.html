@@ -926,12 +926,18 @@
 
       document.getElementById('productDesc').textContent = p.description;
 
+      // 从 URL 参数读取预选的 SKU
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlColor = urlParams.get('color');
+      const urlSize = urlParams.get('size');
+
       if (p.colors && p.colors.length > 0) {
         document.getElementById('colorSection').style.display = 'block';
-        selectedColor = p.colors[0];
+        // 优先使用 URL 参数中的颜色，否则使用第一个
+        selectedColor = (urlColor && p.colors.includes(urlColor)) ? urlColor : p.colors[0];
         document.getElementById('selectedColor').textContent = selectedColor;
-        document.getElementById('colorOptions').innerHTML = p.colors.map((color, i) => `
-          <div class="option-item ${i === 0 ? 'active' : ''}" onclick="selectColor('${color}', this)">
+        document.getElementById('colorOptions').innerHTML = p.colors.map((color) => `
+          <div class="option-item ${color === selectedColor ? 'active' : ''}" onclick="selectColor('${color}', this)">
             ${color}
           </div>
         `).join('');
@@ -939,14 +945,18 @@
 
       if (p.sizes && p.sizes.length > 0) {
         document.getElementById('sizeSection').style.display = 'block';
-        selectedSize = p.sizes[0];
+        // 优先使用 URL 参数中的尺码，否则使用第一个
+        selectedSize = (urlSize && p.sizes.includes(urlSize)) ? urlSize : p.sizes[0];
         document.getElementById('selectedSize').textContent = selectedSize;
-        document.getElementById('sizeOptions').innerHTML = p.sizes.map((size, i) => `
-          <div class="option-item ${i === 0 ? 'active' : ''}" onclick="selectSize('${size}', this)">
+        document.getElementById('sizeOptions').innerHTML = p.sizes.map((size) => `
+          <div class="option-item ${size === selectedSize ? 'active' : ''}" onclick="selectSize('${size}', this)">
             ${size}
           </div>
         `).join('');
       }
+      
+      // 初始化时同步 URL 参数（确保 URL 中包含当前选中的 SKU）
+      updateUrlParams();
 
       const stockInfo = document.getElementById('stockInfo');
       if (p.stock < 10) {
@@ -1076,6 +1086,9 @@
       });
       el.classList.add('active');
       
+      // 更新 URL 参数
+      updateUrlParams();
+      
       // 埋点：选择颜色
       PtTracking.trackSelectVariant(currentProduct, '颜色', color);
     }
@@ -1088,8 +1101,32 @@
       });
       el.classList.add('active');
       
+      // 更新 URL 参数
+      updateUrlParams();
+      
       // 埋点：选择尺码
       PtTracking.trackSelectVariant(currentProduct, '尺码', size);
+    }
+    
+    function updateUrlParams() {
+      const url = new URL(window.location.href);
+      
+      // 设置颜色参数
+      if (selectedColor) {
+        url.searchParams.set('color', selectedColor);
+      } else {
+        url.searchParams.delete('color');
+      }
+      
+      // 设置尺码参数
+      if (selectedSize) {
+        url.searchParams.set('size', selectedSize);
+      } else {
+        url.searchParams.delete('size');
+      }
+      
+      // 使用 replaceState 更新 URL，不刷新页面也不添加历史记录
+      window.history.replaceState({}, '', url.toString());
     }
 
     function changeQuantity(delta) {

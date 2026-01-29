@@ -1,0 +1,4392 @@
+{
+  "meta": {
+    "version": "2.0.0",
+    "created_at": "2026-01-29",
+    "updated_at": "2026-01-29",
+    "total_questions": 289,
+    "description": "PTmeili 电商数据分析问题标准答案模板（合并版）",
+    "source": "ptengine-analysis-questions.md (220题) + questionq.md (100题) 合并去重",
+    "answer_types": {
+      "numeric": "数值型（访问量、时长等）",
+      "percentage": "百分比型",
+      "ranking": "排名/列表型（Top N）",
+      "comparison": "对比型（A vs B）",
+      "distribution": "分布型（各项占比）",
+      "trend": "趋势型（上升/下降/持平）",
+      "boolean": "是否型",
+      "descriptive": "描述型（需要人工判断）"
+    }
+  },
+  "questions": [
+    {
+      "id": 1,
+      "category": "流量与获客",
+      "subcategory": "流量概览",
+      "question": "过去30天，网站的总访问量是多少？日均访问量是多少？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "total_visits": null,
+        "daily_avg": null
+      },
+      "unit": "次",
+      "tolerance": 0,
+      "data_source": "PTengine流量概览",
+      "notes": ""
+    },
+    {
+      "id": 2,
+      "category": "流量与获客",
+      "subcategory": "流量概览",
+      "question": "流量主要来自哪些渠道？各渠道占比是多少？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "channels": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine渠道分析",
+      "notes": "channels数组格式: [{\"name\": \"渠道名\", \"visits\": 数值, \"percentage\": 百分比}]"
+    },
+    {
+      "id": 3,
+      "category": "流量与获客",
+      "subcategory": "流量概览",
+      "question": "各渠道（utm_source）带来的用户数量和转化率分别是多少？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "channels": []
+      },
+      "unit": "人/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine渠道分析",
+      "notes": "channels数组格式: [{\"utm_source\": \"来源\", \"users\": 数值, \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 4,
+      "category": "流量与获客",
+      "subcategory": "流量概览",
+      "question": "哪个广告渠道带来的用户最多？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "top_channel": null,
+        "users": null
+      },
+      "unit": "人",
+      "tolerance": 0,
+      "data_source": "PTengine广告渠道分析",
+      "notes": ""
+    },
+    {
+      "id": 5,
+      "category": "流量与获客",
+      "subcategory": "流量概览",
+      "question": "哪个广告渠道（initial_ad_source）的 ROI 最高？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "top_channel": null,
+        "roi": null,
+        "cost": null,
+        "revenue": null
+      },
+      "unit": "",
+      "tolerance": 0.01,
+      "data_source": "PTengine广告ROI分析",
+      "notes": ""
+    },
+    {
+      "id": 6,
+      "category": "流量与获客",
+      "subcategory": "流量概览",
+      "question": "哪个渠道来的用户质量最高（停留时间长、转化率高）？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "best_quality_channel": null,
+        "avg_duration": null,
+        "conversion_rate": null
+      },
+      "unit": "秒/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine渠道质量分析",
+      "notes": ""
+    },
+    {
+      "id": 7,
+      "category": "流量与获客",
+      "subcategory": "流量概览",
+      "question": "直接访问 vs 搜索引擎 vs 社交媒体的用户质量（会话数、停留时间）对比如何？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "direct": {"sessions": null, "avg_duration": null},
+        "search_engine": {"sessions": null, "avg_duration": null},
+        "social_media": {"sessions": null, "avg_duration": null}
+      },
+      "unit": "次/秒",
+      "tolerance": 0.01,
+      "data_source": "PTengine渠道质量分析",
+      "notes": ""
+    },
+    {
+      "id": 8,
+      "category": "流量与获客",
+      "subcategory": "流量概览",
+      "question": "各广告媒介（utm_medium）的获客成本和转化效果对比？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "mediums": []
+      },
+      "unit": "元/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine广告媒介分析",
+      "notes": "mediums数组格式: [{\"utm_medium\": \"媒介\", \"cac\": 数值, \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 9,
+      "category": "流量与获客",
+      "subcategory": "流量概览",
+      "question": "自然搜索和付费搜索带来的流量各占多少？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "organic_search": {"visits": null, "percentage": null},
+        "paid_search": {"visits": null, "percentage": null}
+      },
+      "unit": "次/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine搜索流量分析",
+      "notes": ""
+    },
+    {
+      "id": 10,
+      "category": "流量与获客",
+      "subcategory": "流量概览",
+      "question": "社交媒体（微信、微博、小红书、抖音）各带来多少流量？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "wechat": null,
+        "weibo": null,
+        "xiaohongshu": null,
+        "douyin": null
+      },
+      "unit": "次",
+      "tolerance": 0,
+      "data_source": "PTengine社交媒体分析",
+      "notes": ""
+    },
+    {
+      "id": 11,
+      "category": "流量与获客",
+      "subcategory": "流量概览",
+      "question": "直接访问的用户占比多少？这些用户是怎么知道我们的？",
+      "answer_type": "percentage",
+      "expected_answer": {
+        "direct_visits_percentage": null,
+        "possible_sources": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine直接访问分析",
+      "notes": ""
+    },
+    {
+      "id": 12,
+      "category": "流量与获客",
+      "subcategory": "流量概览",
+      "question": "哪些外部网站给我们带来了流量？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "referral_sites": []
+      },
+      "unit": "次",
+      "tolerance": 0,
+      "data_source": "PTengine引荐来源分析",
+      "notes": "referral_sites数组格式: [{\"site\": \"网站名\", \"visits\": 数值}]"
+    },
+    {
+      "id": 13,
+      "category": "流量与获客",
+      "subcategory": "流量概览",
+      "question": "引荐来源域名（initial_referrer_host）TOP10 分别是哪些？各自带来多少转化？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "top_referrers": []
+      },
+      "unit": "次",
+      "tolerance": 0,
+      "data_source": "PTengine引荐来源分析",
+      "notes": "top_referrers数组格式: [{\"host\": \"域名\", \"visits\": 数值, \"conversions\": 数值}]"
+    },
+    {
+      "id": 14,
+      "category": "流量与获客",
+      "subcategory": "流量概览",
+      "question": "竞品网站有给我们带来流量吗？",
+      "answer_type": "boolean",
+      "expected_answer": {
+        "has_competitor_traffic": null,
+        "competitor_sites": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine引荐来源分析",
+      "notes": ""
+    },
+    {
+      "id": 15,
+      "category": "流量与获客",
+      "subcategory": "流量概览",
+      "question": "搜索引擎里用户搜什么词找到我们的？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "search_keywords": []
+      },
+      "unit": "次",
+      "tolerance": 0,
+      "data_source": "PTengine搜索关键词分析",
+      "notes": "search_keywords数组格式: [{\"keyword\": \"关键词\", \"visits\": 数值}]"
+    },
+    {
+      "id": 16,
+      "category": "流量与获客",
+      "subcategory": "新老用户分析",
+      "question": "新用户和老用户的比例是多少？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "new_users": {"count": null, "percentage": null},
+        "returning_users": {"count": null, "percentage": null}
+      },
+      "unit": "人/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine用户分析",
+      "notes": ""
+    },
+    {
+      "id": 17,
+      "category": "流量与获客",
+      "subcategory": "新老用户分析",
+      "question": "新访客（session_new_visit=true）的转化率与老访客相比如何？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "new_visitor_conversion_rate": null,
+        "returning_visitor_conversion_rate": null,
+        "difference": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine用户分析",
+      "notes": ""
+    },
+    {
+      "id": 18,
+      "category": "流量与获客",
+      "subcategory": "新老用户分析",
+      "question": "新用户主要从哪个渠道来？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "top_channel": null,
+        "new_users": null,
+        "percentage": null
+      },
+      "unit": "人/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine新用户渠道分析",
+      "notes": ""
+    },
+    {
+      "id": 19,
+      "category": "流量与获客",
+      "subcategory": "新老用户分析",
+      "question": "老用户主要从哪个渠道回来？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "top_channel": null,
+        "returning_users": null,
+        "percentage": null
+      },
+      "unit": "人/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine老用户渠道分析",
+      "notes": ""
+    },
+    {
+      "id": 20,
+      "category": "流量与获客",
+      "subcategory": "新老用户分析",
+      "question": "首次访问到首次购买的平均时间间隔是多少？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_days_to_first_purchase": null
+      },
+      "unit": "天",
+      "tolerance": 0.5,
+      "data_source": "PTengine用户转化分析",
+      "notes": ""
+    },
+    {
+      "id": 21,
+      "category": "流量与获客",
+      "subcategory": "新老用户分析",
+      "question": "新用户的首次访问来源渠道分布是什么？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "channels": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine新用户渠道分析",
+      "notes": "channels数组格式: [{\"channel\": \"渠道名\", \"users\": 数值, \"percentage\": 百分比}]"
+    },
+    {
+      "id": 22,
+      "category": "流量与获客",
+      "subcategory": "新老用户分析",
+      "question": "用户首次访问后，平均多久会再次回来？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_return_days": null
+      },
+      "unit": "天",
+      "tolerance": 0.5,
+      "data_source": "PTengine用户回访分析",
+      "notes": ""
+    },
+    {
+      "id": 23,
+      "category": "流量与获客",
+      "subcategory": "新老用户分析",
+      "question": "老用户的回访周期是多少天？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_revisit_cycle_days": null
+      },
+      "unit": "天",
+      "tolerance": 0.5,
+      "data_source": "PTengine用户回访分析",
+      "notes": ""
+    },
+    {
+      "id": 24,
+      "category": "流量与获客",
+      "subcategory": "新老用户分析",
+      "question": "有多少用户只来过一次就再也没回来？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "one_time_visitors": null,
+        "percentage": null
+      },
+      "unit": "人/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine用户留存分析",
+      "notes": ""
+    },
+    {
+      "id": 25,
+      "category": "落地页与首次体验",
+      "subcategory": "",
+      "question": "用户第一次访问最常落在哪个页面？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "top_landing_page": null,
+        "visits": null,
+        "percentage": null
+      },
+      "unit": "次/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine落地页分析",
+      "notes": ""
+    },
+    {
+      "id": 26,
+      "category": "落地页与首次体验",
+      "subcategory": "",
+      "question": "落地页（pv_is_landing_page）的转化效果对比？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "landing_pages": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine落地页分析",
+      "notes": "landing_pages数组格式: [{\"page\": \"页面名\", \"visits\": 数值, \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 27,
+      "category": "落地页与首次体验",
+      "subcategory": "",
+      "question": "不同落地页的跳出率分别是多少？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "landing_pages": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine落地页跳出率分析",
+      "notes": "landing_pages数组格式: [{\"page\": \"页面名\", \"bounce_rate\": 百分比}]"
+    },
+    {
+      "id": 28,
+      "category": "落地页与首次体验",
+      "subcategory": "",
+      "question": "从首页进来的用户和从商品页进来的用户，哪个转化率更高？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "homepage_conversion_rate": null,
+        "product_page_conversion_rate": null,
+        "winner": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine落地页转化分析",
+      "notes": "winner填写'homepage'或'product_page'"
+    },
+    {
+      "id": 29,
+      "category": "落地页与首次体验",
+      "subcategory": "",
+      "question": "落地页加载速度对跳出率影响大吗？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "correlation": null,
+        "slow_page_bounce_rate": null,
+        "fast_page_bounce_rate": null,
+        "conclusion": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine页面性能分析",
+      "notes": "correlation填写'strong'/'moderate'/'weak'"
+    },
+    {
+      "id": 30,
+      "category": "落地页与首次体验",
+      "subcategory": "",
+      "question": "新用户第一次访问平均看几个页面？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_pages_per_session": null
+      },
+      "unit": "页",
+      "tolerance": 0.1,
+      "data_source": "PTengine新用户行为分析",
+      "notes": ""
+    },
+    {
+      "id": 31,
+      "category": "落地页与首次体验",
+      "subcategory": "",
+      "question": "新用户第一次访问最常做的动作是什么？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "top_actions": []
+      },
+      "unit": "次",
+      "tolerance": 0,
+      "data_source": "PTengine新用户行为分析",
+      "notes": "top_actions数组格式: [{\"action\": \"动作名\", \"count\": 数值, \"percentage\": 百分比}]"
+    },
+    {
+      "id": 32,
+      "category": "落地页与首次体验",
+      "subcategory": "",
+      "question": "首次访问就购买的用户占多少？",
+      "answer_type": "percentage",
+      "expected_answer": {
+        "first_visit_purchase_rate": null,
+        "count": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine首次访问转化分析",
+      "notes": ""
+    },
+    {
+      "id": 33,
+      "category": "落地页与首次体验",
+      "subcategory": "",
+      "question": "首次访问就加购但没买的用户有多少？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "count": null,
+        "percentage": null
+      },
+      "unit": "人/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine首次访问行为分析",
+      "notes": ""
+    },
+    {
+      "id": 34,
+      "category": "转化漏斗",
+      "subcategory": "整体漏斗",
+      "question": "从「首页」→「商品详情」→「加入购物车」→「结算」→「购买完成」的各环节转化率是多少？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "funnel_steps": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine转化漏斗",
+      "notes": "funnel_steps数组格式: [{\"step\": \"步骤名\", \"users\": 数值, \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 35,
+      "category": "转化漏斗",
+      "subcategory": "整体漏斗",
+      "question": "整体的访问-购买转化率是多少？",
+      "answer_type": "percentage",
+      "expected_answer": {
+        "overall_conversion_rate": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine转化漏斗",
+      "notes": ""
+    },
+    {
+      "id": 36,
+      "category": "转化漏斗",
+      "subcategory": "整体漏斗",
+      "question": "用户在哪个环节流失最严重？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "highest_drop_step": null,
+        "drop_rate": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine转化漏斗",
+      "notes": ""
+    },
+    {
+      "id": 37,
+      "category": "转化漏斗",
+      "subcategory": "整体漏斗",
+      "question": "流失的用户有什么共同特征？是某个地区？某种设备？某个渠道？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "common_features": [],
+        "top_region": null,
+        "top_device": null,
+        "top_channel": null
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine流失用户分析",
+      "notes": ""
+    },
+    {
+      "id": 38,
+      "category": "转化漏斗",
+      "subcategory": "整体漏斗",
+      "question": "不同来源渠道用户的漏斗转化率是否有差异？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "channel_funnels": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine渠道漏斗分析",
+      "notes": "channel_funnels数组格式: [{\"channel\": \"渠道名\", \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 39,
+      "category": "转化漏斗",
+      "subcategory": "整体漏斗",
+      "question": "有多少用户浏览了商品但没有加购？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "count": null,
+        "percentage": null
+      },
+      "unit": "人/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine商品浏览分析",
+      "notes": ""
+    },
+    {
+      "id": 40,
+      "category": "转化漏斗",
+      "subcategory": "整体漏斗",
+      "question": "有多少用户加购了但没有去结算？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "count": null,
+        "percentage": null
+      },
+      "unit": "人/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine购物车分析",
+      "notes": ""
+    },
+    {
+      "id": 41,
+      "category": "转化漏斗",
+      "subcategory": "整体漏斗",
+      "question": "有多少用户到了结算页但没有提交订单？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "count": null,
+        "percentage": null
+      },
+      "unit": "人/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine结算页分析",
+      "notes": ""
+    },
+    {
+      "id": 42,
+      "category": "转化漏斗",
+      "subcategory": "整体漏斗",
+      "question": "有多少用户提交订单后支付失败了？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "count": null,
+        "percentage": null
+      },
+      "unit": "人/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine支付分析",
+      "notes": ""
+    },
+    {
+      "id": 43,
+      "category": "转化漏斗",
+      "subcategory": "购物车分析",
+      "question": "购物车放弃率是多少？（有「加入购物车」但没有「购买完成」的用户比例）",
+      "answer_type": "percentage",
+      "expected_answer": {
+        "cart_abandonment_rate": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine购物车分析",
+      "notes": ""
+    },
+    {
+      "id": 44,
+      "category": "转化漏斗",
+      "subcategory": "购物车分析",
+      "question": "用户平均在购物车停留多长时间后才去结算？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_duration_seconds": null
+      },
+      "unit": "秒",
+      "tolerance": 5,
+      "data_source": "PTengine购物车页面分析",
+      "notes": ""
+    },
+    {
+      "id": 45,
+      "category": "转化漏斗",
+      "subcategory": "购物车分析",
+      "question": "用户在购物车页面的平均停留时间是多少？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_duration_seconds": null
+      },
+      "unit": "秒",
+      "tolerance": 5,
+      "data_source": "PTengine购物车页面分析",
+      "notes": ""
+    },
+    {
+      "id": 46,
+      "category": "转化漏斗",
+      "subcategory": "购物车分析",
+      "question": "「移除购物车商品」事件最多的商品是哪些？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "most_removed_products": []
+      },
+      "unit": "次",
+      "tolerance": 0,
+      "data_source": "PTengine购物车分析",
+      "notes": "most_removed_products格式: [{\"product_name\": \"商品名\", \"removal_count\": 数值}]"
+    },
+    {
+      "id": 47,
+      "category": "转化漏斗",
+      "subcategory": "购物车分析",
+      "question": "购物车商品数量与最终转化率的关系？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "correlation": null,
+        "cart_size_brackets": [],
+        "conclusion": null
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine购物车分析",
+      "notes": "cart_size_brackets格式: [{\"size\": \"1-2件\", \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 48,
+      "category": "转化漏斗",
+      "subcategory": "购物车分析",
+      "question": "用户平均在购物车里放几件商品？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_items_in_cart": null
+      },
+      "unit": "件",
+      "tolerance": 0.1,
+      "data_source": "PTengine购物车分析",
+      "notes": ""
+    },
+    {
+      "id": 49,
+      "category": "转化漏斗",
+      "subcategory": "购物车分析",
+      "question": "购物车里商品越多，转化率越高吗？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "correlation": null,
+        "cart_size_brackets": [],
+        "conclusion": null
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine购物车分析",
+      "notes": ""
+    },
+    {
+      "id": 50,
+      "category": "转化漏斗",
+      "subcategory": "购物车分析",
+      "question": "用户在购物车页面会修改数量吗？是增加还是减少？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "modify_quantity_percentage": null,
+        "increase_percentage": null,
+        "decrease_percentage": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine购物车分析",
+      "notes": ""
+    },
+    {
+      "id": 51,
+      "category": "转化漏斗",
+      "subcategory": "购物车分析",
+      "question": "用户在购物车停留多久算正常？停太久是不是有问题？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "avg_duration_seconds": null,
+        "normal_range": {"min": null, "max": null},
+        "long_stay_conversion_rate": null,
+        "conclusion": null
+      },
+      "unit": "秒",
+      "tolerance": 5,
+      "data_source": "PTengine购物车分析",
+      "notes": ""
+    },
+    {
+      "id": 52,
+      "category": "转化漏斗",
+      "subcategory": "购物车分析",
+      "question": "购物车里的商品平均放多久才会被购买？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_days_in_cart": null
+      },
+      "unit": "天",
+      "tolerance": 0.5,
+      "data_source": "PTengine购物车分析",
+      "notes": ""
+    },
+    {
+      "id": 53,
+      "category": "转化漏斗",
+      "subcategory": "购物车分析",
+      "question": "有多少商品在购物车里放了超过7天还没买？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "count": null,
+        "percentage": null
+      },
+      "unit": "件/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine购物车分析",
+      "notes": ""
+    },
+    {
+      "id": 54,
+      "category": "转化漏斗",
+      "subcategory": "购物车分析",
+      "question": "用户会清空购物车吗？什么情况下会清空？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "clear_cart_percentage": null,
+        "common_scenarios": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine购物车分析",
+      "notes": ""
+    },
+    {
+      "id": 55,
+      "category": "转化漏斗",
+      "subcategory": "购物车分析",
+      "question": "购物车金额和最终成交金额差多少？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "avg_cart_value": null,
+        "avg_order_value": null,
+        "difference": null,
+        "difference_percentage": null
+      },
+      "unit": "元/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine购物车分析",
+      "notes": ""
+    },
+    {
+      "id": 56,
+      "category": "转化漏斗",
+      "subcategory": "结算流程分析",
+      "question": "从「去结算」到「提交订单」的转化率是多少？",
+      "answer_type": "percentage",
+      "expected_answer": {
+        "checkout_conversion_rate": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine结算流程分析",
+      "notes": ""
+    },
+    {
+      "id": 57,
+      "category": "转化漏斗",
+      "subcategory": "结算流程分析",
+      "question": "结算放弃率是多少？",
+      "answer_type": "percentage",
+      "expected_answer": {
+        "checkout_abandonment_rate": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine结算分析",
+      "notes": ""
+    },
+    {
+      "id": 58,
+      "category": "转化漏斗",
+      "subcategory": "结算流程分析",
+      "question": "结算页面的跳出率是多少？",
+      "answer_type": "percentage",
+      "expected_answer": {
+        "checkout_bounce_rate": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine结算分析",
+      "notes": ""
+    },
+    {
+      "id": 59,
+      "category": "转化漏斗",
+      "subcategory": "结算流程分析",
+      "question": "从点击「去结算」到「提交订单」，平均需要多长时间？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_duration_seconds": null
+      },
+      "unit": "秒",
+      "tolerance": 5,
+      "data_source": "PTengine结算流程分析",
+      "notes": ""
+    },
+    {
+      "id": 60,
+      "category": "转化漏斗",
+      "subcategory": "结算流程分析",
+      "question": "用户在结算页面填写信息的平均时长？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_duration_seconds": null
+      },
+      "unit": "秒",
+      "tolerance": 5,
+      "data_source": "PTengine表单分析",
+      "notes": ""
+    },
+    {
+      "id": 61,
+      "category": "转化漏斗",
+      "subcategory": "结算流程分析",
+      "question": "结算页面哪一步流失的人最多？填地址？选配送？还是选支付？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "highest_drop_step": null,
+        "drop_rate": null,
+        "steps_breakdown": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine结算流程分析",
+      "notes": "steps_breakdown格式: [{\"step\": \"步骤名\", \"drop_rate\": 百分比}]"
+    },
+    {
+      "id": 62,
+      "category": "转化漏斗",
+      "subcategory": "结算流程分析",
+      "question": "用户填写收货信息平均需要多长时间？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_duration_seconds": null
+      },
+      "unit": "秒",
+      "tolerance": 5,
+      "data_source": "PTengine表单分析",
+      "notes": ""
+    },
+    {
+      "id": 63,
+      "category": "转化漏斗",
+      "subcategory": "结算流程分析",
+      "question": "有多少用户在结算页面来回修改信息？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "count": null,
+        "percentage": null
+      },
+      "unit": "人/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine表单分析",
+      "notes": ""
+    },
+    {
+      "id": 64,
+      "category": "商品表现",
+      "subcategory": "商品基础指标",
+      "question": "哪些商品浏览量最高？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "top_products": []
+      },
+      "unit": "次",
+      "tolerance": 0,
+      "data_source": "PTengine商品分析",
+      "notes": "top_products数组格式: [{\"product_name\": \"商品名\", \"product_id\": \"ID\", \"views\": 数值}]"
+    },
+    {
+      "id": 65,
+      "category": "商品表现",
+      "subcategory": "商品基础指标",
+      "question": "哪些商品加购量最高？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "top_products": []
+      },
+      "unit": "次",
+      "tolerance": 0,
+      "data_source": "PTengine商品分析",
+      "notes": "top_products数组格式: [{\"product_name\": \"商品名\", \"product_id\": \"ID\", \"add_to_cart\": 数值}]"
+    },
+    {
+      "id": 66,
+      "category": "商品表现",
+      "subcategory": "商品基础指标",
+      "question": "哪些商品销量最高？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "top_products": []
+      },
+      "unit": "件",
+      "tolerance": 0,
+      "data_source": "PTengine商品分析",
+      "notes": "top_products数组格式: [{\"product_name\": \"商品名\", \"product_id\": \"ID\", \"sales\": 数值}]"
+    },
+    {
+      "id": 67,
+      "category": "商品表现",
+      "subcategory": "商品基础指标",
+      "question": "哪些商品的「商品详情」浏览量高但「加入购物车」率低？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "products": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine商品转化分析",
+      "notes": "products格式: [{\"product_name\": \"商品名\", \"views\": 数值, \"add_to_cart_rate\": 百分比}]"
+    },
+    {
+      "id": 68,
+      "category": "商品表现",
+      "subcategory": "商品基础指标",
+      "question": "哪些商品的「加入购物车」率高但最终购买率低？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "products": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine商品转化分析",
+      "notes": "products格式: [{\"product_name\": \"商品名\", \"add_to_cart_rate\": 百分比, \"purchase_rate\": 百分比}]"
+    },
+    {
+      "id": 69,
+      "category": "商品表现",
+      "subcategory": "商品基础指标",
+      "question": "哪些商品转化率特别高？有什么可以借鉴的？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "top_converting_products": [],
+        "success_factors": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine商品转化分析",
+      "notes": ""
+    },
+    {
+      "id": 70,
+      "category": "商品表现",
+      "subcategory": "商品基础指标",
+      "question": "哪些商品转化率特别低？问题出在哪？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "low_converting_products": [],
+        "problem_analysis": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine商品转化分析",
+      "notes": ""
+    },
+    {
+      "id": 71,
+      "category": "商品表现",
+      "subcategory": "商品分类分析",
+      "question": "哪个商品分类卖得最好？哪个最差？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "best_category": {"name": null, "sales": null},
+        "worst_category": {"name": null, "sales": null}
+      },
+      "unit": "件",
+      "tolerance": 0,
+      "data_source": "PTengine分类分析",
+      "notes": ""
+    },
+    {
+      "id": 72,
+      "category": "商品表现",
+      "subcategory": "商品分类分析",
+      "question": "不同商品分类（电子产品、服装、家居、配饰）的转化率对比？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "categories": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine分类分析",
+      "notes": "categories格式: [{\"category\": \"分类名\", \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 73,
+      "category": "商品表现",
+      "subcategory": "商品分类分析",
+      "question": "各分类的浏览量和销量匹配吗？有没有看的人多买的人少的分类？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "categories": [],
+        "mismatched_categories": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine分类分析",
+      "notes": "categories格式: [{\"name\": \"分类名\", \"views\": 数值, \"sales\": 数值, \"view_to_sale_ratio\": 比值}]"
+    },
+    {
+      "id": 74,
+      "category": "商品表现",
+      "subcategory": "价格与折扣分析",
+      "question": "打折商品和原价商品，哪个转化率更高？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "discounted_conversion_rate": null,
+        "original_price_conversion_rate": null,
+        "winner": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine促销分析",
+      "notes": "winner填写'discounted'或'original_price'"
+    },
+    {
+      "id": 75,
+      "category": "商品表现",
+      "subcategory": "价格与折扣分析",
+      "question": "折扣率与购买转化率的关系是什么？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "correlation": null,
+        "discount_brackets": [],
+        "conclusion": null
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine促销分析",
+      "notes": "discount_brackets格式: [{\"range\": \"0-10%\", \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 76,
+      "category": "商品表现",
+      "subcategory": "价格与折扣分析",
+      "question": "折扣力度和转化率是什么关系？是不是折扣越大越好卖？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "correlation": null,
+        "discount_brackets": [],
+        "conclusion": null
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine促销分析",
+      "notes": ""
+    },
+    {
+      "id": 77,
+      "category": "商品表现",
+      "subcategory": "价格与折扣分析",
+      "question": "什么价格区间的商品最好卖？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "best_price_range": null,
+        "price_brackets": []
+      },
+      "unit": "元",
+      "tolerance": 0,
+      "data_source": "PTengine价格分析",
+      "notes": "price_brackets格式: [{\"range\": \"0-100\", \"sales\": 数值, \"percentage\": 百分比}]"
+    },
+    {
+      "id": 78,
+      "category": "商品表现",
+      "subcategory": "价格与折扣分析",
+      "question": "不同价格区间商品的转化率分布？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "price_brackets": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine价格分析",
+      "notes": "price_brackets格式: [{\"range\": \"0-100\", \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 79,
+      "category": "商品表现",
+      "subcategory": "价格与折扣分析",
+      "question": "高价商品和低价商品的用户群体有什么不同？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "high_price_user_profile": {},
+        "low_price_user_profile": {},
+        "key_differences": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine用户画像分析",
+      "notes": ""
+    },
+    {
+      "id": 80,
+      "category": "商品表现",
+      "subcategory": "价格与折扣分析",
+      "question": "优惠券使用率是多少？使用优惠券的订单平均金额？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "coupon_usage_rate": null,
+        "avg_order_value_with_coupon": null
+      },
+      "unit": "%/元",
+      "tolerance": 0.01,
+      "data_source": "PTengine优惠券分析",
+      "notes": ""
+    },
+    {
+      "id": 81,
+      "category": "商品表现",
+      "subcategory": "商品组合与关联分析",
+      "question": "哪些商品经常被一起购买？（购物篮分析）",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "product_pairs": []
+      },
+      "unit": "次",
+      "tolerance": 0,
+      "data_source": "PTengine关联分析",
+      "notes": "product_pairs格式: [{\"product_a\": \"商品A\", \"product_b\": \"商品B\", \"co_purchase_count\": 数值}]"
+    },
+    {
+      "id": 82,
+      "category": "商品表现",
+      "subcategory": "商品组合与关联分析",
+      "question": "买了A商品的用户，最常还会买什么？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "product_recommendations": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine关联分析",
+      "notes": "product_recommendations格式: [{\"base_product\": \"商品A\", \"recommended_products\": [\"商品B\", \"商品C\"]}]"
+    },
+    {
+      "id": 83,
+      "category": "商品表现",
+      "subcategory": "商品组合与关联分析",
+      "question": "用户浏览商品A后，最常浏览的下一个商品是什么？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "browse_sequences": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine浏览路径分析",
+      "notes": "browse_sequences格式: [{\"from_product\": \"商品A\", \"to_products\": [\"商品B\", \"商品C\"]}]"
+    },
+    {
+      "id": 84,
+      "category": "商品表现",
+      "subcategory": "商品组合与关联分析",
+      "question": "用户最常从购物车里删除的是哪些商品？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "most_removed_products": []
+      },
+      "unit": "次",
+      "tolerance": 0,
+      "data_source": "PTengine购物车分析",
+      "notes": "most_removed_products格式: [{\"product_name\": \"商品名\", \"removal_count\": 数值}]"
+    },
+    {
+      "id": 85,
+      "category": "商品表现",
+      "subcategory": "商品组合与关联分析",
+      "question": "被删除最多的商品有什么共同点？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "common_features": [],
+        "analysis": null
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine购物车分析",
+      "notes": ""
+    },
+    {
+      "id": 86,
+      "category": "商品表现",
+      "subcategory": "商品标签与属性影响",
+      "question": "热卖标签（isHot）和新品标签（isNew）的转化率对比？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "hot_tag_conversion_rate": null,
+        "new_tag_conversion_rate": null,
+        "winner": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine标签效果分析",
+      "notes": "winner填写'hot'或'new'"
+    },
+    {
+      "id": 87,
+      "category": "商品表现",
+      "subcategory": "商品标签与属性影响",
+      "question": "热卖标签和新品标签，哪个对转化帮助更大？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "hot_sale_tag_conversion_rate": null,
+        "new_arrival_tag_conversion_rate": null,
+        "winner": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine标签效果分析",
+      "notes": "winner填写'hot_sale'或'new_arrival'"
+    },
+    {
+      "id": 88,
+      "category": "商品表现",
+      "subcategory": "商品标签与属性影响",
+      "question": "商品评分（商品评分字段）与购买转化率的关系？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "correlation": null,
+        "rating_brackets": [],
+        "conclusion": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine评价分析",
+      "notes": "correlation填写'strong'/'moderate'/'weak'"
+    },
+    {
+      "id": 89,
+      "category": "商品表现",
+      "subcategory": "商品标签与属性影响",
+      "question": "评价数量对购买决策影响大吗？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "correlation": null,
+        "many_reviews_conversion_rate": null,
+        "few_reviews_conversion_rate": null,
+        "conclusion": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine评价分析",
+      "notes": "correlation填写'strong'/'moderate'/'weak'"
+    },
+    {
+      "id": 90,
+      "category": "商品表现",
+      "subcategory": "商品标签与属性影响",
+      "question": "库存紧张提示（仅剩X件）对转化有帮助吗？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "has_effect": null,
+        "with_urgency_conversion_rate": null,
+        "without_urgency_conversion_rate": null,
+        "conclusion": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine紧迫感分析",
+      "notes": ""
+    },
+    {
+      "id": 91,
+      "category": "商品表现",
+      "subcategory": "商品标签与属性影响",
+      "question": "商品详情页的哪些信息用户最关注？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "attention_areas": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine热图分析",
+      "notes": "attention_areas格式: [{\"area\": \"区域名\", \"attention_score\": 分数, \"click_count\": 数值}]"
+    },
+    {
+      "id": 92,
+      "category": "用户浏览行为",
+      "subcategory": "页面浏览指标",
+      "question": "用户在网站上平均浏览几个页面？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_pages_per_session": null
+      },
+      "unit": "页",
+      "tolerance": 0.1,
+      "data_source": "PTengine会话分析",
+      "notes": ""
+    },
+    {
+      "id": 93,
+      "category": "用户浏览行为",
+      "subcategory": "页面浏览指标",
+      "question": "平均每个会话的页面浏览数是多少？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_pages_per_session": null
+      },
+      "unit": "页",
+      "tolerance": 0.1,
+      "data_source": "PTengine会话分析",
+      "notes": ""
+    },
+    {
+      "id": 94,
+      "category": "用户浏览行为",
+      "subcategory": "页面浏览指标",
+      "question": "从首页到购买完成，用户平均需要浏览多少个页面？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_pages_to_purchase": null
+      },
+      "unit": "页",
+      "tolerance": 0.5,
+      "data_source": "PTengine购买路径分析",
+      "notes": ""
+    },
+    {
+      "id": 95,
+      "category": "用户浏览行为",
+      "subcategory": "页面浏览指标",
+      "question": "用户平均每次访问停留多长时间？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_session_duration_seconds": null
+      },
+      "unit": "秒",
+      "tolerance": 5,
+      "data_source": "PTengine会话分析",
+      "notes": ""
+    },
+    {
+      "id": 96,
+      "category": "用户浏览行为",
+      "subcategory": "页面浏览指标",
+      "question": "会话停留时间（session_visit_stay_time）与转化率的关系？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "correlation": null,
+        "duration_brackets": [],
+        "conclusion": null
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine会话分析",
+      "notes": "duration_brackets格式: [{\"range\": \"0-30秒\", \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 97,
+      "category": "用户浏览行为",
+      "subcategory": "页面浏览指标",
+      "question": "哪些页面的停留时间最长？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "top_pages": []
+      },
+      "unit": "秒",
+      "tolerance": 5,
+      "data_source": "PTengine页面分析",
+      "notes": "top_pages格式: [{\"page\": \"页面名\", \"avg_duration_seconds\": 数值}]"
+    },
+    {
+      "id": 98,
+      "category": "用户浏览行为",
+      "subcategory": "跳出与退出分析",
+      "question": "哪些页面的跳出率（session_bounce）最高？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "high_bounce_pages": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine页面分析",
+      "notes": "high_bounce_pages格式: [{\"page\": \"页面名\", \"bounce_rate\": 百分比}]"
+    },
+    {
+      "id": 99,
+      "category": "用户浏览行为",
+      "subcategory": "跳出与退出分析",
+      "question": "哪些页面是用户最常离开网站的页面？（退出页分析）",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "exit_pages": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine页面分析",
+      "notes": "exit_pages格式: [{\"page\": \"页面名\", \"exit_rate\": 百分比}]"
+    },
+    {
+      "id": 100,
+      "category": "用户浏览行为",
+      "subcategory": "跳出与退出分析",
+      "question": "首屏流失（pv_first_screen_churn）率最高的页面是哪些？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "high_churn_pages": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine页面分析",
+      "notes": "high_churn_pages格式: [{\"page\": \"页面名\", \"first_screen_churn_rate\": 百分比}]"
+    },
+    {
+      "id": 101,
+      "category": "用户浏览行为",
+      "subcategory": "浏览路径分析",
+      "question": "用户最常走的浏览路径是什么？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "top_paths": []
+      },
+      "unit": "次",
+      "tolerance": 0,
+      "data_source": "PTengine路径分析",
+      "notes": "top_paths格式: [{\"path\": [\"页面1\", \"页面2\", \"页面3\"], \"count\": 数值}]"
+    },
+    {
+      "id": 102,
+      "category": "用户浏览行为",
+      "subcategory": "浏览路径分析",
+      "question": "购买用户和未购买用户的浏览路径有什么不同？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "purchaser_common_paths": [],
+        "non_purchaser_common_paths": [],
+        "key_differences": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine路径分析",
+      "notes": ""
+    },
+    {
+      "id": 103,
+      "category": "用户浏览行为",
+      "subcategory": "浏览路径分析",
+      "question": "会话访问深度（session_visit_depth）与购买转化的关系？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "correlation": null,
+        "depth_brackets": [],
+        "conclusion": null
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine会话分析",
+      "notes": "depth_brackets格式: [{\"depth\": \"1-3页\", \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 104,
+      "category": "用户浏览行为",
+      "subcategory": "页面交互分析",
+      "question": "商品详情页用户平均滚动到页面的百分之多少？",
+      "answer_type": "percentage",
+      "expected_answer": {
+        "avg_scroll_depth": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine滚动分析",
+      "notes": ""
+    },
+    {
+      "id": 105,
+      "category": "用户浏览行为",
+      "subcategory": "页面交互分析",
+      "question": "商品详情页的平均滚动深度（pv_scroll_max）是多少？",
+      "answer_type": "percentage",
+      "expected_answer": {
+        "avg_scroll_max": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine滚动分析",
+      "notes": ""
+    },
+    {
+      "id": 106,
+      "category": "用户浏览行为",
+      "subcategory": "页面交互分析",
+      "question": "有多少用户看完了整个商品详情页？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "count": null,
+        "percentage": null
+      },
+      "unit": "人/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine滚动分析",
+      "notes": ""
+    },
+    {
+      "id": 107,
+      "category": "用户浏览行为",
+      "subcategory": "页面交互分析",
+      "question": "用户在商品详情页最常点击什么？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "top_clicked_elements": []
+      },
+      "unit": "次",
+      "tolerance": 0,
+      "data_source": "PTengine热图分析",
+      "notes": "top_clicked_elements格式: [{\"element\": \"元素名\", \"clicks\": 数值}]"
+    },
+    {
+      "id": 108,
+      "category": "用户浏览行为",
+      "subcategory": "页面交互分析",
+      "question": "页面点击次数（pv_click_count）与转化率的关系？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "correlation": null,
+        "click_brackets": [],
+        "conclusion": null
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine点击分析",
+      "notes": "click_brackets格式: [{\"range\": \"0-5次\", \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 109,
+      "category": "用户浏览行为",
+      "subcategory": "页面交互分析",
+      "question": "用户会看商品评价吗？看评价的用户转化率更高吗？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "view_reviews_percentage": null,
+        "viewers_conversion_rate": null,
+        "non_viewers_conversion_rate": null,
+        "conclusion": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine行为分析",
+      "notes": ""
+    },
+    {
+      "id": 110,
+      "category": "用户浏览行为",
+      "subcategory": "页面交互分析",
+      "question": "用户会看商品规格参数吗？",
+      "answer_type": "percentage",
+      "expected_answer": {
+        "view_specs_percentage": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine行为分析",
+      "notes": ""
+    },
+    {
+      "id": 111,
+      "category": "用户浏览行为",
+      "subcategory": "页面交互分析",
+      "question": "用户一般看几个商品详情页才会下单？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_product_pages_before_purchase": null
+      },
+      "unit": "页",
+      "tolerance": 0.5,
+      "data_source": "PTengine购买路径分析",
+      "notes": ""
+    },
+    {
+      "id": 112,
+      "category": "用户浏览行为",
+      "subcategory": "页面交互分析",
+      "question": "用户会比较多个商品吗？比较几个？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "compare_users_percentage": null,
+        "avg_products_compared": null
+      },
+      "unit": "个",
+      "tolerance": 0.5,
+      "data_source": "PTengine比较行为分析",
+      "notes": ""
+    },
+    {
+      "id": 113,
+      "category": "用户浏览行为",
+      "subcategory": "页面交互分析",
+      "question": "用户从浏览到加购平均需要多长时间？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_time_to_add_cart_seconds": null
+      },
+      "unit": "秒",
+      "tolerance": 10,
+      "data_source": "PTengine行为分析",
+      "notes": ""
+    },
+    {
+      "id": 114,
+      "category": "用户浏览行为",
+      "subcategory": "页面交互分析",
+      "question": "用户从加购到购买平均需要多长时间？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_time_to_purchase_seconds": null
+      },
+      "unit": "秒",
+      "tolerance": 60,
+      "data_source": "PTengine行为分析",
+      "notes": ""
+    },
+    {
+      "id": 115,
+      "category": "收藏行为",
+      "subcategory": "",
+      "question": "有多少用户使用了收藏功能？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "count": null,
+        "percentage": null
+      },
+      "unit": "人/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine收藏分析",
+      "notes": ""
+    },
+    {
+      "id": 116,
+      "category": "收藏行为",
+      "subcategory": "",
+      "question": "「收藏商品」后实际购买的转化率是多少？",
+      "answer_type": "percentage",
+      "expected_answer": {
+        "favorite_to_purchase_rate": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine收藏分析",
+      "notes": ""
+    },
+    {
+      "id": 117,
+      "category": "收藏行为",
+      "subcategory": "",
+      "question": "从收藏到购买，平均需要多少天？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_days_to_purchase": null
+      },
+      "unit": "天",
+      "tolerance": 0.5,
+      "data_source": "PTengine收藏分析",
+      "notes": ""
+    },
+    {
+      "id": 118,
+      "category": "收藏行为",
+      "subcategory": "",
+      "question": "哪些商品被收藏最多？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "most_favorited_products": []
+      },
+      "unit": "次",
+      "tolerance": 0,
+      "data_source": "PTengine收藏分析",
+      "notes": "most_favorited_products格式: [{\"product_name\": \"商品名\", \"favorite_count\": 数值}]"
+    },
+    {
+      "id": 119,
+      "category": "收藏行为",
+      "subcategory": "",
+      "question": "哪些商品被收藏多但购买少？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "products": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine收藏分析",
+      "notes": "products格式: [{\"product_name\": \"商品名\", \"favorite_count\": 数值, \"purchase_count\": 数值, \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 120,
+      "category": "收藏行为",
+      "subcategory": "",
+      "question": "收藏后取消收藏的比例是多少？",
+      "answer_type": "percentage",
+      "expected_answer": {
+        "unfavorite_rate": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine收藏分析",
+      "notes": ""
+    },
+    {
+      "id": 121,
+      "category": "收藏行为",
+      "subcategory": "",
+      "question": "用户一般会收藏几个商品？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_favorites_per_user": null
+      },
+      "unit": "个",
+      "tolerance": 0.5,
+      "data_source": "PTengine收藏分析",
+      "notes": ""
+    },
+    {
+      "id": 122,
+      "category": "收藏行为",
+      "subcategory": "",
+      "question": "收藏了商品的用户和没收藏的用户，转化率差多少？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "favorited_users_conversion_rate": null,
+        "non_favorited_users_conversion_rate": null,
+        "difference": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine收藏分析",
+      "notes": ""
+    },
+    {
+      "id": 123,
+      "category": "设备与环境",
+      "subcategory": "设备分析",
+      "question": "PC端和手机端（session_device_type）的用户比例是多少？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "pc": {"count": null, "percentage": null},
+        "mobile": {"count": null, "percentage": null}
+      },
+      "unit": "人/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine设备分析",
+      "notes": ""
+    },
+    {
+      "id": 124,
+      "category": "设备与环境",
+      "subcategory": "设备分析",
+      "question": "PC端和手机端哪个转化率更高？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "pc_conversion_rate": null,
+        "mobile_conversion_rate": null,
+        "winner": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine设备分析",
+      "notes": "winner填写'pc'或'mobile'"
+    },
+    {
+      "id": 125,
+      "category": "设备与环境",
+      "subcategory": "设备分析",
+      "question": "PC端和手机端用户的客单价差多少？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "pc_avg_order_value": null,
+        "mobile_avg_order_value": null,
+        "difference": null
+      },
+      "unit": "元",
+      "tolerance": 1,
+      "data_source": "PTengine设备分析",
+      "notes": ""
+    },
+    {
+      "id": 126,
+      "category": "设备与环境",
+      "subcategory": "设备分析",
+      "question": "手机端用户用什么操作系统？iOS多还是Android多？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "ios": {"count": null, "percentage": null},
+        "android": {"count": null, "percentage": null},
+        "winner": null
+      },
+      "unit": "人/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine设备分析",
+      "notes": "winner填写'ios'或'android'"
+    },
+    {
+      "id": 127,
+      "category": "设备与环境",
+      "subcategory": "设备分析",
+      "question": "不同操作系统（session_operating_system）用户的购买行为差异？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "os_comparison": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine设备分析",
+      "notes": "os_comparison格式: [{\"os\": \"操作系统\", \"conversion_rate\": 百分比, \"avg_order_value\": 数值}]"
+    },
+    {
+      "id": 128,
+      "category": "设备与环境",
+      "subcategory": "设备分析",
+      "question": "iOS用户和Android用户的消费行为有差异吗？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "ios_avg_order_value": null,
+        "android_avg_order_value": null,
+        "ios_conversion_rate": null,
+        "android_conversion_rate": null,
+        "key_differences": []
+      },
+      "unit": "元/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine设备分析",
+      "notes": ""
+    },
+    {
+      "id": 129,
+      "category": "设备与环境",
+      "subcategory": "设备分析",
+      "question": "用户主要用什么浏览器访问？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "browsers": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine浏览器分析",
+      "notes": "browsers格式: [{\"name\": \"浏览器名\", \"count\": 数值, \"percentage\": 百分比}]"
+    },
+    {
+      "id": 130,
+      "category": "设备与环境",
+      "subcategory": "设备分析",
+      "question": "不同浏览器（session_browser）的用户体验是否有差异？有没有兼容性问题？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "browser_metrics": [],
+        "compatibility_issues": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine浏览器分析",
+      "notes": "browser_metrics格式: [{\"browser\": \"浏览器名\", \"bounce_rate\": 百分比, \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 131,
+      "category": "设备与环境",
+      "subcategory": "设备分析",
+      "question": "用户的屏幕分辨率（session_resolution）分布是怎样的？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "resolutions": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine设备分析",
+      "notes": "resolutions格式: [{\"resolution\": \"1920x1080\", \"count\": 数值, \"percentage\": 百分比}]"
+    },
+    {
+      "id": 132,
+      "category": "设备与环境",
+      "subcategory": "设备分析",
+      "question": "不同屏幕分辨率用户的转化率？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "resolution_conversion": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine设备分析",
+      "notes": "resolution_conversion格式: [{\"resolution\": \"分辨率\", \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 133,
+      "category": "设备与环境",
+      "subcategory": "设备分析",
+      "question": "有没有因为屏幕太小导致体验不好的情况？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "small_screen_users_percentage": null,
+        "small_screen_bounce_rate": null,
+        "small_screen_conversion_rate": null,
+        "has_issues": null,
+        "conclusion": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine设备分析",
+      "notes": ""
+    },
+    {
+      "id": 134,
+      "category": "设备与环境",
+      "subcategory": "设备分析",
+      "question": "设备制造商（session_device_maker）和型号对用户行为的影响？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "top_device_makers": [],
+        "device_impact_analysis": null
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine设备分析",
+      "notes": "top_device_makers格式: [{\"maker\": \"制造商\", \"users\": 数值, \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 135,
+      "category": "设备与环境",
+      "subcategory": "网络与性能",
+      "question": "用户的网络环境怎么样？页面加载慢会影响转化吗？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "avg_page_load_time_seconds": null,
+        "slow_load_bounce_rate": null,
+        "fast_load_bounce_rate": null,
+        "correlation": null,
+        "conclusion": null
+      },
+      "unit": "秒/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine性能分析",
+      "notes": "correlation填写'strong'/'moderate'/'weak'"
+    },
+    {
+      "id": 136,
+      "category": "设备与环境",
+      "subcategory": "网络与性能",
+      "question": "页面加载时间（pv_load_time）对跳出率的影响？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "load_time_brackets": [],
+        "correlation": null,
+        "conclusion": null
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine性能分析",
+      "notes": "load_time_brackets格式: [{\"range\": \"0-2秒\", \"bounce_rate\": 百分比}]"
+    },
+    {
+      "id": 137,
+      "category": "地域分析",
+      "subcategory": "",
+      "question": "用户主要分布在哪些城市（session_city）？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "top_cities": []
+      },
+      "unit": "人",
+      "tolerance": 0,
+      "data_source": "PTengine地域分析",
+      "notes": "top_cities格式: [{\"city\": \"城市名\", \"users\": 数值, \"percentage\": 百分比}]"
+    },
+    {
+      "id": 138,
+      "category": "地域分析",
+      "subcategory": "",
+      "question": "哪些城市的用户购买力最强？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "top_cities_by_spending": []
+      },
+      "unit": "元",
+      "tolerance": 1,
+      "data_source": "PTengine地域分析",
+      "notes": "top_cities_by_spending格式: [{\"city\": \"城市名\", \"avg_order_value\": 数值, \"total_revenue\": 数值}]"
+    },
+    {
+      "id": 139,
+      "category": "地域分析",
+      "subcategory": "",
+      "question": "哪些城市的转化率最高？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "top_cities_by_conversion": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine地域分析",
+      "notes": "top_cities_by_conversion格式: [{\"city\": \"城市名\", \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 140,
+      "category": "地域分析",
+      "subcategory": "",
+      "question": "一线城市和其他城市的用户行为有什么差异？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "tier1_cities": {"avg_order_value": null, "conversion_rate": null, "avg_session_duration": null},
+        "other_cities": {"avg_order_value": null, "conversion_rate": null, "avg_session_duration": null},
+        "key_differences": []
+      },
+      "unit": "",
+      "tolerance": 0.01,
+      "data_source": "PTengine地域分析",
+      "notes": ""
+    },
+    {
+      "id": 141,
+      "category": "地域分析",
+      "subcategory": "",
+      "question": "不同省份/地区（session_state）用户的商品偏好是否有差异？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "regional_preferences": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine地域分析",
+      "notes": "regional_preferences格式: [{\"region\": \"地区名\", \"top_categories\": [\"分类1\", \"分类2\"]}]"
+    },
+    {
+      "id": 142,
+      "category": "地域分析",
+      "subcategory": "",
+      "question": "不同国家（session_country）用户的转化率对比？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "countries": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine地域分析",
+      "notes": "countries格式: [{\"country\": \"国家名\", \"users\": 数值, \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 143,
+      "category": "地域分析",
+      "subcategory": "",
+      "question": "南方用户和北方用户的消费习惯有差异吗？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "south": {"avg_order_value": null, "top_categories": [], "conversion_rate": null},
+        "north": {"avg_order_value": null, "top_categories": [], "conversion_rate": null},
+        "key_differences": []
+      },
+      "unit": "",
+      "tolerance": 0.01,
+      "data_source": "PTengine地域分析",
+      "notes": ""
+    },
+    {
+      "id": 144,
+      "category": "地域分析",
+      "subcategory": "",
+      "question": "有没有某些地区流量大但转化低的情况？为什么？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "problem_regions": [],
+        "analysis": null
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine地域分析",
+      "notes": "problem_regions格式: [{\"region\": \"地区名\", \"traffic\": 数值, \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 145,
+      "category": "地域分析",
+      "subcategory": "",
+      "question": "配送覆盖范围对销售有影响吗？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "covered_regions_conversion_rate": null,
+        "uncovered_regions_conversion_rate": null,
+        "has_impact": null,
+        "conclusion": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine地域分析",
+      "notes": ""
+    },
+    {
+      "id": 146,
+      "category": "地域分析",
+      "subcategory": "",
+      "question": "偏远地区的用户会因为运费放弃购买吗？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "remote_region_cart_abandonment_rate": null,
+        "normal_region_cart_abandonment_rate": null,
+        "shipping_related_abandonment_percentage": null,
+        "conclusion": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine地域分析",
+      "notes": ""
+    },
+    {
+      "id": 147,
+      "category": "地域分析",
+      "subcategory": "",
+      "question": "用户时区（session_timezone）与购买高峰时段的关系？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "timezone_distribution": [],
+        "peak_hours_by_timezone": [],
+        "conclusion": null
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine地域分析",
+      "notes": ""
+    },
+    {
+      "id": 148,
+      "category": "支付与配送",
+      "subcategory": "支付方式分析",
+      "question": "用户最常用哪种支付方式？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "top_payment_method": null,
+        "percentage": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine支付分析",
+      "notes": ""
+    },
+    {
+      "id": 149,
+      "category": "支付与配送",
+      "subcategory": "支付方式分析",
+      "question": "支付宝 vs 微信支付 vs 银联 vs 信用卡的使用比例？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "alipay": {"count": null, "percentage": null},
+        "wechat_pay": {"count": null, "percentage": null},
+        "unionpay": {"count": null, "percentage": null},
+        "credit_card": {"count": null, "percentage": null}
+      },
+      "unit": "次/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine支付分析",
+      "notes": ""
+    },
+    {
+      "id": 150,
+      "category": "支付与配送",
+      "subcategory": "支付方式分析",
+      "question": "不同支付方式的订单完成率有差别吗？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "payment_methods": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine支付分析",
+      "notes": "payment_methods格式: [{\"method\": \"支付方式\", \"completion_rate\": 百分比}]"
+    },
+    {
+      "id": 151,
+      "category": "支付与配送",
+      "subcategory": "支付方式分析",
+      "question": "不同支付方式用户的平均订单金额？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "payment_methods": []
+      },
+      "unit": "元",
+      "tolerance": 1,
+      "data_source": "PTengine支付分析",
+      "notes": "payment_methods格式: [{\"method\": \"支付方式\", \"avg_order_value\": 数值}]"
+    },
+    {
+      "id": 152,
+      "category": "支付与配送",
+      "subcategory": "支付方式分析",
+      "question": "支付方式选择与用户设备类型的关系？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "device_payment_preference": [],
+        "conclusion": null
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine支付分析",
+      "notes": "device_payment_preference格式: [{\"device\": \"设备类型\", \"top_payment\": \"支付方式\", \"percentage\": 百分比}]"
+    },
+    {
+      "id": 153,
+      "category": "支付与配送",
+      "subcategory": "支付方式分析",
+      "question": "有没有用户因为没有想要的支付方式而放弃？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "estimated_abandonment_count": null,
+        "requested_payment_methods": [],
+        "conclusion": null
+      },
+      "unit": "人",
+      "tolerance": 0,
+      "data_source": "PTengine支付分析",
+      "notes": ""
+    },
+    {
+      "id": 154,
+      "category": "支付与配送",
+      "subcategory": "配送方式分析",
+      "question": "用户选择「标准配送」vs「快速配送」vs「当日达」的比例？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "standard_delivery": {"count": null, "percentage": null},
+        "express_delivery": {"count": null, "percentage": null},
+        "same_day_delivery": {"count": null, "percentage": null}
+      },
+      "unit": "次/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine配送分析",
+      "notes": ""
+    },
+    {
+      "id": 155,
+      "category": "支付与配送",
+      "subcategory": "配送方式分析",
+      "question": "选择付费快递的用户，订单金额是不是更高？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "paid_delivery_avg_order_value": null,
+        "free_delivery_avg_order_value": null,
+        "is_higher": null
+      },
+      "unit": "元",
+      "tolerance": 1,
+      "data_source": "PTengine配送分析",
+      "notes": ""
+    },
+    {
+      "id": 156,
+      "category": "支付与配送",
+      "subcategory": "配送方式分析",
+      "question": "有多少用户愿意为「当日达」额外付费？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "count": null,
+        "percentage": null
+      },
+      "unit": "人/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine配送分析",
+      "notes": ""
+    },
+    {
+      "id": 157,
+      "category": "支付与配送",
+      "subcategory": "配送方式分析",
+      "question": "不同地区用户的配送方式偏好？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "regional_preferences": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine配送分析",
+      "notes": "regional_preferences格式: [{\"region\": \"地区名\", \"preferred_delivery\": \"配送方式\", \"percentage\": 百分比}]"
+    },
+    {
+      "id": 158,
+      "category": "支付与配送",
+      "subcategory": "配送方式分析",
+      "question": "配送方式选择对订单完成率的影响？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "delivery_completion_rates": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine配送分析",
+      "notes": "delivery_completion_rates格式: [{\"delivery_type\": \"配送方式\", \"completion_rate\": 百分比}]"
+    },
+    {
+      "id": 159,
+      "category": "支付与配送",
+      "subcategory": "配送方式分析",
+      "question": "运费对转化率影响大吗？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "free_shipping_conversion_rate": null,
+        "paid_shipping_conversion_rate": null,
+        "correlation": null,
+        "conclusion": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine配送分析",
+      "notes": "correlation填写'strong'/'moderate'/'weak'"
+    },
+    {
+      "id": 160,
+      "category": "支付与配送",
+      "subcategory": "配送方式分析",
+      "question": "满多少包邮的设置合理吗？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "current_threshold": null,
+        "orders_above_threshold_percentage": null,
+        "avg_order_value": null,
+        "is_reasonable": null,
+        "recommended_threshold": null
+      },
+      "unit": "元/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine配送分析",
+      "notes": ""
+    },
+    {
+      "id": 161,
+      "category": "订单与客单价",
+      "subcategory": "",
+      "question": "平均客单价是多少？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_order_value": null
+      },
+      "unit": "元",
+      "tolerance": 1,
+      "data_source": "PTengine订单分析",
+      "notes": ""
+    },
+    {
+      "id": 162,
+      "category": "订单与客单价",
+      "subcategory": "",
+      "question": "客单价的分布是怎样的？大部分订单在什么价格区间？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "price_brackets": [],
+        "most_common_bracket": null
+      },
+      "unit": "元",
+      "tolerance": 0,
+      "data_source": "PTengine订单分析",
+      "notes": "price_brackets格式: [{\"range\": \"0-100\", \"count\": 数值, \"percentage\": 百分比}]"
+    },
+    {
+      "id": 163,
+      "category": "订单与客单价",
+      "subcategory": "",
+      "question": "客单价有上升还是下降的趋势？",
+      "answer_type": "trend",
+      "expected_answer": {
+        "trend": null,
+        "change_percentage": null,
+        "period": "过去30天"
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine订单分析",
+      "notes": "trend填写'up'/'down'/'stable'"
+    },
+    {
+      "id": 164,
+      "category": "订单与客单价",
+      "subcategory": "",
+      "question": "新用户和老用户的客单价差多少？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "new_user_avg_order_value": null,
+        "returning_user_avg_order_value": null,
+        "difference": null
+      },
+      "unit": "元",
+      "tolerance": 1,
+      "data_source": "PTengine订单分析",
+      "notes": ""
+    },
+    {
+      "id": 165,
+      "category": "订单与客单价",
+      "subcategory": "",
+      "question": "不同渠道来的用户客单价有差异吗？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "channels": []
+      },
+      "unit": "元",
+      "tolerance": 1,
+      "data_source": "PTengine订单分析",
+      "notes": "channels格式: [{\"channel\": \"渠道名\", \"avg_order_value\": 数值}]"
+    },
+    {
+      "id": 166,
+      "category": "订单与客单价",
+      "subcategory": "",
+      "question": "PC端和手机端的客单价差多少？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "pc_avg_order_value": null,
+        "mobile_avg_order_value": null,
+        "difference": null
+      },
+      "unit": "元",
+      "tolerance": 1,
+      "data_source": "PTengine订单分析",
+      "notes": ""
+    },
+    {
+      "id": 167,
+      "category": "订单与客单价",
+      "subcategory": "",
+      "question": "每笔订单平均买几件商品？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_items_per_order": null
+      },
+      "unit": "件",
+      "tolerance": 0.1,
+      "data_source": "PTengine订单分析",
+      "notes": ""
+    },
+    {
+      "id": 168,
+      "category": "订单与客单价",
+      "subcategory": "",
+      "question": "买多件商品的用户占比多少？",
+      "answer_type": "percentage",
+      "expected_answer": {
+        "multi_item_orders_percentage": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine订单分析",
+      "notes": ""
+    },
+    {
+      "id": 169,
+      "category": "订单与客单价",
+      "subcategory": "",
+      "question": "有没有办法提高连带购买率？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "current_cross_sell_rate": null,
+        "recommendations": [],
+        "potential_improvement": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine订单分析",
+      "notes": ""
+    },
+    {
+      "id": 170,
+      "category": "订单与客单价",
+      "subcategory": "",
+      "question": "大促期间客单价会下降吗？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "promotion_avg_order_value": null,
+        "normal_avg_order_value": null,
+        "does_decrease": null,
+        "change_percentage": null
+      },
+      "unit": "元/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine订单分析",
+      "notes": ""
+    },
+    {
+      "id": 171,
+      "category": "用户价值与忠诚度",
+      "subcategory": "复购分析",
+      "question": "用户平均多久会复购一次？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_repurchase_interval_days": null
+      },
+      "unit": "天",
+      "tolerance": 1,
+      "data_source": "PTengine用户分析",
+      "notes": ""
+    },
+    {
+      "id": 172,
+      "category": "用户价值与忠诚度",
+      "subcategory": "复购分析",
+      "question": "用户的平均复购周期是多少？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_repurchase_cycle_days": null
+      },
+      "unit": "天",
+      "tolerance": 1,
+      "data_source": "PTengine用户分析",
+      "notes": ""
+    },
+    {
+      "id": 173,
+      "category": "用户价值与忠诚度",
+      "subcategory": "复购分析",
+      "question": "复购率是多少？",
+      "answer_type": "percentage",
+      "expected_answer": {
+        "repurchase_rate": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine用户分析",
+      "notes": ""
+    },
+    {
+      "id": 174,
+      "category": "用户价值与忠诚度",
+      "subcategory": "复购分析",
+      "question": "复购用户的第二次购买间隔是多久？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_second_purchase_interval_days": null
+      },
+      "unit": "天",
+      "tolerance": 1,
+      "data_source": "PTengine用户分析",
+      "notes": ""
+    },
+    {
+      "id": 175,
+      "category": "用户价值与忠诚度",
+      "subcategory": "用户价值分析",
+      "question": "什么样的用户是高价值用户？他们有什么特征？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "high_value_user_definition": null,
+        "count": null,
+        "percentage": null,
+        "characteristics": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine用户分析",
+      "notes": ""
+    },
+    {
+      "id": 176,
+      "category": "用户价值与忠诚度",
+      "subcategory": "用户价值分析",
+      "question": "高价值用户（total_sessions 高、购买金额高）的特征是什么？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "characteristics": [],
+        "avg_total_sessions": null,
+        "avg_purchase_amount": null
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine用户分析",
+      "notes": ""
+    },
+    {
+      "id": 177,
+      "category": "用户价值与忠诚度",
+      "subcategory": "用户价值分析",
+      "question": "高价值用户（RFM 模型）的画像是什么？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "rfm_segments": [],
+        "high_value_profile": {}
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine用户分析",
+      "notes": ""
+    },
+    {
+      "id": 178,
+      "category": "用户价值与忠诚度",
+      "subcategory": "用户价值分析",
+      "question": "高价值用户主要从哪个渠道来？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "top_channels": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine用户分析",
+      "notes": "top_channels格式: [{\"channel\": \"渠道名\", \"high_value_users\": 数值, \"percentage\": 百分比}]"
+    },
+    {
+      "id": 179,
+      "category": "用户价值与忠诚度",
+      "subcategory": "用户价值分析",
+      "question": "高价值用户最喜欢买什么商品？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "top_products": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine用户分析",
+      "notes": "top_products格式: [{\"product_name\": \"商品名\", \"purchase_count\": 数值}]"
+    },
+    {
+      "id": 180,
+      "category": "用户价值与忠诚度",
+      "subcategory": "用户价值分析",
+      "question": "老用户的生命周期价值是多少？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_ltv": null
+      },
+      "unit": "元",
+      "tolerance": 10,
+      "data_source": "PTengine用户分析",
+      "notes": ""
+    },
+    {
+      "id": 181,
+      "category": "用户价值与忠诚度",
+      "subcategory": "用户价值分析",
+      "question": "用户从第一次访问到成为忠实用户，平均需要多长时间？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_days_to_loyalty": null
+      },
+      "unit": "天",
+      "tolerance": 5,
+      "data_source": "PTengine用户分析",
+      "notes": ""
+    },
+    {
+      "id": 182,
+      "category": "用户价值与忠诚度",
+      "subcategory": "用户价值分析",
+      "question": "忠实用户一般买过几次之后就稳定了？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "avg_purchases_to_stability": null
+      },
+      "unit": "次",
+      "tolerance": 0.5,
+      "data_source": "PTengine用户分析",
+      "notes": ""
+    },
+    {
+      "id": 183,
+      "category": "用户价值与忠诚度",
+      "subcategory": "流失分析",
+      "question": "多少天没来的用户可能已经流失了？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "churn_threshold_days": null,
+        "analysis_basis": null
+      },
+      "unit": "天",
+      "tolerance": 5,
+      "data_source": "PTengine用户分析",
+      "notes": ""
+    },
+    {
+      "id": 184,
+      "category": "用户价值与忠诚度",
+      "subcategory": "流失分析",
+      "question": "用户流失预警：多少天未访问的用户可能流失？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "warning_threshold_days": null,
+        "at_risk_users_count": null
+      },
+      "unit": "天/人",
+      "tolerance": 5,
+      "data_source": "PTengine用户分析",
+      "notes": ""
+    },
+    {
+      "id": 185,
+      "category": "用户价值与忠诚度",
+      "subcategory": "流失分析",
+      "question": "流失用户有什么共同特征？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "common_features": [],
+        "top_churn_reasons": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine用户分析",
+      "notes": ""
+    },
+    {
+      "id": 186,
+      "category": "用户价值与忠诚度",
+      "subcategory": "流失分析",
+      "question": "流失风险用户的特征是什么？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "risk_indicators": [],
+        "at_risk_user_profile": {}
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine用户分析",
+      "notes": ""
+    },
+    {
+      "id": 187,
+      "category": "用户价值与忠诚度",
+      "subcategory": "流失分析",
+      "question": "有没有办法预测哪些用户即将流失？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "prediction_indicators": [],
+        "at_risk_users_count": null,
+        "recommendations": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine用户分析",
+      "notes": ""
+    },
+    {
+      "id": 188,
+      "category": "时间规律",
+      "subcategory": "日内时段分析",
+      "question": "一天中哪个时段访问量最高？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "peak_hour": null,
+        "peak_visits": null
+      },
+      "unit": "时/次",
+      "tolerance": 0,
+      "data_source": "PTengine时间分析",
+      "notes": ""
+    },
+    {
+      "id": 189,
+      "category": "时间规律",
+      "subcategory": "日内时段分析",
+      "question": "一天中哪个时段转化率最高？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "peak_conversion_hour": null,
+        "peak_conversion_rate": null
+      },
+      "unit": "时/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine时间分析",
+      "notes": ""
+    },
+    {
+      "id": 190,
+      "category": "时间规律",
+      "subcategory": "日内时段分析",
+      "question": "访问高峰和转化高峰是同一个时段吗？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "traffic_peak_hour": null,
+        "conversion_peak_hour": null,
+        "is_same": null
+      },
+      "unit": "时",
+      "tolerance": 0,
+      "data_source": "PTengine时间分析",
+      "notes": ""
+    },
+    {
+      "id": 191,
+      "category": "时间规律",
+      "subcategory": "周/月趋势分析",
+      "question": "每日/每周/每月的访问量和订单量趋势？",
+      "answer_type": "trend",
+      "expected_answer": {
+        "daily_trend": null,
+        "weekly_trend": null,
+        "monthly_trend": null,
+        "trend_data": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine时间分析",
+      "notes": ""
+    },
+    {
+      "id": 192,
+      "category": "时间规律",
+      "subcategory": "周/月趋势分析",
+      "question": "周末和工作日的访问量差多少？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "weekday_avg_visits": null,
+        "weekend_avg_visits": null,
+        "difference_percentage": null
+      },
+      "unit": "次/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine时间分析",
+      "notes": ""
+    },
+    {
+      "id": 193,
+      "category": "时间规律",
+      "subcategory": "周/月趋势分析",
+      "question": "周末 vs 工作日的用户行为差异？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "weekday": {"avg_visits": null, "avg_session_duration": null, "conversion_rate": null},
+        "weekend": {"avg_visits": null, "avg_session_duration": null, "conversion_rate": null},
+        "key_differences": []
+      },
+      "unit": "",
+      "tolerance": 0.01,
+      "data_source": "PTengine时间分析",
+      "notes": ""
+    },
+    {
+      "id": 194,
+      "category": "时间规律",
+      "subcategory": "周/月趋势分析",
+      "question": "周末和工作日的转化率差多少？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "weekday_conversion_rate": null,
+        "weekend_conversion_rate": null,
+        "difference": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine时间分析",
+      "notes": ""
+    },
+    {
+      "id": 195,
+      "category": "时间规律",
+      "subcategory": "周/月趋势分析",
+      "question": "每周哪一天的订单量最多？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "peak_day": null,
+        "orders": null
+      },
+      "unit": "单",
+      "tolerance": 0,
+      "data_source": "PTengine时间分析",
+      "notes": ""
+    },
+    {
+      "id": 196,
+      "category": "时间规律",
+      "subcategory": "周/月趋势分析",
+      "question": "月初和月末的用户行为有差异吗？发工资前后有变化吗？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "month_start": {"avg_visits": null, "conversion_rate": null, "avg_order_value": null},
+        "month_end": {"avg_visits": null, "conversion_rate": null, "avg_order_value": null},
+        "has_payday_effect": null,
+        "conclusion": null
+      },
+      "unit": "",
+      "tolerance": 0.01,
+      "data_source": "PTengine时间分析",
+      "notes": ""
+    },
+    {
+      "id": 197,
+      "category": "时间规律",
+      "subcategory": "节假日与季节性",
+      "question": "节假日对销售的影响有多大？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "holiday_avg_sales": null,
+        "normal_avg_sales": null,
+        "change_percentage": null
+      },
+      "unit": "元/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine时间分析",
+      "notes": ""
+    },
+    {
+      "id": 198,
+      "category": "时间规律",
+      "subcategory": "节假日与季节性",
+      "question": "不同商品分类的季节性销售规律？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "seasonal_patterns": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine季节分析",
+      "notes": "seasonal_patterns格式: [{\"category\": \"分类名\", \"peak_season\": \"季节\", \"low_season\": \"季节\"}]"
+    },
+    {
+      "id": 199,
+      "category": "时间规律",
+      "subcategory": "节假日与季节性",
+      "question": "换季对不同品类的销售影响如何？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "seasonal_impact": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine季节分析",
+      "notes": "seasonal_impact格式: [{\"category\": \"分类名\", \"spring\": 数值, \"summer\": 数值, \"autumn\": 数值, \"winter\": 数值}]"
+    },
+    {
+      "id": 200,
+      "category": "时间规律",
+      "subcategory": "促销时段分析",
+      "question": "促销活动期间的流量和转化变化？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "promotion_traffic": null,
+        "normal_traffic": null,
+        "promotion_conversion_rate": null,
+        "normal_conversion_rate": null
+      },
+      "unit": "次/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine促销分析",
+      "notes": ""
+    },
+    {
+      "id": 201,
+      "category": "时间规律",
+      "subcategory": "促销时段分析",
+      "question": "大促前用户会提前加购等待吗？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "pre_promotion_add_to_cart_increase": null,
+        "avg_days_before_promotion": null,
+        "conclusion": null
+      },
+      "unit": "%/天",
+      "tolerance": 0.01,
+      "data_source": "PTengine促销分析",
+      "notes": ""
+    },
+    {
+      "id": 202,
+      "category": "时间规律",
+      "subcategory": "促销时段分析",
+      "question": "大促后会有明显的销售下滑吗？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "post_promotion_sales_change": null,
+        "recovery_days": null,
+        "conclusion": null
+      },
+      "unit": "%/天",
+      "tolerance": 0.01,
+      "data_source": "PTengine促销分析",
+      "notes": ""
+    },
+    {
+      "id": 203,
+      "category": "营销活动效果",
+      "subcategory": "营销活动整体效果",
+      "question": "最近的营销活动带来了多少新用户？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "new_users_from_campaign": null,
+        "campaign_name": null
+      },
+      "unit": "人",
+      "tolerance": 0,
+      "data_source": "PTengine营销分析",
+      "notes": ""
+    },
+    {
+      "id": 204,
+      "category": "营销活动效果",
+      "subcategory": "营销活动整体效果",
+      "question": "营销活动期间的转化率比平时高多少？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "campaign_conversion_rate": null,
+        "normal_conversion_rate": null,
+        "increase_percentage": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine营销分析",
+      "notes": ""
+    },
+    {
+      "id": 205,
+      "category": "营销活动效果",
+      "subcategory": "营销活动整体效果",
+      "question": "营销活动带来的用户质量怎么样？会复购吗？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "campaign_users_repurchase_rate": null,
+        "normal_users_repurchase_rate": null,
+        "quality_assessment": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine营销分析",
+      "notes": "quality_assessment填写'high'/'medium'/'low'"
+    },
+    {
+      "id": 206,
+      "category": "营销活动效果",
+      "subcategory": "营销活动整体效果",
+      "question": "促销活动期间，流量和转化提升了多少？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "traffic_increase_percentage": null,
+        "conversion_increase_percentage": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine促销分析",
+      "notes": ""
+    },
+    {
+      "id": 207,
+      "category": "营销活动效果",
+      "subcategory": "广告效果分析",
+      "question": "各广告活动（utm_campaign）的转化效果对比？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "campaigns": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine广告分析",
+      "notes": "campaigns格式: [{\"campaign\": \"活动名\", \"clicks\": 数值, \"conversions\": 数值, \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 208,
+      "category": "营销活动效果",
+      "subcategory": "广告效果分析",
+      "question": "不同广告素材的点击效果对比如何？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "ad_creatives": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine广告分析",
+      "notes": "ad_creatives格式: [{\"creative_name\": \"素材名\", \"impressions\": 数值, \"clicks\": 数值, \"ctr\": 百分比}]"
+    },
+    {
+      "id": 209,
+      "category": "营销活动效果",
+      "subcategory": "广告效果分析",
+      "question": "不同广告文案的转化效果对比如何？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "ad_copies": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine广告分析",
+      "notes": "ad_copies格式: [{\"copy_name\": \"文案名\", \"clicks\": 数值, \"conversions\": 数值, \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 210,
+      "category": "营销活动效果",
+      "subcategory": "广告效果分析",
+      "question": "广告内容（utm_content）A/B 测试效果？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "variant_a": {"clicks": null, "conversion_rate": null},
+        "variant_b": {"clicks": null, "conversion_rate": null},
+        "winner": null
+      },
+      "unit": "",
+      "tolerance": 0.01,
+      "data_source": "PTengine广告分析",
+      "notes": ""
+    },
+    {
+      "id": 211,
+      "category": "营销活动效果",
+      "subcategory": "广告效果分析",
+      "question": "哪个推广关键词的投入产出比最高？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "top_keywords": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine关键词分析",
+      "notes": "top_keywords格式: [{\"keyword\": \"关键词\", \"cost\": 数值, \"revenue\": 数值, \"roi\": 比值}]"
+    },
+    {
+      "id": 212,
+      "category": "营销活动效果",
+      "subcategory": "广告效果分析",
+      "question": "广告关键词（utm_term）的 ROI 排名？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "keyword_roi_ranking": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine关键词分析",
+      "notes": "keyword_roi_ranking格式: [{\"utm_term\": \"关键词\", \"cost\": 数值, \"revenue\": 数值, \"roi\": 比值}]"
+    },
+    {
+      "id": 213,
+      "category": "营销活动效果",
+      "subcategory": "广告效果分析",
+      "question": "哪个推广渠道的获客成本最低？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "lowest_cac_channel": null,
+        "cac": null,
+        "channels_comparison": []
+      },
+      "unit": "元",
+      "tolerance": 1,
+      "data_source": "PTengine渠道分析",
+      "notes": "channels_comparison格式: [{\"channel\": \"渠道名\", \"cac\": 数值}]"
+    },
+    {
+      "id": 214,
+      "category": "营销活动效果",
+      "subcategory": "广告效果分析",
+      "question": "首次接触渠道 vs 最终转化渠道的归因分析？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "first_touch_attribution": [],
+        "last_touch_attribution": [],
+        "analysis": null
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine归因分析",
+      "notes": ""
+    },
+    {
+      "id": 215,
+      "category": "营销活动效果",
+      "subcategory": "优惠券与促销",
+      "question": "优惠券的使用率是多少？",
+      "answer_type": "percentage",
+      "expected_answer": {
+        "coupon_usage_rate": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine优惠券分析",
+      "notes": ""
+    },
+    {
+      "id": 216,
+      "category": "营销活动效果",
+      "subcategory": "优惠券与促销",
+      "question": "用了优惠券的订单和没用的，客单价差多少？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "with_coupon_avg_order_value": null,
+        "without_coupon_avg_order_value": null,
+        "difference": null
+      },
+      "unit": "元",
+      "tolerance": 1,
+      "data_source": "PTengine优惠券分析",
+      "notes": ""
+    },
+    {
+      "id": 217,
+      "category": "营销活动效果",
+      "subcategory": "优惠券与促销",
+      "question": "什么面额的优惠券最受欢迎？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "most_popular_coupon_value": null,
+        "usage_count": null,
+        "coupon_breakdown": []
+      },
+      "unit": "元/次",
+      "tolerance": 0,
+      "data_source": "PTengine优惠券分析",
+      "notes": "coupon_breakdown格式: [{\"value\": 面额, \"usage_count\": 数值, \"usage_rate\": 百分比}]"
+    },
+    {
+      "id": 218,
+      "category": "营销活动效果",
+      "subcategory": "优惠券与促销",
+      "question": "优惠券有没有被薅羊毛的情况？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "has_abuse": null,
+        "abuse_indicators": [],
+        "estimated_loss": null
+      },
+      "unit": "元",
+      "tolerance": 0,
+      "data_source": "PTengine优惠券分析",
+      "notes": ""
+    },
+    {
+      "id": 219,
+      "category": "营销活动效果",
+      "subcategory": "优惠券与促销",
+      "question": "限时促销对转化的刺激效果如何？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "flash_sale_conversion_rate": null,
+        "normal_conversion_rate": null,
+        "increase_percentage": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine促销分析",
+      "notes": ""
+    },
+    {
+      "id": 220,
+      "category": "营销活动效果",
+      "subcategory": "优惠券与促销",
+      "question": "满减活动能提高客单价吗？提高多少？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "with_threshold_avg_order_value": null,
+        "without_threshold_avg_order_value": null,
+        "increase_percentage": null,
+        "is_effective": null
+      },
+      "unit": "元/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine促销分析",
+      "notes": ""
+    },
+    {
+      "id": 221,
+      "category": "营销活动效果",
+      "subcategory": "邮件订阅",
+      "question": "邮件订阅转化率是多少？",
+      "answer_type": "percentage",
+      "expected_answer": {
+        "email_subscription_rate": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine邮件分析",
+      "notes": ""
+    },
+    {
+      "id": 222,
+      "category": "营销活动效果",
+      "subcategory": "邮件订阅",
+      "question": "邮件订阅的用户，后续购买率是多少？",
+      "answer_type": "percentage",
+      "expected_answer": {
+        "email_subscriber_purchase_rate": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine邮件分析",
+      "notes": ""
+    },
+    {
+      "id": 223,
+      "category": "营销活动效果",
+      "subcategory": "邮件订阅",
+      "question": "订阅用户 vs 非订阅用户的购买行为差异？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "subscriber": {"purchase_rate": null, "avg_order_value": null},
+        "non_subscriber": {"purchase_rate": null, "avg_order_value": null},
+        "key_differences": []
+      },
+      "unit": "",
+      "tolerance": 0.01,
+      "data_source": "PTengine邮件分析",
+      "notes": ""
+    },
+    {
+      "id": 224,
+      "category": "异常与问题监控",
+      "subcategory": "日常异常监控",
+      "question": "今天的流量和昨天比有异常吗？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "today_visits": null,
+        "yesterday_visits": null,
+        "change_percentage": null,
+        "is_abnormal": null,
+        "threshold": 0.2
+      },
+      "unit": "次/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine实时监控",
+      "notes": "超过threshold(20%)视为异常"
+    },
+    {
+      "id": 225,
+      "category": "异常与问题监控",
+      "subcategory": "日常异常监控",
+      "question": "今天的转化率和昨天比有异常吗？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "today_conversion_rate": null,
+        "yesterday_conversion_rate": null,
+        "change_percentage": null,
+        "is_abnormal": null,
+        "threshold": 0.15
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine实时监控",
+      "notes": "超过threshold(15%)视为异常"
+    },
+    {
+      "id": 226,
+      "category": "异常与问题监控",
+      "subcategory": "日常异常监控",
+      "question": "今天的「购物车」页面访问量是否正常？是否有异常下降？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "today_cart_visits": null,
+        "avg_cart_visits": null,
+        "is_abnormal": null
+      },
+      "unit": "次",
+      "tolerance": 0,
+      "data_source": "PTengine实时监控",
+      "notes": ""
+    },
+    {
+      "id": 227,
+      "category": "异常与问题监控",
+      "subcategory": "日常异常监控",
+      "question": "购物车页面的访问量最近有下降吗？",
+      "answer_type": "trend",
+      "expected_answer": {
+        "trend": null,
+        "change_percentage": null,
+        "period": "过去7天"
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine页面监控",
+      "notes": "trend填写'up'/'down'/'stable'"
+    },
+    {
+      "id": 228,
+      "category": "异常与问题监控",
+      "subcategory": "日常异常监控",
+      "question": "结算页面的访问量最近有下降吗？",
+      "answer_type": "trend",
+      "expected_answer": {
+        "trend": null,
+        "change_percentage": null,
+        "period": "过去7天"
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine页面监控",
+      "notes": "trend填写'up'/'down'/'stable'"
+    },
+    {
+      "id": 229,
+      "category": "异常与问题监控",
+      "subcategory": "日常异常监控",
+      "question": "有没有哪个商品的转化率突然变差了？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "problematic_products": [],
+        "has_issues": null
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine商品监控",
+      "notes": "problematic_products格式: [{\"product_name\": \"商品名\", \"previous_rate\": 百分比, \"current_rate\": 百分比, \"change\": 百分比}]"
+    },
+    {
+      "id": 230,
+      "category": "异常与问题监控",
+      "subcategory": "日常异常监控",
+      "question": "某个商品的加购率是否突然下降？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "problematic_products": [],
+        "has_issues": null
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine商品监控",
+      "notes": ""
+    },
+    {
+      "id": 231,
+      "category": "异常与问题监控",
+      "subcategory": "日常异常监控",
+      "question": "有没有哪个渠道的流量突然下降了？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "problematic_channels": [],
+        "has_issues": null
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine渠道监控",
+      "notes": "problematic_channels格式: [{\"channel\": \"渠道名\", \"previous_traffic\": 数值, \"current_traffic\": 数值, \"change_percentage\": 百分比}]"
+    },
+    {
+      "id": 232,
+      "category": "异常与问题监控",
+      "subcategory": "性能监控",
+      "question": "页面加载速度最近有变慢吗？",
+      "answer_type": "trend",
+      "expected_answer": {
+        "current_avg_load_time_seconds": null,
+        "previous_avg_load_time_seconds": null,
+        "trend": null,
+        "change_percentage": null
+      },
+      "unit": "秒/%",
+      "tolerance": 0.1,
+      "data_source": "PTengine性能监控",
+      "notes": "trend填写'faster'/'slower'/'stable'"
+    },
+    {
+      "id": 233,
+      "category": "异常与问题监控",
+      "subcategory": "性能监控",
+      "question": "页面加载时间是否有异常增加？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "current_load_time": null,
+        "baseline_load_time": null,
+        "is_abnormal": null
+      },
+      "unit": "秒",
+      "tolerance": 0.1,
+      "data_source": "PTengine性能监控",
+      "notes": ""
+    },
+    {
+      "id": 234,
+      "category": "异常与问题监控",
+      "subcategory": "性能监控",
+      "question": "页面报错率是多少？有上升吗？",
+      "answer_type": "trend",
+      "expected_answer": {
+        "current_error_rate": null,
+        "previous_error_rate": null,
+        "trend": null,
+        "top_errors": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine错误监控",
+      "notes": "top_errors格式: [{\"error_type\": \"错误类型\", \"count\": 数值}]"
+    },
+    {
+      "id": 235,
+      "category": "异常与问题监控",
+      "subcategory": "结算与支付异常",
+      "question": "结算页面的表单提交失败率是多少？",
+      "answer_type": "percentage",
+      "expected_answer": {
+        "form_submission_failure_rate": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine表单监控",
+      "notes": ""
+    },
+    {
+      "id": 236,
+      "category": "异常与问题监控",
+      "subcategory": "结算与支付异常",
+      "question": "结算失败的订单有多少？主要是什么原因？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "failed_orders_count": null,
+        "failure_rate": null,
+        "top_reasons": []
+      },
+      "unit": "单/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine订单监控",
+      "notes": "top_reasons格式: [{\"reason\": \"原因\", \"count\": 数值, \"percentage\": 百分比}]"
+    },
+    {
+      "id": 237,
+      "category": "异常与问题监控",
+      "subcategory": "结算与支付异常",
+      "question": "有没有用户反复尝试结算但失败的情况？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "repeated_failure_users": null,
+        "avg_attempts": null,
+        "common_issues": []
+      },
+      "unit": "人/次",
+      "tolerance": 0,
+      "data_source": "PTengine订单监控",
+      "notes": ""
+    },
+    {
+      "id": 238,
+      "category": "异常与问题监控",
+      "subcategory": "结算与支付异常",
+      "question": "移动端有没有兼容性问题导致的转化下降？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "has_compatibility_issues": null,
+        "affected_devices": [],
+        "conversion_impact": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine设备监控",
+      "notes": ""
+    },
+    {
+      "id": 239,
+      "category": "异常与问题监控",
+      "subcategory": "实时指标",
+      "question": "当前在线用户数是多少？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "online_users": null
+      },
+      "unit": "人",
+      "tolerance": 0,
+      "data_source": "PTengine实时监控",
+      "notes": ""
+    },
+    {
+      "id": 240,
+      "category": "异常与问题监控",
+      "subcategory": "实时指标",
+      "question": "过去1小时的订单数和订单金额？",
+      "answer_type": "numeric",
+      "expected_answer": {
+        "orders_last_hour": null,
+        "revenue_last_hour": null
+      },
+      "unit": "单/元",
+      "tolerance": 0,
+      "data_source": "PTengine实时监控",
+      "notes": ""
+    },
+    {
+      "id": 241,
+      "category": "异常与问题监控",
+      "subcategory": "实时指标",
+      "question": "实时转化漏斗各环节数据？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "realtime_funnel": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine实时监控",
+      "notes": "realtime_funnel格式: [{\"step\": \"步骤名\", \"users\": 数值, \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 242,
+      "category": "用户分群与画像",
+      "subcategory": "用户细分",
+      "question": "价格敏感型用户占多少？他们有什么特征？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "percentage": null,
+        "count": null,
+        "characteristics": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine用户分群",
+      "notes": ""
+    },
+    {
+      "id": 243,
+      "category": "用户分群与画像",
+      "subcategory": "用户细分",
+      "question": "品质导向型用户占多少？他们有什么特征？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "percentage": null,
+        "count": null,
+        "characteristics": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine用户分群",
+      "notes": ""
+    },
+    {
+      "id": 244,
+      "category": "用户分群与画像",
+      "subcategory": "用户细分",
+      "question": "价格敏感型用户 vs 品质导向型用户的行为差异？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "price_sensitive": {"avg_order_value": null, "conversion_rate": null, "top_categories": []},
+        "quality_oriented": {"avg_order_value": null, "conversion_rate": null, "top_categories": []},
+        "key_differences": []
+      },
+      "unit": "",
+      "tolerance": 0.01,
+      "data_source": "PTengine用户分群",
+      "notes": ""
+    },
+    {
+      "id": 245,
+      "category": "用户分群与画像",
+      "subcategory": "用户细分",
+      "question": "只浏览不购买的用户有什么特征？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "percentage": null,
+        "count": null,
+        "characteristics": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine用户分群",
+      "notes": ""
+    },
+    {
+      "id": 246,
+      "category": "用户分群与画像",
+      "subcategory": "用户细分",
+      "question": "高频访问但低消费的用户是怎么回事？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "percentage": null,
+        "count": null,
+        "possible_reasons": [],
+        "characteristics": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine用户分群",
+      "notes": ""
+    },
+    {
+      "id": 247,
+      "category": "用户分群与画像",
+      "subcategory": "用户细分",
+      "question": "一次性购买用户和复购用户的差异在哪里？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "one_time_buyers": {"percentage": null, "avg_order_value": null, "characteristics": []},
+        "repeat_buyers": {"percentage": null, "avg_order_value": null, "characteristics": []},
+        "key_differences": []
+      },
+      "unit": "",
+      "tolerance": 0.01,
+      "data_source": "PTengine用户分群",
+      "notes": ""
+    },
+    {
+      "id": 248,
+      "category": "用户分群与画像",
+      "subcategory": "用户细分",
+      "question": "哪类用户最容易被促销活动吸引？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "user_segment": null,
+        "promotion_response_rate": null,
+        "characteristics": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine用户分群",
+      "notes": ""
+    },
+    {
+      "id": 249,
+      "category": "用户分群与画像",
+      "subcategory": "用户细分",
+      "question": "哪类用户对价格不敏感？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "user_segment": null,
+        "percentage": null,
+        "characteristics": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine用户分群",
+      "notes": ""
+    },
+    {
+      "id": 250,
+      "category": "用户分群与画像",
+      "subcategory": "用户细分",
+      "question": "冲动消费型用户多吗？他们的行为特征是什么？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "percentage": null,
+        "count": null,
+        "behavior_patterns": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine用户分群",
+      "notes": ""
+    },
+    {
+      "id": 251,
+      "category": "用户分群与画像",
+      "subcategory": "用户细分",
+      "question": "理性比较型用户多吗？他们的行为特征是什么？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "percentage": null,
+        "count": null,
+        "behavior_patterns": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine用户分群",
+      "notes": ""
+    },
+    {
+      "id": 252,
+      "category": "用户分群与画像",
+      "subcategory": "用户细分",
+      "question": "不同用户群体的商品偏好？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "segment_preferences": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine用户分群",
+      "notes": "segment_preferences格式: [{\"segment\": \"用户群名\", \"top_categories\": [\"分类1\", \"分类2\"]}]"
+    },
+    {
+      "id": 253,
+      "category": "用户分群与画像",
+      "subcategory": "用户细分",
+      "question": "不同用户群体的最佳触达方式是什么？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "segment_recommendations": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine用户分群",
+      "notes": "segment_recommendations格式: [{\"segment\": \"用户群名\", \"best_channel\": \"渠道\", \"best_time\": \"时段\", \"best_message_type\": \"消息类型\"}]"
+    },
+    {
+      "id": 254,
+      "category": "用户分群与画像",
+      "subcategory": "用户标签",
+      "question": "用户自定义变量（user_variant）中最常见的标签是什么？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "top_tags": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine用户标签",
+      "notes": "top_tags格式: [{\"tag\": \"标签名\", \"users\": 数值, \"percentage\": 百分比}]"
+    },
+    {
+      "id": 255,
+      "category": "用户分群与画像",
+      "subcategory": "用户标签",
+      "question": "不同标签用户的转化率对比？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "tag_conversion_rates": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine用户标签",
+      "notes": "tag_conversion_rates格式: [{\"tag\": \"标签名\", \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 256,
+      "category": "搜索与导航",
+      "subcategory": "",
+      "question": "用户在站内搜索什么关键词最多？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "top_keywords": []
+      },
+      "unit": "次",
+      "tolerance": 0,
+      "data_source": "PTengine站内搜索分析",
+      "notes": "top_keywords格式: [{\"keyword\": \"关键词\", \"searches\": 数值}]"
+    },
+    {
+      "id": 257,
+      "category": "搜索与导航",
+      "subcategory": "",
+      "question": "搜索结果的点击率怎么样？",
+      "answer_type": "percentage",
+      "expected_answer": {
+        "search_result_ctr": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine站内搜索分析",
+      "notes": ""
+    },
+    {
+      "id": 258,
+      "category": "搜索与导航",
+      "subcategory": "",
+      "question": "有没有用户搜索了但没找到想要的商品？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "zero_result_searches": null,
+        "zero_result_rate": null,
+        "top_failed_keywords": []
+      },
+      "unit": "次/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine站内搜索分析",
+      "notes": "top_failed_keywords格式: [{\"keyword\": \"关键词\", \"searches\": 数值}]"
+    },
+    {
+      "id": 259,
+      "category": "搜索与导航",
+      "subcategory": "",
+      "question": "搜索用户和浏览用户的转化率差多少？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "search_users_conversion_rate": null,
+        "browse_users_conversion_rate": null,
+        "difference": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine站内搜索分析",
+      "notes": ""
+    },
+    {
+      "id": 260,
+      "category": "搜索与导航",
+      "subcategory": "",
+      "question": "用户更喜欢用搜索还是用分类导航找商品？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "search_users_percentage": null,
+        "navigation_users_percentage": null,
+        "preferred_method": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine导航分析",
+      "notes": "preferred_method填写'search'或'navigation'"
+    },
+    {
+      "id": 261,
+      "category": "搜索与导航",
+      "subcategory": "",
+      "question": "分类导航的点击分布是怎样的？",
+      "answer_type": "distribution",
+      "expected_answer": {
+        "categories": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine导航分析",
+      "notes": "categories格式: [{\"category\": \"分类名\", \"clicks\": 数值, \"percentage\": 百分比}]"
+    },
+    {
+      "id": 262,
+      "category": "搜索与导航",
+      "subcategory": "",
+      "question": "有没有用户在导航里迷路的情况？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "lost_users_percentage": null,
+        "common_confusion_points": [],
+        "recommendations": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine导航分析",
+      "notes": ""
+    },
+    {
+      "id": 263,
+      "category": "推荐效果",
+      "subcategory": "",
+      "question": "首页推荐位的点击率是多少？",
+      "answer_type": "percentage",
+      "expected_answer": {
+        "homepage_recommendation_ctr": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine推荐分析",
+      "notes": ""
+    },
+    {
+      "id": 264,
+      "category": "推荐效果",
+      "subcategory": "",
+      "question": "商品详情页的相关推荐点击率是多少？",
+      "answer_type": "percentage",
+      "expected_answer": {
+        "pdp_recommendation_ctr": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine推荐分析",
+      "notes": ""
+    },
+    {
+      "id": 265,
+      "category": "推荐效果",
+      "subcategory": "",
+      "question": "购物车页面的推荐商品有人买吗？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "cart_recommendation_ctr": null,
+        "cart_recommendation_conversion_rate": null,
+        "revenue_contribution": null
+      },
+      "unit": "%/元",
+      "tolerance": 0.01,
+      "data_source": "PTengine推荐分析",
+      "notes": ""
+    },
+    {
+      "id": 266,
+      "category": "推荐效果",
+      "subcategory": "",
+      "question": "推荐商品的转化率和自然浏览的商品比怎么样？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "recommended_conversion_rate": null,
+        "organic_conversion_rate": null,
+        "difference": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine推荐分析",
+      "notes": ""
+    },
+    {
+      "id": 267,
+      "category": "推荐效果",
+      "subcategory": "",
+      "question": "「猜你喜欢」推得准吗？用户会点吗？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "accuracy_score": null,
+        "ctr": null,
+        "user_feedback": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine推荐分析",
+      "notes": ""
+    },
+    {
+      "id": 268,
+      "category": "推荐效果",
+      "subcategory": "",
+      "question": "哪种推荐策略效果最好？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "best_strategy": null,
+        "strategies_comparison": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine推荐分析",
+      "notes": "strategies_comparison格式: [{\"strategy\": \"策略名\", \"ctr\": 百分比, \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 269,
+      "category": "竞争与机会",
+      "subcategory": "",
+      "question": "用户访问我们网站前后，还去了哪些网站？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "sites_before": [],
+        "sites_after": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine竞争分析",
+      "notes": "此数据可能需要第三方工具支持"
+    },
+    {
+      "id": 270,
+      "category": "竞争与机会",
+      "subcategory": "",
+      "question": "哪些商品的市场需求大但我们的转化率低？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "opportunity_products": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine商品分析",
+      "notes": "opportunity_products格式: [{\"product_name\": \"商品名\", \"search_volume\": 数值, \"conversion_rate\": 百分比}]"
+    },
+    {
+      "id": 271,
+      "category": "竞争与机会",
+      "subcategory": "",
+      "question": "有没有被忽视的高潜力商品或品类？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "high_potential_products": [],
+        "high_potential_categories": [],
+        "analysis": null
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine商品分析",
+      "notes": ""
+    },
+    {
+      "id": 272,
+      "category": "竞争与机会",
+      "subcategory": "",
+      "question": "用户搜索了什么关键词但我们没有对应商品？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "unmet_search_keywords": []
+      },
+      "unit": "次",
+      "tolerance": 0,
+      "data_source": "PTengine站内搜索分析",
+      "notes": "unmet_search_keywords格式: [{\"keyword\": \"关键词\", \"searches\": 数值}]"
+    },
+    {
+      "id": 273,
+      "category": "竞争与机会",
+      "subcategory": "",
+      "question": "哪些用户群体我们还没有覆盖到？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "uncovered_segments": [],
+        "recommendations": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine用户分析",
+      "notes": ""
+    },
+    {
+      "id": 274,
+      "category": "竞争与机会",
+      "subcategory": "",
+      "question": "和竞品比，我们的优势品类是什么？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "advantage_categories": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine竞争分析",
+      "notes": "advantage_categories格式: [{\"category\": \"分类名\", \"our_market_share\": 百分比, \"advantage_reason\": \"原因\"}]"
+    },
+    {
+      "id": 275,
+      "category": "竞争与机会",
+      "subcategory": "",
+      "question": "和竞品比，我们的劣势品类是什么？",
+      "answer_type": "ranking",
+      "expected_answer": {
+        "disadvantage_categories": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine竞争分析",
+      "notes": "disadvantage_categories格式: [{\"category\": \"分类名\", \"our_market_share\": 百分比, \"disadvantage_reason\": \"原因\"}]"
+    },
+    {
+      "id": 276,
+      "category": "长期趋势",
+      "subcategory": "",
+      "question": "过去一年，流量的整体趋势是上升还是下降？",
+      "answer_type": "trend",
+      "expected_answer": {
+        "trend": null,
+        "change_percentage": null,
+        "monthly_data": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine趋势分析",
+      "notes": "trend填写'up'/'down'/'stable'，monthly_data格式: [{\"month\": \"2025-01\", \"visits\": 数值}]"
+    },
+    {
+      "id": 277,
+      "category": "长期趋势",
+      "subcategory": "",
+      "question": "过去一年，转化率的整体趋势是上升还是下降？",
+      "answer_type": "trend",
+      "expected_answer": {
+        "trend": null,
+        "change_percentage": null,
+        "monthly_data": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine趋势分析",
+      "notes": "trend填写'up'/'down'/'stable'"
+    },
+    {
+      "id": 278,
+      "category": "长期趋势",
+      "subcategory": "",
+      "question": "过去一年，客单价的整体趋势是怎样的？",
+      "answer_type": "trend",
+      "expected_answer": {
+        "trend": null,
+        "change_percentage": null,
+        "monthly_data": []
+      },
+      "unit": "元/%",
+      "tolerance": 0.01,
+      "data_source": "PTengine趋势分析",
+      "notes": "trend填写'up'/'down'/'stable'"
+    },
+    {
+      "id": 279,
+      "category": "长期趋势",
+      "subcategory": "",
+      "question": "用户结构有变化吗？新用户占比是增加还是减少？",
+      "answer_type": "trend",
+      "expected_answer": {
+        "new_user_ratio_trend": null,
+        "current_new_user_ratio": null,
+        "previous_new_user_ratio": null,
+        "change_percentage": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine趋势分析",
+      "notes": "new_user_ratio_trend填写'increasing'/'decreasing'/'stable'"
+    },
+    {
+      "id": 280,
+      "category": "长期趋势",
+      "subcategory": "",
+      "question": "各渠道的流量占比有变化吗？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "channel_changes": [],
+        "significant_changes": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine趋势分析",
+      "notes": "channel_changes格式: [{\"channel\": \"渠道名\", \"previous_share\": 百分比, \"current_share\": 百分比, \"change\": 百分比}]"
+    },
+    {
+      "id": 281,
+      "category": "长期趋势",
+      "subcategory": "",
+      "question": "各品类的销售占比有变化吗？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "category_changes": [],
+        "significant_changes": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine趋势分析",
+      "notes": "category_changes格式: [{\"category\": \"分类名\", \"previous_share\": 百分比, \"current_share\": 百分比, \"change\": 百分比}]"
+    },
+    {
+      "id": 282,
+      "category": "长期趋势",
+      "subcategory": "",
+      "question": "用户的设备使用习惯有变化吗？移动端占比在增加吗？",
+      "answer_type": "trend",
+      "expected_answer": {
+        "mobile_ratio_trend": null,
+        "current_mobile_ratio": null,
+        "previous_mobile_ratio": null,
+        "change_percentage": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine趋势分析",
+      "notes": "mobile_ratio_trend填写'increasing'/'decreasing'/'stable'"
+    },
+    {
+      "id": 283,
+      "category": "长期趋势",
+      "subcategory": "",
+      "question": "用户的支付习惯有变化吗？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "payment_changes": [],
+        "significant_changes": []
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine趋势分析",
+      "notes": "payment_changes格式: [{\"method\": \"支付方式\", \"previous_share\": 百分比, \"current_share\": 百分比, \"change\": 百分比}]"
+    },
+    {
+      "id": 284,
+      "category": "长期趋势",
+      "subcategory": "",
+      "question": "有没有新的增长机会点？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "growth_opportunities": [],
+        "recommendations": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine趋势分析",
+      "notes": ""
+    },
+    {
+      "id": 285,
+      "category": "长期趋势",
+      "subcategory": "",
+      "question": "有没有需要警惕的下滑信号？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "warning_signals": [],
+        "risk_level": null,
+        "recommendations": []
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine趋势分析",
+      "notes": "risk_level填写'high'/'medium'/'low'"
+    },
+    {
+      "id": 286,
+      "category": "身份识别与跨设备分析",
+      "subcategory": "",
+      "question": "已识别用户（有 email/phone）vs 匿名用户的转化率差异？",
+      "answer_type": "comparison",
+      "expected_answer": {
+        "identified_users_conversion_rate": null,
+        "anonymous_users_conversion_rate": null,
+        "difference": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine身份分析",
+      "notes": ""
+    },
+    {
+      "id": 287,
+      "category": "身份识别与跨设备分析",
+      "subcategory": "",
+      "question": "用户登录率是多少？",
+      "answer_type": "percentage",
+      "expected_answer": {
+        "login_rate": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine身份分析",
+      "notes": ""
+    },
+    {
+      "id": 288,
+      "category": "身份识别与跨设备分析",
+      "subcategory": "",
+      "question": "同一用户跨设备访问的比例？",
+      "answer_type": "percentage",
+      "expected_answer": {
+        "cross_device_users_percentage": null
+      },
+      "unit": "%",
+      "tolerance": 0.01,
+      "data_source": "PTengine跨设备分析",
+      "notes": ""
+    },
+    {
+      "id": 289,
+      "category": "身份识别与跨设备分析",
+      "subcategory": "",
+      "question": "用户身份合并后的完整用户旅程是什么？",
+      "answer_type": "descriptive",
+      "expected_answer": {
+        "typical_journey": [],
+        "cross_device_patterns": [],
+        "insights": null
+      },
+      "unit": "",
+      "tolerance": 0,
+      "data_source": "PTengine跨设备分析",
+      "notes": ""
+    }
+  ]
+}
