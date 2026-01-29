@@ -14,7 +14,6 @@ const PtTracking = {
    */
   trackProductImpression(products, listName) {
     ptengine.track('商品曝光', {
-      ...this.getCommonProps(),
       '列表名称': listName,
       '商品数量': products.length,
       '商品ID列表': products.map(p => p.id).join(','),
@@ -27,7 +26,6 @@ const PtTracking = {
    */
   trackProductClick(product, listName, position) {
     ptengine.track('商品点击', {
-      ...this.getCommonProps(),
       '商品ID': product.id,
       '商品名称': product.name,
       '商品价格': product.price,
@@ -48,7 +46,6 @@ const PtTracking = {
    */
   trackProductView(product) {
     ptengine.track('商品详情浏览', {
-      ...this.getCommonProps(),
       '商品ID': product.id,
       '商品名称': product.name,
       '商品价格': product.price,
@@ -69,7 +66,6 @@ const PtTracking = {
    */
   trackSelectVariant(product, variantType, variantValue) {
     ptengine.track('选择商品规格', {
-      ...this.getCommonProps(),
       '商品ID': product.id,
       '商品名称': product.name,
       '规格类型': variantType,
@@ -82,7 +78,6 @@ const PtTracking = {
    */
   trackViewReviews(product) {
     ptengine.track('查看商品评价', {
-      ...this.getCommonProps(),
       '商品ID': product.id,
       '商品名称': product.name,
       '评价数量': product.reviewCount,
@@ -95,7 +90,6 @@ const PtTracking = {
    */
   trackViewSpecs(product) {
     ptengine.track('查看商品规格', {
-      ...this.getCommonProps(),
       '商品ID': product.id,
       '商品名称': product.name
     });
@@ -110,7 +104,6 @@ const PtTracking = {
    */
   trackAddToCart(product, quantity, variant = {}) {
     ptengine.track('加入购物车', {
-      ...this.getCommonProps(),
       '商品ID': product.id,
       '商品名称': product.name,
       '商品价格': product.price,
@@ -129,7 +122,6 @@ const PtTracking = {
    */
   trackRemoveFromCart(item, reason = '') {
     ptengine.track('移除购物车', {
-      ...this.getCommonProps(),
       '商品ID': item.id,
       '商品名称': item.name,
       '商品价格': item.price,
@@ -145,7 +137,6 @@ const PtTracking = {
   trackUpdateCartQuantity(item, oldQuantity, newQuantity) {
     const action = newQuantity > oldQuantity ? '增加' : '减少';
     ptengine.track('修改购物车数量', {
-      ...this.getCommonProps(),
       '商品ID': item.id,
       '商品名称': item.name,
       '商品价格': item.price,
@@ -161,7 +152,6 @@ const PtTracking = {
    */
   trackViewCart(items, totalAmount) {
     ptengine.track('查看购物车', {
-      ...this.getCommonProps(),
       '商品种类数': items.length,
       '商品总数量': items.reduce((sum, item) => sum + item.quantity, 0),
       '购物车总金额': totalAmount,
@@ -174,7 +164,6 @@ const PtTracking = {
    */
   trackClearCart(items, totalAmount) {
     ptengine.track('清空购物车', {
-      ...this.getCommonProps(),
       '清空商品数量': items.length,
       '清空总金额': totalAmount
     });
@@ -189,7 +178,6 @@ const PtTracking = {
    */
   trackAddToFavorite(product) {
     ptengine.track('收藏商品', {
-      ...this.getCommonProps(),
       '商品ID': product.id,
       '商品名称': product.name,
       '商品价格': product.price,
@@ -202,7 +190,6 @@ const PtTracking = {
    */
   trackRemoveFromFavorite(product) {
     ptengine.track('取消收藏', {
-      ...this.getCommonProps(),
       '商品ID': product.id,
       '商品名称': product.name
     });
@@ -217,7 +204,6 @@ const PtTracking = {
    */
   trackBeginCheckout(items, totalAmount) {
     ptengine.track('开始结算', {
-      ...this.getCommonProps(),
       '商品种类数': items.length,
       '商品总数量': items.reduce((sum, item) => sum + item.quantity, 0),
       '结算总金额': totalAmount,
@@ -230,7 +216,6 @@ const PtTracking = {
    */
   trackFillShippingInfo(field) {
     ptengine.track('填写收货信息', {
-      ...this.getCommonProps(),
       '填写字段': field
     });
   },
@@ -240,7 +225,6 @@ const PtTracking = {
    */
   trackSelectShipping(method, cost) {
     ptengine.track('选择配送方式', {
-      ...this.getCommonProps(),
       '配送方式': method,
       '配送费用': cost
     });
@@ -251,7 +235,6 @@ const PtTracking = {
    */
   trackSelectPayment(method) {
     ptengine.track('选择支付方式', {
-      ...this.getCommonProps(),
       '支付方式': method
     });
   },
@@ -261,7 +244,6 @@ const PtTracking = {
    */
   trackApplyCoupon(code, success, discountAmount = 0) {
     ptengine.track('使用优惠券', {
-      ...this.getCommonProps(),
       '优惠券码': code,
       '是否成功': success ? '是' : '否',
       '优惠金额': discountAmount
@@ -273,7 +255,6 @@ const PtTracking = {
    */
   trackSubmitOrder(orderInfo) {
     ptengine.track('提交订单', {
-      ...this.getCommonProps(),
       '订单号': orderInfo.orderId,
       '商品原价总额': orderInfo.originalTotal || orderInfo.subtotal,
       '商品实际总额': orderInfo.subtotal,
@@ -292,7 +273,6 @@ const PtTracking = {
    */
   trackOrderComplete(orderInfo) {
     ptengine.track('订单完成', {
-      ...this.getCommonProps(),
       '订单号': orderInfo.orderId,
       '订单总额': orderInfo.total,
       '商品数量': orderInfo.itemCount,
@@ -312,7 +292,6 @@ const PtTracking = {
    */
   trackSearch(keyword, resultCount) {
     ptengine.track('站内搜索', {
-      ...this.getCommonProps(),
       '搜索关键词': keyword,
       '搜索结果数': resultCount
     });
@@ -323,7 +302,6 @@ const PtTracking = {
    */
   trackFilter(filterType, filterValue) {
     ptengine.track('筛选商品', {
-      ...this.getCommonProps(),
       '筛选类型': filterType,
       '筛选值': filterValue
     });
@@ -334,7 +312,6 @@ const PtTracking = {
    */
   trackSort(sortType) {
     ptengine.track('排序商品', {
-      ...this.getCommonProps(),
       '排序方式': sortType
     });
   },
@@ -348,7 +325,6 @@ const PtTracking = {
    */
   trackRegister(method) {
     ptengine.track('用户注册', {
-      ...this.getCommonProps(),
       '注册方式': method
     });
   },
@@ -358,7 +334,6 @@ const PtTracking = {
    */
   trackLogin(method) {
     ptengine.track('用户登录', {
-      ...this.getCommonProps(),
       '登录方式': method
     });
   },
@@ -367,9 +342,7 @@ const PtTracking = {
    * 用户退出
    */
   trackLogout() {
-    ptengine.track('用户退出', {
-      ...this.getCommonProps()
-    });
+    ptengine.track('用户退出', {});
   },
 
   /**
@@ -377,7 +350,6 @@ const PtTracking = {
    */
   trackSubscribe(email) {
     ptengine.track('订阅邮件', {
-      ...this.getCommonProps(),
       '邮箱': email
     });
   },
@@ -391,7 +363,6 @@ const PtTracking = {
    */
   trackNavClick(navItem) {
     ptengine.track('点击导航', {
-      ...this.getCommonProps(),
       '导航项': navItem
     });
   },
@@ -401,7 +372,6 @@ const PtTracking = {
    */
   trackBannerClick(bannerName, position) {
     ptengine.track('点击Banner', {
-      ...this.getCommonProps(),
       'Banner名称': bannerName,
       'Banner位置': position
     });
@@ -412,7 +382,6 @@ const PtTracking = {
    */
   trackRecommendClick(product, recommendType, position) {
     ptengine.track('点击推荐', {
-      ...this.getCommonProps(),
       '商品ID': product.id,
       '商品名称': product.name,
       '推荐类型': recommendType,
@@ -425,7 +394,6 @@ const PtTracking = {
    */
   trackImageZoom(product, imageIndex) {
     ptengine.track('图片放大', {
-      ...this.getCommonProps(),
       '商品ID': product.id,
       '商品名称': product.name,
       '图片序号': imageIndex
@@ -437,7 +405,6 @@ const PtTracking = {
    */
   trackImageSwitch(product, imageIndex) {
     ptengine.track('切换图片', {
-      ...this.getCommonProps(),
       '商品ID': product.id,
       '商品名称': product.name,
       '图片序号': imageIndex
@@ -449,7 +416,6 @@ const PtTracking = {
    */
   trackTabSwitch(tabName, pageName) {
     ptengine.track('切换Tab', {
-      ...this.getCommonProps(),
       'Tab名称': tabName,
       '页面名称': pageName
     });
