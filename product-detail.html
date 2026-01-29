@@ -846,6 +846,7 @@
   </footer>
 
   <script src="/js/common.js"></script>
+  <script src="/js/tracking.js"></script>
   <script>
     // 移动端菜单切换
     function toggleMenu() {
@@ -858,6 +859,7 @@
     let currentProduct = null;
     let selectedColor = '';
     let selectedSize = '';
+    let detailPageEnterTime = Date.now();
 
     function getProductId() {
       const params = new URLSearchParams(window.location.search);
@@ -885,23 +887,8 @@
         items: [formatProductItem(currentProduct)]
       });
       
-      ptengine.track('商品详情', {
-        '事件发生时间戳': Date.now(),
-        '事件发生时间': new Date().toLocaleString(),
-        '事件发生的url': document.location.href,
-        '商品ID': currentProduct.id,
-        '商品名称': currentProduct.name,
-        '商品实际价格': currentProduct.price,
-        '商品原价': currentProduct.originalPrice || currentProduct.price,
-        '折扣率': currentProduct.originalPrice ? Math.round((1 - currentProduct.price / currentProduct.originalPrice) * 100) + '%' : '0%',
-        '商品分类': currentProduct.category,
-        '商品品牌': currentProduct.brand || '',
-        '商品评分': currentProduct.rating,
-        '评价数量': currentProduct.reviewCount,
-        '库存数量': currentProduct.stock,
-        '是否热卖': currentProduct.isHot ? '是' : '否',
-        '是否新品': currentProduct.isNew ? '是' : '否'
-      });
+      // 使用新的埋点工具
+      PtTracking.trackProductView(currentProduct);
     }
 
     function renderProduct() {
@@ -1050,6 +1037,17 @@
           document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
           btn.classList.add('active');
           document.getElementById(`tab-${btn.dataset.tab}`).classList.add('active');
+          
+          // 埋点：Tab切换
+          const tabName = btn.textContent.trim();
+          PtTracking.trackTabSwitch(tabName, '商品详情');
+          
+          // 特殊埋点
+          if (btn.dataset.tab === 'reviews') {
+            PtTracking.trackViewReviews(currentProduct);
+          } else if (btn.dataset.tab === 'specs') {
+            PtTracking.trackViewSpecs(currentProduct);
+          }
         });
       });
 
@@ -1065,6 +1063,9 @@
       document.querySelectorAll('.thumbnail').forEach((t, i) => {
         t.classList.toggle('active', i === index);
       });
+      
+      // 埋点：切换图片
+      PtTracking.trackImageSwitch(currentProduct, index + 1);
     }
 
     function selectColor(color, el) {
@@ -1074,6 +1075,9 @@
         item.classList.remove('active');
       });
       el.classList.add('active');
+      
+      // 埋点：选择颜色
+      PtTracking.trackSelectVariant(currentProduct, '颜色', color);
     }
 
     function selectSize(size, el) {
@@ -1083,6 +1087,9 @@
         item.classList.remove('active');
       });
       el.classList.add('active');
+      
+      // 埋点：选择尺码
+      PtTracking.trackSelectVariant(currentProduct, '尺码', size);
     }
 
     function changeQuantity(delta) {
@@ -1101,20 +1108,8 @@
 
       Cart.addItem(currentProduct, quantity, variant);
       
-      ptengine.track('加入购物车', {
-        '事件发生时间戳': Date.now(),
-        '事件发生时间': new Date().toLocaleString(),
-        '事件发生的url': document.location.href,
-        '商品ID': currentProduct.id,
-        '商品名称': currentProduct.name,
-        '商品实际价格': currentProduct.price,
-        '商品原价': currentProduct.originalPrice || currentProduct.price,
-        '折扣率': currentProduct.originalPrice ? Math.round((1 - currentProduct.price / currentProduct.originalPrice) * 100) + '%' : '0%',
-        '购买数量': quantity,
-        '小计金额': currentProduct.price * quantity,
-        '颜色': selectedColor || '',
-        '尺码': selectedSize || ''
-      });
+      // 使用新的埋点工具
+      PtTracking.trackAddToCart(currentProduct, quantity, variant);
     }
 
     function buyNow() {
@@ -1129,19 +1124,17 @@
         items: [formatProductItem(currentProduct, quantity)]
       });
       
+      // 使用新的埋点工具
       ptengine.track('立即购买', {
-        '事件发生时间戳': Date.now(),
-        '事件发生时间': new Date().toLocaleString(),
-        '事件发生的url': document.location.href,
+        ...PtTracking.getCommonProps(),
         '商品ID': currentProduct.id,
         '商品名称': currentProduct.name,
-        '商品实际价格': currentProduct.price,
-        '商品原价': currentProduct.originalPrice || currentProduct.price,
-        '折扣率': currentProduct.originalPrice ? Math.round((1 - currentProduct.price / currentProduct.originalPrice) * 100) + '%' : '0%',
+        '商品价格': currentProduct.price,
         '购买数量': quantity,
         '小计金额': currentProduct.price * quantity,
         '颜色': selectedColor || '',
-        '尺码': selectedSize || ''
+        '尺码': selectedSize || '',
+        '详情页停留时间秒': Math.floor((Date.now() - detailPageEnterTime) / 1000)
       });
       
       const checkoutItem = {
@@ -1163,17 +1156,12 @@
       const isActive = btn.classList.contains('active');
       btn.textContent = isActive ? '♥' : '♡';
       
-      ptengine.track('收藏商品', {
-        '事件发生时间戳': Date.now(),
-        '事件发生时间': new Date().toLocaleString(),
-        '事件发生的url': document.location.href,
-        '商品ID': currentProduct.id,
-        '商品名称': currentProduct.name,
-        '商品实际价格': currentProduct.price,
-        '商品原价': currentProduct.originalPrice || currentProduct.price,
-        '商品分类': currentProduct.category,
-        '操作': isActive ? '收藏' : '取消收藏'
-      });
+      // 使用新的埋点工具
+      if (isActive) {
+        PtTracking.trackAddToFavorite(currentProduct);
+      } else {
+        PtTracking.trackRemoveFromFavorite(currentProduct);
+      }
       
       showToast(isActive ? '已添加到收藏夹' : '已取消收藏');
     }

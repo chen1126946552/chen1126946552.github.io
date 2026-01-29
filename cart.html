@@ -763,6 +763,7 @@
   </footer>
 
   <script src="/js/common.js"></script>
+  <script src="/js/tracking.js"></script>
   <script>
     // 移动端菜单切换
     function toggleMenu() {
@@ -807,6 +808,9 @@
             index: i
           }))
         });
+        
+        // 使用新的埋点工具
+        PtTracking.trackViewCart(cartItems, Cart.getTotal());
       }
 
       // 加载推荐商品
@@ -893,9 +897,13 @@
       if (newQuantity < 1) return;
       
       const item = cartItems[index];
+      const oldQuantity = item.quantity;
       
       cartItems[index].quantity = newQuantity;
       Cart.saveItems(cartItems);
+      
+      // 使用新的埋点工具
+      PtTracking.trackUpdateCartQuantity(item, oldQuantity, newQuantity);
       
       // 根据增减发送不同事件
       if (delta > 0) {
@@ -908,19 +916,6 @@
             quantity: delta
           }]
         });
-        
-        ptengine.track('购物车增加商品', {
-          '事件发生时间戳': Date.now(),
-          '事件发生时间': new Date().toLocaleString(),
-          '事件发生的url': document.location.href,
-          '商品ID': item.id,
-          '商品名称': item.name,
-          '商品实际价格': item.price,
-          '商品原价': item.originalPrice || item.price,
-          '增加数量': delta,
-          '当前数量': newQuantity,
-          '小计金额': item.price * newQuantity
-        });
       } else {
         pushEcommerceEvent('remove_from_cart', {
           value: item.price * Math.abs(delta),
@@ -930,19 +925,6 @@
             price: item.price,
             quantity: Math.abs(delta)
           }]
-        });
-        
-        ptengine.track('购物车减少商品', {
-          '事件发生时间戳': Date.now(),
-          '事件发生时间': new Date().toLocaleString(),
-          '事件发生的url': document.location.href,
-          '商品ID': item.id,
-          '商品名称': item.name,
-          '商品实际价格': item.price,
-          '商品原价': item.originalPrice || item.price,
-          '减少数量': Math.abs(delta),
-          '当前数量': newQuantity,
-          '小计金额': item.price * newQuantity
         });
       }
       
@@ -992,17 +974,8 @@
     function removeItem(index) {
       const removedItem = cartItems[index];
       
-      ptengine.track('移除购物车商品', {
-        '事件发生时间戳': Date.now(),
-        '事件发生时间': new Date().toLocaleString(),
-        '事件发生的url': document.location.href,
-        '商品ID': removedItem.id,
-        '商品名称': removedItem.name,
-        '商品实际价格': removedItem.price,
-        '商品原价': removedItem.originalPrice || removedItem.price,
-        '移除数量': removedItem.quantity,
-        '移除金额': removedItem.price * removedItem.quantity
-      });
+      // 使用新的埋点工具
+      PtTracking.trackRemoveFromCart(removedItem, '手动删除');
       
       pushEcommerceEvent('remove_from_cart', {
         value: removedItem.price * removedItem.quantity,
@@ -1084,13 +1057,10 @@
     function clearCart() {
       if (!confirm('确定要清空购物车吗？')) return;
       
-      ptengine.track('清空购物车', {
-        '事件发生时间戳': Date.now(),
-        '事件发生时间': new Date().toLocaleString(),
-        '事件发生的url': document.location.href,
-        '清空商品数量': cartItems.length,
-        '清空商品总价': cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
-      });
+      const totalAmount = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      
+      // 使用新的埋点工具
+      PtTracking.trackClearCart(cartItems, totalAmount);
       
       Cart.clear();
       cartItems = [];
@@ -1151,16 +1121,9 @@
       sessionStorage.setItem('checkoutItems', JSON.stringify(checkoutItems));
       
       const totalAmount = checkoutItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-      const totalQuantity = checkoutItems.reduce((sum, item) => sum + item.quantity, 0);
       
-      ptengine.track('去结算', {
-        '事件发生时间戳': Date.now(),
-        '事件发生时间': new Date().toLocaleString(),
-        '事件发生的url': document.location.href,
-        '商品数量': totalQuantity,
-        '商品总额': totalAmount,
-        '商品种类数': checkoutItems.length
-      });
+      // 使用新的埋点工具
+      PtTracking.trackBeginCheckout(checkoutItems, totalAmount);
       
       window.location.href = 'checkout.html';
     }

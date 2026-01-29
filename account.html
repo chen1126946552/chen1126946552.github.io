@@ -874,6 +874,7 @@
   </footer>
 
   <script src="/js/common.js"></script>
+  <script src="/js/tracking.js"></script>
   <script>
     // 模拟订单数据
     const mockOrders = [
@@ -1098,14 +1099,8 @@
         '生日': birthday
       });
       
-      // Ptengine 事件追踪
-      ptengine.track('用户登录', {
-        '事件发生时间戳': loginTimestamp,
-        '事件发生时间': loginTime,
-        '事件发生的url': document.location.href,
-        '用户邮箱': email,
-        '用户生日': birthday
-      });
+      // 使用新的埋点工具
+      PtTracking.trackLogin('邮箱登录');
       
       showToast('登录成功！');
       
@@ -1126,12 +1121,8 @@
     
     // 处理退出登录
     function handleLogout() {
-      // Ptengine 事件追踪
-      ptengine.track('用户退出', {
-        '事件发生时间戳': Date.now(),
-        '事件发生时间': new Date().toLocaleString(),
-        '事件发生的url': document.location.href
-      });
+      // 使用新的埋点工具
+      PtTracking.trackLogout();
       
       localStorage.removeItem('userInfo');
       showToast('已退出登录');

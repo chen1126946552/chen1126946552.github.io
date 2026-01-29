@@ -654,6 +654,7 @@
   </footer>
 
   <script src="/js/common.js"></script>
+  <script src="/js/tracking.js"></script>
   <script>
     // 移动端菜单切换
     function toggleMenu() {
@@ -662,7 +663,7 @@
       nav.classList.toggle('active');
       toggle.classList.toggle('active');
     }
-
+    
     // 状态管理
     let allProducts = [];
     let filteredProducts = [];
@@ -713,13 +714,8 @@
 
     // 设置分类
     function setCategory(category) {
-      // Ptengine 事件追踪
-      ptengine.track('筛选分类', {
-        '事件发生时间戳': Date.now(),
-        '事件发生时间': new Date().toLocaleString(),
-        '事件发生的url': document.location.href,
-        '分类名称': category
-      });
+      // 使用新的埋点工具
+      PtTracking.trackFilter('分类', category);
       
       // 更新UI
       document.querySelectorAll('#categoryFilters .filter-option').forEach(option => {
@@ -780,12 +776,8 @@
       };
       
       if (rerender) {
-        ptengine.track('排序商品', {
-          '事件发生时间戳': Date.now(),
-          '事件发生时间': new Date().toLocaleString(),
-          '事件发生的url': document.location.href,
-          '排序方式': sortOptions[sortBy] || sortBy
-        });
+        // 使用新的埋点工具
+        PtTracking.trackSort(sortOptions[sortBy] || sortBy);
       }
 
       switch (sortBy) {
@@ -823,13 +815,8 @@
       const minPrice = document.getElementById('priceMin').value;
       const maxPrice = document.getElementById('priceMax').value;
       
-      ptengine.track('价格筛选', {
-        '事件发生时间戳': Date.now(),
-        '事件发生时间': new Date().toLocaleString(),
-        '事件发生的url': document.location.href,
-        '最低价格': minPrice || '无限制',
-        '最高价格': maxPrice || '无限制'
-      });
+      // 使用新的埋点工具
+      PtTracking.trackFilter('价格区间', `${minPrice || '0'}-${maxPrice || '不限'}`);
       
       currentPage = 1;
       filterProducts();
@@ -955,19 +942,13 @@
     // 跳转到商品详情
     function goToProduct(productId) {
       const product = filteredProducts.find(p => p.id === productId);
+      const position = filteredProducts.findIndex(p => p.id === productId);
       
-      // Ptengine 事件追踪
-      ptengine.track('点击商品', {
-        '事件发生时间戳': Date.now(),
-        '事件发生时间': new Date().toLocaleString(),
-        '事件发生的url': document.location.href,
-        '商品ID': productId,
-        '商品名称': product ? product.name : '',
-        '商品实际价格': product ? product.price : 0,
-        '商品原价': product ? (product.originalPrice || product.price) : 0,
-        '折扣率': product && product.originalPrice ? Math.round((1 - product.price / product.originalPrice) * 100) + '%' : '0%',
-        '商品分类': product ? product.category : ''
-      });
+      if (product) {
+        // 使用新的埋点工具
+        const category = document.querySelector('#categoryFilters .filter-option.active')?.dataset.category || '全部';
+        PtTracking.trackProductClick(product, '商品列表-' + category, position + 1);
+      }
       
       window.location.href = `product-detail.html?id=${productId}`;
     }
