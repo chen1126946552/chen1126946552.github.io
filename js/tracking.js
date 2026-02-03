@@ -643,6 +643,31 @@ const PtTracking = {
   // ========================================
 
   /**
+   * 获取通用属性（时间、URL等）
+   * 用于外部直接调用 ptengine.track 时使用
+   */
+  getCommonProps() {
+    const currentTime = new Date();
+    const timestamp = currentTime.getTime();
+    const timeString = currentTime.toLocaleString('zh-CN', { 
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    });
+    
+    return {
+      '事件发生时间': timeString,
+      '事件发生时间戳': timestamp,
+      '事件发生的URL': window.location.href,
+      '页面标题': document.title
+    };
+  },
+
+  /**
    * 节流函数
    */
   throttle(func, limit) {
