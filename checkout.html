@@ -737,7 +737,10 @@
     // 绑定事件
     function bindEvents() {
       document.querySelectorAll('.shipping-option').forEach(option => {
-        option.addEventListener('click', () => {
+        option.addEventListener('click', (e) => {
+          // 防止 label 和 input 的双重触发
+          if (e.target.tagName === 'INPUT') return;
+          
           document.querySelectorAll('.shipping-option').forEach(o => o.classList.remove('active'));
           option.classList.add('active');
           option.querySelector('input').checked = true;
@@ -753,7 +756,10 @@
       });
 
       document.querySelectorAll('.payment-option').forEach(option => {
-        option.addEventListener('click', () => {
+        option.addEventListener('click', (e) => {
+          // 防止 label 和 input 的双重触发
+          if (e.target.tagName === 'INPUT') return;
+          
           document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('active'));
           option.classList.add('active');
           option.querySelector('input').checked = true;
