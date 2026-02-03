@@ -140,6 +140,28 @@ const PtTracking = {
       return;
     }
 
+    // 获取当前时间和URL（系统属性，所有语言版本统一使用中文）
+    const currentTime = new Date();
+    const timestamp = currentTime.getTime();
+    const timeString = currentTime.toLocaleString('zh-CN', { 
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    });
+    const currentUrl = window.location.href;
+
+    // 系统属性（所有语言版本统一使用中文字段名）
+    const systemProperties = {
+      '事件发生时间': timeString,
+      '事件发生时间戳': timestamp,
+      '事件发生的URL': currentUrl,
+      '页面标题': document.title
+    };
+
     // 翻译事件名称
     const eventNames = {
       zh: eventNameCn,
@@ -171,27 +193,30 @@ const PtTracking = {
 
     // 发送中文版本
     const propertiesZh = {
+      ...systemProperties,
       ...translateProperties('zh'),
       '_lang': 'zh-CN',
-      '_event_version': 'multi-lang-v1'
+      '_event_version': 'multi-lang-v1.2'
     };
     ptengine.track(eventNames.zh, propertiesZh);
     console.log('📊 [ZH]', eventNames.zh, propertiesZh);
 
     // 发送英文版本
     const propertiesEn = {
+      ...systemProperties,
       ...translateProperties('en'),
       '_lang': 'en-US',
-      '_event_version': 'multi-lang-v1'
+      '_event_version': 'multi-lang-v1.2'
     };
     ptengine.track(eventNames.en, propertiesEn);
     console.log('📊 [EN]', eventNames.en, propertiesEn);
 
     // 发送日文版本
     const propertiesJa = {
+      ...systemProperties,
       ...translateProperties('ja'),
       '_lang': 'ja-JP',
-      '_event_version': 'multi-lang-v1'
+      '_event_version': 'multi-lang-v1.2'
     };
     ptengine.track(eventNames.ja, propertiesJa);
     console.log('📊 [JA]', eventNames.ja, propertiesJa);
