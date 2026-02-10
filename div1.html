@@ -335,7 +335,7 @@
     <script>
         // 创建并附加Shadow DOM
         const shadowHost2 = document.getElementById('shadow-host2');
-        const shadowRoot2 = shadowHost.attachShadow({mode: 'open'});
+        const shadowRoot2 = shadowHost2.attachShadow({mode: 'open'});
         
         // 创建Shadow DOM的内容
         const shadowContent2 = document.createElement('div');
@@ -354,7 +354,7 @@
         `;
         
         // 将内容添加到Shadow Root
-        shadowRoot2.appendChild(shadowContent);
+        shadowRoot2.appendChild(shadowContent2);
     </script>
     <section>
     <section class="testcase">
