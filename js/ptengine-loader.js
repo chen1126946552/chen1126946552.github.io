@@ -4,8 +4,8 @@
   var COMMON_SCRIPTS = ['19ky1yoe'];
   // 特定页面加载额外脚本（路径匹配）
   var PAGE_EXTRA_SCRIPTS = {
-    '/index.html': ['7fvr8iz1'],
-    '/': ['7fvr8iz1']
+    // '/index.html': ['7fvr8iz1'],
+    // '/': ['7fvr8iz1']
   };
   // =============================================
 
