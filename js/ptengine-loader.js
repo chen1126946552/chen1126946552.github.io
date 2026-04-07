@@ -1,7 +1,7 @@
 (function () {
   // ============ 统一配置，修改这里即可 ============
-  var DOMAIN = 'https://js.ptengine.jp';
-  var COMMON_SCRIPTS = ['16a80qqh'];
+  var DOMAIN = 'https://devjs.ptengine.com';
+  var COMMON_SCRIPTS = ['3dtrcrvt'];
   // 特定页面加载额外脚本（路径匹配）
   var PAGE_EXTRA_SCRIPTS = {
     // '/index.html': ['7fvr8iz1'],
