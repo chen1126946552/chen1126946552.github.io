@@ -52,6 +52,56 @@
     <H5>meili</H5>
     <a href="https://www.ptengine.jp/contact_us/" target="_self" rel="noopener noreferrer" class="Foot___NavItemA-sc-15y30se-5 eOvXuJ">お問い合わせ</a>
 
-   
+    <!-- SPA 风格：点击按钮只改 URL 参数(?view=)，不改路径、不刷新页面 -->
+    <nav id="view-nav" style="margin:16px 0;">
+      <button type="button" data-view="home">首页</button>
+      <button type="button" data-view="about">关于</button>
+      <button type="button" data-view="contact">联系</button>
+    </nav>
+
+    <div id="view-content"
+         data-view-home="<h2>首页</h2><p>这是首页内容。</p>"
+         data-view-about="<h2>关于</h2><p>这是关于页面的内容。</p>"
+         data-view-contact="<h2>联系</h2><p>这是联系页面的内容。</p>">
+    </div>
+
+    <script>
+      (function () {
+        var DEFAULT_VIEW = 'home';
+        var container = document.getElementById('view-content');
+        var nav = document.getElementById('view-nav');
+
+        // 根据当前 URL 参数渲染对应内容
+        function render() {
+          var view = new URLSearchParams(location.search).get('view') || DEFAULT_VIEW;
+          var html = container.getAttribute('data-view-' + view);
+          if (html == null) { view = DEFAULT_VIEW; html = container.getAttribute('data-view-' + DEFAULT_VIEW); }
+          container.innerHTML = html;
+
+          // 高亮当前选中的按钮
+          nav.querySelectorAll('button').forEach(function (b) {
+            b.style.fontWeight = b.getAttribute('data-view') === view ? 'bold' : 'normal';
+          });
+        }
+
+        // 点击按钮：只更新参数，路径不变，页面不刷新
+        nav.addEventListener('click', function (e) {
+          var btn = e.target.closest('button[data-view]');
+          if (!btn) return;
+          var view = btn.getAttribute('data-view');
+          var params = new URLSearchParams(location.search);
+          params.set('view', view);
+          history.pushState({ view: view }, '', location.pathname + '?' + params.toString());
+          render();
+        });
+
+        // 支持浏览器前进/后退
+        window.addEventListener('popstate', render);
+
+        render();
+      })();
+    </script>
+
+
   </body>
 </html>
