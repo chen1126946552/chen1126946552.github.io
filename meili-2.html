@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Ptengine Tag -->
+<script src="https://js.ptengine.jp/57117aa6.js"></script>
+ <!-- End Ptengine Tag -->
+   <!-- Ptengine Tag -->
+ <!-- <script src="https://devjs.ptengine.com/19ky1yoe.js"></script>-->
+<!-- End Ptengine Tag -->      
+            
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TTPBR7L');</script>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8Z5LM4WKJ5"></script>
+<script>
+  window._pt_sp_2 = [];
+  _pt_sp_2.push('setIframe,true'); 
+</script>
+     <!-- Google tag (gtag.js) -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-8Z5LM4WKJ5');
+</script>
+            
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vite App</title>
+    <script type="module" crossorigin src="/assets/index-a575275f.js"></script>
+    <link rel="stylesheet" href="/assets/index-737b46e0.css">
+
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GC13MMXEFD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GC13MMXEFD');
+</script>
+  </head>
+  <body>
+  <script src="js/ga-loader.js"></script>
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TTPBR7L"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+    <div style="
+    display: block;
+"><iframe src="https://chen1126946552.github.io/div1.html" style="
+    height: 800px;
+    width: 1000px;
+"></iframe></div>
+    <div id="app">
+    </div>
+
+
+    <H5>meili</H5>
+    <a href="https://www.ptengine.jp/contact_us/" target="_self" rel="noopener noreferrer" class="Foot___NavItemA-sc-15y30se-5 eOvXuJ">お問い合わせ</a>
+
+    <!-- SPA 风格：点击按钮只改 URL 参数(?view=)，不改路径、不刷新页面 -->
+    <nav id="view-nav" style="margin:16px 0;">
+      <button type="button" data-view="home">首页</button>
+      <button type="button" data-view="about">关于</button>
+      <button type="button" data-view="contact">联系</button>
+    </nav>
+
+    <div id="view-content"
+         data-view-home="<h2 class='meilitest'>首页</h2><p>这是首页内容。</p>"
+         data-view-about="<h2>关于</h2><p>这是关于页面的内容。</p>"
+         data-view-contact="<h2>联系</h2><p>这是联系页面的内容。</p>">
+    </div>
+
+    <script>
+      (function () {
+        var DEFAULT_VIEW = 'home';
+        var container = document.getElementById('view-content');
+        var nav = document.getElementById('view-nav');
+
+        // 根据当前 URL 参数渲染对应内容
+        function render() {
+          var view = new URLSearchParams(location.search).get('view') || DEFAULT_VIEW;
+          var html = container.getAttribute('data-view-' + view);
+          if (html == null) { view = DEFAULT_VIEW; html = container.getAttribute('data-view-' + DEFAULT_VIEW); }
+          container.innerHTML = html;
+
+          // 高亮当前选中的按钮
+          nav.querySelectorAll('button').forEach(function (b) {
+            b.style.fontWeight = b.getAttribute('data-view') === view ? 'bold' : 'normal';
+          });
+        }
+
+        // 点击按钮：只更新参数，路径不变，页面不刷新
+        nav.addEventListener('click', function (e) {
+          var btn = e.target.closest('button[data-view]');
+          if (!btn) return;
+          var view = btn.getAttribute('data-view');
+          var params = new URLSearchParams(location.search);
+          params.set('view', view);
+          history.pushState({ view: view }, '', location.pathname + '?' + params.toString());
+          render();
+        });
+
+        // 支持浏览器前进/后退
+        window.addEventListener('popstate', render);
+
+        render();
+      })();
+    </script>
+
+
+  </body>
+</html>
