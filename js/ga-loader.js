@@ -1,6 +1,6 @@
 (function () {
   // ============ 统一配置，修改这里即可 ============
-  var COMMON_IDS = ['G-8Z5LM4WKJ5'];
+  var COMMON_IDS = [];
   // 特定页面加载额外 GA 测量 ID（路径匹配）
   var PAGE_EXTRA_IDS = {
     // '/index.html': ['G-XXXXXXX'],
